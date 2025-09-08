@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php include "resources/css/tailwind.php" ?>
   <title>Portfolio - Agassi Bustarga</title>
+  <link rel="icon" type="image/png" href="public/images/favicon.png">
 </head>
 <body>
-  <h1 class="">test</h1>
+  <?php include "resources/views/home.php" ?>
 </body>
 </html>
