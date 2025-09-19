@@ -20,7 +20,7 @@
         <div class="space-y-4">
           <div class="flex items-center gap-3">
             <div class="flex items-center justify-center w-10 h-10 p-1 rounded-full bg-gradient-to-br from-gray-700 to-gray-900">
-              <img src="public/images/favicon.png" alt="Agassi Logo" class="object-contain w-full h-full rounded-full">
+              <img src="../public/images/favicon.png" alt="Agassi Logo" class="object-contain w-full h-full rounded-full">
             </div>
             <h3 class="text-xl font-bold text-white">Agassi Bustarga</h3>
           </div>

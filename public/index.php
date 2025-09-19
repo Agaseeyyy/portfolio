@@ -9,17 +9,29 @@
   <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body class="text-white bg-black">
-  <?php   
-    require_once (__DIR__ . "/../app/core/autoload.php");
+  <!-- navigation bar -->
+  <?php include (__DIR__ . '/../resources/views/shared/nav.php'); ?>
+  <!-- Content Container with relative positioning -->
+  <div class="relative z-10 min-h-screen overflow-x-hidden">
+
+  <?php 
+    require_once (__DIR__ . '/../app/core/autoload.php');
     use app\core\Router;
 
     $router = new Router();
+    require_once (__DIR__ . '/../routes/web.php');
 
-    require_once (__DIR__ . "/../routes/web.php");
-
+    // nav and animated background
+    include (__DIR__ . '/../resources/views/shared/background.php'); 
+   
+    // render view pages 
     $router->dispatch();
-  ?>
   
+    // footer
+    include (__DIR__ . '/../resources/views/shared/footer.php'); 
+  ?>
+  </div>
+
   <!-- JavaScript Files -->
   <script src="../resources/js/animations.js"></script>
   <script src="../resources/js/portfolio.js"></script>
