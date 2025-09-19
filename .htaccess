@@ -1,0 +1,7 @@
+Options -Indexes
+
+RewriteEngine On
+
+# Redirect everything to /portfolio/public
+RewriteCond %{REQUEST_URI} !^/portfolio/public
+RewriteRule ^(.*)$ /portfolio/public/$1 [L,R=302]

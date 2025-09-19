@@ -1,0 +1,13 @@
+Options -MultiViews
+RewriteEngine On
+
+RewriteBase /portfolio/public
+
+#accept loading files of actual files or directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# send everything else to index
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+
