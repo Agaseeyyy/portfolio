@@ -21,7 +21,7 @@
     $router = new Router();
     require_once (__DIR__ . '/../routes/web.php');
 
-    // nav and animated background
+    // animated background
     include (__DIR__ . '/../resources/views/shared/background.php'); 
    
     // render view pages 
@@ -33,10 +33,10 @@
   </div>
 
   <!-- JavaScript Files -->
-  <script src="../resources/js/animations.js"></script>
-  <script src="../resources/js/portfolio.js"></script>
-  <script src="../resources/js/services.js"></script>
-  <script src="../resources/js/contacts.js"></script>
-  <script src="../resources/js/script.js"></script>
+  <script src="../resources/js/animations.js" defer></script>
+  <script src="../resources/js/portfolio.js" defer></script>
+  <script src="../resources/js/services.js" defer></script>
+  <script src="../resources/js/contacts.js" defer></script>
+  <script src="../resources/js/script.js" defer></script>
 </body>
 </html>

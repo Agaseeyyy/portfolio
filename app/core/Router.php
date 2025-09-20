@@ -44,14 +44,14 @@ class Router
 
 		// returns routes with anonymous functions
 		if (is_callable($handler)) {
-      echo call_user_func($handler);
+      call_user_func($handler);
       return;
     }
 
     // returning controller method from controllers [Controller::class, 'method']
     if (is_array($handler)) {
       [$controller, $method] = $handler;
-      echo call_user_func([new $controller, $method]);
+      call_user_func([new $controller, $method]);
       return;
     }
 
@@ -61,7 +61,8 @@ class Router
 			return;
 		}
 
-		echo "404 not found";
+		// render 404 page view if path doesn't exist
+		View::render($path);
 	}
 
 }

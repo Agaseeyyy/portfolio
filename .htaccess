@@ -4,4 +4,5 @@ RewriteEngine On
 
 # Redirect everything to /portfolio/public
 RewriteCond %{REQUEST_URI} !^/portfolio/public
+RewriteCond %{REQUEST_URI} !^/portfolio/resources/js
 RewriteRule ^(.*)$ /portfolio/public/$1 [L,R=302]

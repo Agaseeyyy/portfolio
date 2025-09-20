@@ -12,6 +12,9 @@
       @apply scroll-smooth overflow-x-hidden;
       background: #000000;
       overscroll-behavior: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeSpeed;
     }
     
     body {
@@ -20,18 +23,8 @@
       overscroll-behavior: none;
       -webkit-overflow-scrolling: touch;
       position: relative;
-    }
-    
-    /* Additional mobile overscroll prevention */
-    body::before {
-      content: '';
-      position: fixed;
-      top: -100vh;
-      left: 0;
-      right: 0;
-      height: 200vh;
-      background: linear-gradient(to bottom right, #000000, #1f2937, #000000);
-      z-index: -1;
+      transform: translateZ(0);
+      will-change: auto;
     }
   }
       
@@ -45,6 +38,44 @@
     .max-w-8xl{
       @apply max-w-[96rem] px-5 mx-auto
     } 
+    
+    /* Add scroll margin for sections and headers - reduced for sticky nav */
+    section, header {
+      scroll-margin-top: 100px;
+    }
+    
+    /* Pink Frosted theme - Better color harmony */
+    .pink-frosted {
+      background: rgba(236, 72, 153, 0.1);
+      border: 1px solid rgba(236, 72, 153, 0.3);
+      will-change: transform;
+    }
+    
+    .pink-frosted:hover {
+      background: rgba(236, 72, 153, 0.15);
+      border-color: rgba(236, 72, 153, 0.4);
+    }
+    
+    /* Gray frosted for subtle elements */
+    .gray-frosted {
+      background: rgba(75, 85, 99, 0.15);
+      border: 1px solid rgba(75, 85, 99, 0.3);
+    }
+    
+    /* Rose frosted for accents */
+    .rose-frosted {
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+    }
+    
+    /* Disable animations for users who prefer reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
     
     .nav{
       @apply relative ml-10 text-white
@@ -144,23 +175,6 @@
 
     .orbit-overflow-container > div {
       pointer-events: auto;
-    }
-
-    /* Mobile orbit adjustments */
-    @media (max-width: 768px) {
-      .orbit-overflow-container {
-        width: 150% !important;
-        height: 150% !important;
-        left: -25% !important;
-        top: -25% !important;
-      }
-      
-      .orbit-overflow-container > div[class*="w-["] {
-        max-width: 85vw !important;
-        max-height: 85vw !important;
-        width: min(24rem, 85vw) !important;
-        height: min(24rem, 85vw) !important;
-      }
     }
 
     /* Animation Delays */
