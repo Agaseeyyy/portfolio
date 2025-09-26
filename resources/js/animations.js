@@ -1,8 +1,14 @@
 /**
- * Animation utilities and scroll animations
+ * Animation utilities and scroll animations for portfolio website
+ * Provides intersection observer-based animations and UI effects
+ * @fileoverview Animation system for portfolio components
  */
 
-// Initialize scroll animations for headers and buttons
+/**
+ * Initialize scroll-triggered animations for headers and buttons
+ * Uses IntersectionObserver to trigger animations when elements enter viewport
+ * @function initializeScrollAnimations
+ */
 function initializeScrollAnimations() {
   const animatedElements = document.querySelectorAll('.header-animate, .button-animate, .tab-animate');
   
@@ -32,7 +38,12 @@ function initializeScrollAnimations() {
   });
 }
 
-// Initialize card animations with intersection observer
+/**
+ * Initialize card animations with intersection observer
+ * Animates cards when they enter the viewport with staggered delays
+ * @param {string} selector - CSS selector for cards to animate
+ * @param {number} [delay=100] - Delay between card animations in milliseconds
+ */
 function initializeCardAnimations(selector, delay = 100) {
   const cards = document.querySelectorAll(selector);
   
@@ -73,7 +84,12 @@ function initializeCardAnimations(selector, delay = 100) {
   });
 }
 
-// Add stagger animation for elements
+/**
+ * Add staggered animation delays to elements
+ * Applies incremental animation delays to create a wave effect
+ * @param {string} selector - CSS selector for elements to animate
+ * @param {string} [animationClass='animate-fade-in'] - CSS class to add for animation
+ */
 function addStaggerAnimation(selector, animationClass = 'animate-fade-in') {
   const elements = document.querySelectorAll(selector);
   
@@ -83,7 +99,11 @@ function addStaggerAnimation(selector, animationClass = 'animate-fade-in') {
   });
 }
 
-// Add hover effects for cards
+/**
+ * Add interactive hover effects to card elements
+ * Applies transform effects on mouse enter/leave events
+ * @param {string} selector - CSS selector for cards to add hover effects
+ */
 function addCardHoverEffects(selector) {
   const cards = document.querySelectorAll(selector);
   
@@ -98,7 +118,11 @@ function addCardHoverEffects(selector) {
   });
 }
 
-// Export functions for global use
+/**
+ * Animation utilities namespace
+ * Global object containing all animation-related functions
+ * @namespace AnimationUtils
+ */
 window.AnimationUtils = {
   initializeScrollAnimations,
   initializeCardAnimations,

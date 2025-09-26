@@ -1,4 +1,11 @@
-<section id="contacts" class="relative px-6 py-20 overflow-hidden lg:px-8 xl:px-12">
+<?php
+/**
+ * Contacts Section Template
+ * Interactive contact page with form, chat, and social media integration
+ * Features: Contact form, live chat simulation, GitHub auth, comments system
+ */
+?>
+<section id="contacts" class="relative px-6 py-8">
   <!-- Animated Background Elements -->
   <div class="absolute inset-0 pointer-events-none">
     <div class="absolute rounded-full w-96 h-96 bg-gradient-to-r from-pink-500/10 to-purple-500/10 -top-48 -left-48 animate-pulse"></div>
@@ -7,7 +14,7 @@
   </div>
 
   <div class="relative z-10 mx-auto max-w-8xl">
-    <!-- Section Header -->
+    <!-- Section Header: Main title and description -->
     <div class="mb-16 text-center header-animate">
       <h2 class="mb-4 text-3xl font-bold text-white lg:text-4xl">
         Let's <span class="text-pink-500">Connect</span>
@@ -17,12 +24,12 @@
       </p>
     </div>
 
-    <!-- Contact Grid -->
+    <!-- Contact Grid: Two-column layout for forms and interactive features -->
     <div class="grid gap-8 lg:grid-cols-5 lg:gap-12 xl:gap-16">
       
-      <!-- Left Column: Contact Form with Info and Social -->
+      <!-- Left Column: Contact Form with Info and Social Media Links -->
       <div class="lg:col-span-2">
-        <!-- Contact Form Section -->
+        <!-- Contact Form Section: Email contact form with mailto functionality -->
         <div class="relative p-8 mb-8 border shadow-md rounded-xl bg-rose-500/10 border-rose-500/25 button-animate">
           
           <div class="relative z-10">
@@ -61,7 +68,7 @@
           </div>
         </div>
 
-        <!-- Contact Info Card -->
+        <!-- Contact Info Card: Display contact details and response time -->
         <div class="relative p-6 mb-8 border shadow-md rounded-xl bg-rose-500/10 border-rose-500/25 button-animate" style="animation-delay: 0.2s;">
           
           <div class="relative z-10">
@@ -101,7 +108,7 @@
           </div>
         </div>
 
-        <!-- Social Media Card -->
+        <!-- Social Media Card: Links to external social platforms -->
         <div class="relative p-6 border shadow-md rounded-xl bg-rose-500/10 border-rose-500/25 button-animate" style="animation-delay: 0.3s;">
           
           <div class="relative z-10">
@@ -136,10 +143,10 @@
         </div>
       </div>
 
-      <!-- Right Column: Chat and Comments -->
+      <!-- Right Column: Interactive Chat and Comments System -->
       <div class="space-y-8 lg:col-span-3">
 
-        <!-- Live Chat Card -->
+        <!-- Live Chat Card: Simulated real-time chat with GitHub authentication -->
         <div class="relative p-6 border shadow-lg rounded-xl bg-rose-500/10 border-rose-500/25 button-animate" style="animation-delay: 0.4s;">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-60"></div>
           
@@ -152,7 +159,7 @@
               </div>
             </div>
             
-            <!-- Chat Container -->
+            <!-- Chat Container: Scrollable message history -->
             <div class="mb-4 overflow-y-auto border rounded-lg h-80 bg-black/20 border-white/10 scrollbar-themed">
               <div id="chatMessages" class="p-3 space-y-2">
                 <div class="flex items-start gap-2">
@@ -172,7 +179,7 @@
               </div>
             </div>
             
-            <!-- GitHub Auth Required Message -->
+            <!-- GitHub Auth Required Message: Authentication prompt for chat -->
             <div id="chatAuthRequired" class="p-4 mb-4 border rounded-lg bg-yellow-500/10 border-yellow-500/30">
               <div class="flex items-center gap-2 mb-2">
                 <img src="../public/images/icons/warning.svg" alt="Warning" class="w-4 h-4" style="filter: brightness(0) saturate(100%) invert(77%) sepia(89%) saturate(1919%) hue-rotate(3deg) brightness(103%) contrast(107%);">
@@ -185,7 +192,7 @@
               </button>
             </div>
             
-            <!-- Chat Input (Hidden when not authenticated) -->
+            <!-- Chat Input: Message input field (disabled until authenticated) -->
             <div id="chatInputArea" class="flex gap-2 opacity-50 pointer-events-none">
               <input type="text" id="chatInput" placeholder="Login with GitHub to chat..." disabled
                      class="flex-1 px-3 py-2 text-sm text-white placeholder-gray-400 transition-all duration-300 border rounded-lg bg-rose-500/10 border-rose-500/25 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent">
@@ -196,14 +203,14 @@
           </div>
         </div>
 
-        <!-- Comments Section -->
+        <!-- Comments Section: User feedback and testimonials system -->
         <div class="relative p-6 border shadow-lg rounded-xl bg-rose-500/10 border-rose-500/25 button-animate" style="animation-delay: 0.5s;">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-60"></div>
           
           <div class="relative z-10">
             <h3 class="mb-3 text-lg font-bold text-white">Comments</h3>
             
-            <!-- GitHub Auth Required Message for Comments -->
+            <!-- GitHub Auth Required Message: Authentication prompt for comments -->
             <div id="commentsAuthRequired" class="p-3 mb-4 border rounded-lg bg-yellow-500/10 border-yellow-500/30">
               <div class="flex items-center gap-2 mb-2">
                 <img src="../public/images/icons/warning.svg" alt="Warning" class="w-4 h-4" style="filter: brightness(0) saturate(100%) invert(77%) sepia(89%) saturate(1919%) hue-rotate(3deg) brightness(103%) contrast(107%);">
@@ -216,7 +223,7 @@
               </button>
             </div>
             
-            <!-- Add Comment Form (Hidden when not authenticated) -->
+            <!-- Add Comment Form: User input for new comments (disabled until authenticated) -->
             <div id="commentForm" class="mb-4 space-y-2 opacity-50 pointer-events-none">
               <input type="text" id="commentName" placeholder="Login with GitHub to comment..." disabled
                      class="w-full px-3 py-2 text-sm text-white placeholder-gray-400 transition-all duration-300 border rounded-lg bg-rose-500/10 border-rose-500/25 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent">
@@ -227,7 +234,7 @@
               </button>
             </div>
             
-            <!-- Comments List -->
+            <!-- Comments List: Display existing user comments and testimonials -->
             <div id="commentsList" class="space-y-4 overflow-y-auto max-h-80 scrollbar-themed">
               <div class="p-3 border rounded-lg bg-white/15 border-white/25">
                 <div class="flex items-center justify-between mb-1">

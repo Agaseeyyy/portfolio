@@ -1,8 +1,14 @@
 /**
  * Services section functionality
+ * Handles service cards animations and scroll effects
+ * @fileoverview Services section interactive features
  */
 
-// Initialize services animations
+/**
+ * Initialize services section animations and interactions
+ * Sets up card animations and scroll-triggered effects
+ * @function initializeServices
+ */
 function initializeServices() {
   // Initialize service cards animation
   if (window.AnimationUtils) {
@@ -36,7 +42,11 @@ function initializeServices() {
   });
 }
 
-// Export functions for global use
+/**
+ * Services functionality namespace
+ * Global object containing all service-related functions
+ * @namespace Services
+ */
 window.Services = {
   initializeServices
 };

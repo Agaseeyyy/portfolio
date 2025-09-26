@@ -1,8 +1,14 @@
 /**
  * Main application initialization
+ * Entry point for the portfolio website
+ * @fileoverview Application bootstrap and initialization
  */
 
-// Initialize the entire application
+/**
+ * Initialize the entire portfolio application
+ * Sets up all sections and their respective functionalities
+ * @event DOMContentLoaded
+ */
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize global scroll animations
   if (window.AnimationUtils) {

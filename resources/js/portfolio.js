@@ -1,8 +1,14 @@
 /**
  * Portfolio section functionality
+ * Handles tab navigation, project filtering, and animations
+ * @fileoverview Portfolio section interactive features
  */
 
-// Portfolio section switching functionality
+/**
+ * Switch between different portfolio sections (projects, tech stack, certifications)
+ * Manages tab states and section visibility with animations
+ * @param {string} sectionName - Name of the section to display
+ */
 function showSection(sectionName) {
   // Hide all sections
   const sections = document.querySelectorAll('.portfolio-section');
@@ -39,7 +45,11 @@ function showSection(sectionName) {
   }
 }
 
-// Toggle Projects Show More
+/**
+ * Toggle visibility of additional projects
+ * Shows/hides extra project items and updates button text
+ * @function toggleProjects
+ */
 function toggleProjects() {
   const hiddenProjects = document.querySelectorAll('.project-item.hidden');
   const showMoreBtn = document.getElementById('projects-show-more');
@@ -68,7 +78,11 @@ function toggleProjects() {
   }
 }
 
-// Toggle Certifications Show More
+/**
+ * Toggle visibility of additional certifications
+ * Shows/hides extra certification items and updates button text
+ * @function toggleCertifications
+ */
 function toggleCertifications() {
   const hiddenCerts = document.querySelectorAll('.cert-item.hidden');
   const showMoreBtn = document.getElementById('certifications-show-more');
@@ -97,7 +111,11 @@ function toggleCertifications() {
   }
 }
 
-// Initialize project animations when section becomes visible
+/**
+ * Initialize animations for project cards
+ * Sets up intersection observer for project card entrance animations
+ * @function initializeProjectAnimations
+ */
 function initializeProjectAnimations() {
   const projectCards = document.querySelectorAll('#projects-section .project-card');
   
@@ -122,7 +140,11 @@ function initializeProjectAnimations() {
   });
 }
 
-// Initialize portfolio functionality
+/**
+ * Initialize portfolio section functionality
+ * Sets up default section, animations, and interactive elements
+ * @function initializePortfolio
+ */
 function initializePortfolio() {
   // Show projects by default
   showSection('projects');
@@ -138,7 +160,11 @@ function initializePortfolio() {
   }
 }
 
-// Export functions for global use
+/**
+ * Portfolio functionality namespace
+ * Global object containing all portfolio-related functions
+ * @namespace Portfolio
+ */
 window.Portfolio = {
   showSection,
   toggleProjects,

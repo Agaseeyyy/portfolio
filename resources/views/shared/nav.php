@@ -1,4 +1,4 @@
-<nav class="sticky top-0 z-50 px-6 text-white transition-all duration-300 border-b shadow-md bg-black/80 border-pink-500/20 h-fit">
+<nav class="sticky top-0 z-50 px-6 text-white transition-all duration-300 border-b shadow-md bg-black/70 backdrop-blur-sm border-pink-500/20 h-fit max-lg:backdrop-blur-none">
   <div class="flex items-center justify-between py-6 mx-auto max-w-8xl h-fit">
     <!-- Logo -->
     <a href="" class="relative z-20 text-xl font-semibold">

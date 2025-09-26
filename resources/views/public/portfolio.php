@@ -1,32 +1,39 @@
-<!-- Portfolio Section -->
-<section id="portfolio" class="px-6 py-20 lg:px-8 xl:px-12">
+<?php
+/**
+ * Portfolio Section Template
+ * Showcases projects, tech stack, and certifications with tabbed navigation
+ * Features: Project gallery, technology showcase, certification display
+ */
+?>
+<!-- Portfolio Section: Main showcase of work and skills -->
+<section id="portfolio" class="px-6 py-8">
   <div class="mx-auto max-w-8xl">
-    <!-- Section Header -->
+    <!-- Section Header: Portfolio introduction and navigation -->
     <div class="mb-16 text-center header-animate">
       <h2 class="mb-4 text-3xl font-bold text-white lg:text-4xl">Portfolio Showcase</h2>
       <p class="max-w-3xl mx-auto text-lg text-gray-300">Explore my projects, technical expertise, and achievements</p>
     </div>
 
-    <!-- Portfolio Navigation Tabs -->
+    <!-- Portfolio Navigation Tabs: Switch between different content sections -->
     <div class="flex justify-center mb-12 tab-animate">
       <div class="relative p-1 border rounded-full bg-gray-600/15 border-gray-500/25">
-        <button onclick="window.Portfolio.showSection('projects')" id="projects-tab" class="cursor-pointer px-6 py-3 text-sm font-medium text-white transition-all duration-300 rounded-full portfolio-tab portfolio-tab-active">
+        <button onclick="window.Portfolio.showSection('projects')" id="projects-tab" class="px-6 py-3 text-sm font-medium text-white transition-all duration-300 rounded-full cursor-pointer portfolio-tab portfolio-tab-active">
           Projects
         </button>
-        <button onclick="window.Portfolio.showSection('techstack')" id="techstack-tab" class="cursor-pointer px-6 py-3 text-sm font-medium text-white transition-all duration-300 rounded-full portfolio-tab">
+        <button onclick="window.Portfolio.showSection('techstack')" id="techstack-tab" class="px-6 py-3 text-sm font-medium text-white transition-all duration-300 rounded-full cursor-pointer portfolio-tab">
           Tech Stack
         </button>
-        <button onclick="window.Portfolio.showSection('certifications')" id="certifications-tab" class="cursor-pointer px-6 py-3 text-sm font-medium text-white transition-all duration-300 rounded-full portfolio-tab">
+        <button onclick="window.Portfolio.showSection('certifications')" id="certifications-tab" class="px-6 py-3 text-sm font-medium text-white transition-all duration-300 rounded-full cursor-pointer portfolio-tab">
           Certifications
         </button>
       </div>
     </div>
 
-    <!-- Projects Section -->
+    <!-- Projects Section: Gallery of completed projects -->
     <div id="projects-section" class="portfolio-section portfolio-section-active">
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" id="projects-grid">
-        <!-- Project 1 -->
-        <div class="relative p-6 simple-hover border shadow-lg project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial" data-aos="fade-up" data-aos-delay="100">
+        <!-- Project Card: E-commerce Platform -->
+        <div class="relative p-6 border shadow-lg simple-hover project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial" data-aos="fade-up" data-aos-delay="100">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10">
             <div class="mb-4">
@@ -50,8 +57,8 @@
           </div>
         </div>
 
-        <!-- Project 2 -->
-        <div class="relative p-6 simple-hover border shadow-lg project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial" data-aos="fade-up" data-aos-delay="200">
+        <!-- Project Card: Task Management System -->
+        <div class="relative p-6 border shadow-lg simple-hover project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial" data-aos="fade-up" data-aos-delay="200">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10">
             <div class="mb-4">
@@ -75,8 +82,8 @@
           </div>
         </div>
 
-        <!-- Project 3 -->
-        <div class="relative p-6 simple-hover border shadow-lg project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial" data-aos="fade-up" data-aos-delay="300">
+        <!-- Project Card: Weather Forecast App -->
+        <div class="relative p-6 border shadow-lg simple-hover project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial" data-aos="fade-up" data-aos-delay="300">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10">
             <div class="mb-4">
@@ -100,8 +107,8 @@
           </div>
         </div>
 
-        <!-- Hidden Project 4 -->
-        <div class="hidden project-item relative p-6 simple-hover border shadow-lg project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial" data-aos="fade-up" data-aos-delay="400">
+        <!-- Hidden Project Card: Blog Platform (expandable content) -->
+        <div class="relative hidden p-6 border shadow-lg project-item simple-hover project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial" data-aos="fade-up" data-aos-delay="400">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10">
             <div class="mb-4">
@@ -124,8 +131,8 @@
           </div>
         </div>
 
-        <!-- Hidden Project 5 -->
-        <div class="hidden project-item relative p-6 simple-hover border shadow-lg project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial" data-aos="fade-up" data-aos-delay="500">
+        <!-- Hidden Project Card: Portfolio Website (expandable content) -->
+        <div class="relative hidden p-6 border shadow-lg project-item simple-hover project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial" data-aos="fade-up" data-aos-delay="500">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10">
             <div class="mb-4">
@@ -150,7 +157,7 @@
         </div>
       </div>
 
-      <!-- Show More Button for Projects -->
+      <!-- Show More Button: Toggle visibility of additional projects -->
       <div class="mt-12 text-center button-animate">
         <button id="projects-show-more" onclick="window.Portfolio.toggleProjects()" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 border rounded-lg bg-gradient-to-r from-pink-500/90 to-rose-600/90 border-white/30 hover:from-pink-600 hover:to-rose-700 hover:scale-105 hover:shadow-xl">
           <img src="../public/images/icons/arrow-right.svg" alt="Show More" class="w-4 h-4 transition-transform duration-300" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
@@ -159,10 +166,10 @@
       </div>
     </div>
 
-    <!-- Tech Stack Section -->
+    <!-- Tech Stack Section: Display technical skills and proficiencies -->
     <div id="techstack-section" class="hidden portfolio-section">
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <!-- Frontend Technologies -->
+        <!-- Frontend Technologies: Client-side development skills -->
         <div class="relative p-6 border shadow-xl rounded-xl tech-category bg-gray-600/15 border-gray-500/25">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10">
@@ -208,7 +215,7 @@
           </div>
         </div>
 
-         <!-- Backend Technologies -->
+        <!-- Backend Technologies: Server-side development skills -->
         <div class="relative p-6 border shadow-xl rounded-xl tech-category bg-gray-600/15 border-gray-500/25">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10">
@@ -242,7 +249,7 @@
           </div>
         </div>
 
-        <!-- Database Technologies -->
+        <!-- Database Technologies: Data storage and management skills -->
         <div class="relative p-6 border shadow-xl rounded-xl tech-category bg-gray-600/15 border-gray-500/25">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10">
@@ -258,7 +265,7 @@
           </div>
         </div>
 
-        <!-- Tools & Others -->
+        <!-- Tools & Others: Development tools and additional technologies -->
         <div class="relative p-6 border shadow-xl rounded-xl tech-category bg-gray-600/15 border-gray-500/25">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10">
@@ -306,11 +313,11 @@
       </div>
     </div>
 
-    <!-- Certifications Section -->
+    <!-- Certifications Section: Professional certifications and achievements -->
     <div id="certifications-section" class="hidden portfolio-section">
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" id="certifications-grid">
-        <!-- Certification 1 -->
-        <div class="relative p-6 simple-hover border shadow-lg cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
+        <!-- Certification Card: PHP Web Development -->
+        <div class="relative p-6 border shadow-lg simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10 text-center">
             <div class="mb-4">
@@ -328,8 +335,8 @@
           </div>
         </div>
 
-        <!-- Certification 2 -->
-        <div class="relative p-6 simple-hover border shadow-lg cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
+        <!-- Certification Card: JavaScript Fundamentals -->
+        <div class="relative p-6 border shadow-lg simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10 text-center">
             <div class="mb-4">
@@ -347,8 +354,8 @@
           </div>
         </div>
 
-        <!-- Certification 3 -->
-        <div class="relative p-6 simple-hover border shadow-lg cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
+        <!-- Certification Card: Database Management -->
+        <div class="relative p-6 border shadow-lg simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10 text-center">
             <div class="mb-4">
@@ -366,8 +373,8 @@
           </div>
         </div>
 
-        <!-- Certification 4 -->
-        <div class="relative p-6 simple-hover border shadow-lg cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
+        <!-- Certification Card: Responsive Web Design -->
+        <div class="relative p-6 border shadow-lg simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10 text-center">
             <div class="mb-4">
@@ -385,8 +392,8 @@
           </div>
         </div>
 
-        <!-- Certification 5 -->
-        <div class="relative p-6 simple-hover border shadow-lg cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
+        <!-- Certification Card: Git Version Control -->
+        <div class="relative p-6 border shadow-lg simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10 text-center">
             <div class="mb-4">
@@ -404,8 +411,8 @@
           </div>
         </div>
 
-        <!-- Certification 6 -->
-        <div class="relative p-6 simple-hover border shadow-lg cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
+        <!-- Certification Card: React Development -->
+        <div class="relative p-6 border shadow-lg simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10 text-center">
             <div class="mb-4">
@@ -423,8 +430,8 @@
           </div>
         </div>
 
-        <!-- Hidden Certification 7 -->
-        <div class="hidden cert-item relative p-6 simple-hover border shadow-lg cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
+        <!-- Hidden Certification Card: API Development (expandable content) -->
+        <div class="relative hidden p-6 border shadow-lg cert-item simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10 text-center">
             <div class="mb-4">
@@ -442,8 +449,8 @@
           </div>
         </div>
 
-        <!-- Hidden Certification 8 -->
-        <div class="hidden cert-item relative p-6 simple-hover border shadow-lg cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
+        <!-- Hidden Certification Card: UI/UX Design (expandable content) -->
+        <div class="relative hidden p-6 border shadow-lg cert-item simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
           <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
           <div class="relative z-10 text-center">
             <div class="mb-4">
@@ -462,7 +469,7 @@
         </div>
       </div>
 
-      <!-- Show More Button for Certifications -->
+      <!-- Show More Button: Toggle visibility of additional certifications -->
       <div class="mt-12 text-center button-animate">
         <button id="certifications-show-more" onclick="window.Portfolio.toggleCertifications()" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 border rounded-lg bg-gradient-to-r from-pink-500/90 to-rose-600/90 border-white/30 hover:from-pink-600 hover:to-rose-700 hover:scale-105 hover:shadow-xl">
           <img src="../public/images/icons/plus.svg" alt="Plus" class="w-4 h-4 transition-transform duration-300 filter brightness-0 invert">

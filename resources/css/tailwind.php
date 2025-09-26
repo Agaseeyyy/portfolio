@@ -3,14 +3,16 @@
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
   @import "tailwindcss";
 
+  /* ========================================
+     BASE STYLES & THEME CONFIGURATION
+  ======================================== */
   @layer base {
     * {
       @apply box-border;
     }
 
     html {
-      @apply scroll-smooth overflow-x-hidden;
-      background: #000000;
+      @apply scroll-smooth overflow-x-hidden bg-black;
       overscroll-behavior: none;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -18,109 +20,74 @@
     }
     
     body {
-      background: linear-gradient(to bottom right, #000000, #1f2937, #000000);
-      min-height: 100vh;
+      @apply bg-gradient-to-br from-black via-gray-800 to-black min-h-screen relative;
       overscroll-behavior: none;
       -webkit-overflow-scrolling: touch;
-      position: relative;
       transform: translateZ(0);
       will-change: auto;
     }
   }
-      
+
   @theme {
     --color-clifford: #da373d;
     --font-sans: Poppins, ui-sans-serif, system-ui, sans-serif;
   }
 
+  /* ========================================
+     UTILITY CLASSES & COMPONENTS
+  ======================================== */
   @layer utilities {
-
-    .max-w-8xl{
-      @apply max-w-[96rem] px-5 mx-auto
-    } 
     
-    /* Add scroll margin for sections and headers - reduced for sticky nav */
-    section, header {
-      scroll-margin-top: 100px;
+    /* Layout Utilities */
+    .max-w-8xl {
+      @apply max-w-[96rem] px-5 mx-auto;
     }
     
-    /* Pink Frosted theme - Better color harmony */
+    section, header {
+      @apply scroll-mt-[100px];
+    }
+
+    /* ========================================
+       GLASS & FROSTED THEMES
+    ======================================== */
     .pink-frosted {
-      background: rgba(236, 72, 153, 0.1);
-      border: 1px solid rgba(236, 72, 153, 0.3);
+      @apply bg-pink-500/10 border border-pink-500/30 backdrop-blur-sm;
       will-change: transform;
     }
     
     .pink-frosted:hover {
-      background: rgba(236, 72, 153, 0.15);
-      border-color: rgba(236, 72, 153, 0.4);
+      @apply bg-pink-500/15 border-pink-500/40;
     }
     
-    /* Gray frosted for subtle elements */
     .gray-frosted {
-      background: rgba(75, 85, 99, 0.15);
-      border: 1px solid rgba(75, 85, 99, 0.3);
+      @apply bg-gray-600/15 border border-gray-600/30;
     }
     
-    /* Rose frosted for accents */
     .rose-frosted {
-      background: rgba(244, 63, 94, 0.1);
-      border: 1px solid rgba(244, 63, 94, 0.25);
-    }
-    
-    /* Disable animations for users who prefer reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-    
-    .nav{
-      @apply relative ml-10 text-white
-      tracking-[1px] cursor-pointer
-      hover:text-white
+      @apply bg-rose-500/10 border border-rose-500/25;
     }
 
-    .nav::after{
-      @apply content-[''] bg-pink-500 h-[3px] w-[0%] left-0 -bottom-[5px] 
-      rounded-xl absolute duration-300
+    /* ========================================
+       NAVIGATION STYLES
+    ======================================== */
+    .nav {
+      @apply relative ml-10 text-white tracking-[1px] cursor-pointer hover:text-white;
     }
 
-    /* Custom Scrollbar Styles */
-    .scrollbar-thin {
-      scrollbar-width: thin;
-    }
-    
-    .scrollbar-thumb-pink-500\/50::-webkit-scrollbar-thumb {
-      background-color: rgba(236, 72, 153, 0.5);
-      border-radius: 4px;
-    }
-    
-    .scrollbar-track-white\/10::-webkit-scrollbar-track {
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
-    }
-    
-    .scrollbar-thin::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    
-    .scrollbar-thin::-webkit-scrollbar-thumb {
-      background-color: rgba(236, 72, 153, 0.5);
-      border-radius: 4px;
-    }
-    
-    .scrollbar-thin::-webkit-scrollbar-track {
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
+    .nav::after {
+      @apply content-[''] bg-pink-500 h-[3px] w-[0%] left-0 -bottom-[5px] rounded-xl absolute duration-300;
     }
 
+    .nav:hover::after {
+      @apply w-[100%];
+    }
+
+    /* ========================================
+       CUSTOM SCROLLBAR STYLES
+    ======================================== */
     .scrollbar-themed {
       scrollbar-width: thin;
-      scrollbar-color: rgba(236, 72, 153, 0.4) rgba(255, 255, 255, 0.1);
+      scrollbar-color: rgb(236 72 153 / 0.4) rgb(255 255 255 / 0.1);
     }
 
     .scrollbar-themed::-webkit-scrollbar {
@@ -128,131 +95,86 @@
     }
 
     .scrollbar-themed::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
+      background: rgb(255 255 255 / 0.1);
+      border-radius: 0.375rem;
     }
 
     .scrollbar-themed::-webkit-scrollbar-thumb {
-      background: rgba(236, 72, 153, 0.4);
-      border-radius: 4px;
+      background: rgb(236 72 153 / 0.4);
+      border-radius: 0.375rem;
       transition: background 0.3s ease;
     }
 
     .scrollbar-themed::-webkit-scrollbar-thumb:hover {
-      background: rgba(236, 72, 153, 0.6);
+      background: rgb(236 72 153 / 0.6);
     }
 
-    .nav:hover::after{
-      @apply w-[100%]
-    }
-
-    /* Orbit Animation Containment */
+    /* ========================================
+       AVATAR & ORBIT ANIMATIONS
+    ======================================== */
     .animate-spin {
       transform-origin: center center;
     }
 
-    /* Avatar section specific positioning */
     .avatar-orbit-container {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @apply relative flex items-center justify-center;
     }
 
     .avatar-orbit-container > div {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
     }
 
-    /* Orbit overflow container */
     .orbit-overflow-container {
-      position: absolute;
-      pointer-events: none;
-      z-index: 1;
+      @apply absolute pointer-events-none z-10;
     }
 
     .orbit-overflow-container > div {
-      pointer-events: auto;
+      @apply pointer-events-auto;
     }
 
-    /* Animation Delays */
-    .animation-delay-500 {
-      animation-delay: 0.5s;
-    }
-    
-    .animation-delay-1000 {
-      animation-delay: 1s;
-    }
-    
-    .animation-delay-1500 {
-      animation-delay: 1.5s;
-    }
-    
-    .animation-delay-2000 {
-      animation-delay: 2s;
-    }
-
-    /* Portfolio Custom Animations */
+    /* ========================================
+       KEYFRAME ANIMATIONS
+    ======================================== */
     @keyframes fade-in {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .animate-fade-in {
-      animation: fade-in 0.6s ease forwards;
-    }
-
-    /* Homepage entrance animations */
     @keyframes slide-in-left {
-      from {
-        opacity: 0;
-        transform: translateX(-100px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
+      from { opacity: 0; transform: translateX(-100px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
     @keyframes slide-in-right {
-      from {
-        opacity: 0;
-        transform: translateX(100px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
+      from { opacity: 0; transform: translateX(100px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
     @keyframes fade-in-up {
-      from {
-        opacity: 0;
-        transform: translateY(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes scale-in {
-      from {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: rgba(236, 72, 153, 1); }
+    }
+
+    /* ========================================
+       ANIMATION CLASSES
+    ======================================== */
+    .animate-fade-in {
+      animation: fade-in 0.6s ease forwards;
     }
 
     .animate-slide-in-left {
@@ -271,40 +193,16 @@
       animation: scale-in 0.6s ease-out forwards;
     }
 
-    /* Typing animation */
-    @keyframes typing {
-      from {
-        width: 0;
-      }
-      to {
-        width: 100%;
-      }
-    }
-
-    @keyframes blink-caret {
-      from, to {
-        border-color: transparent;
-      }
-      50% {
-        border-color: rgba(236, 72, 153, 1);
-      }
-    }
-
+    /* ========================================
+       TYPING ANIMATION
+    ======================================== */
     .typing-container {
-      position: relative;
-      display: inline-block;
+      @apply relative inline-block;
     }
 
     .typing-container::before {
       content: attr(data-text);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      overflow: hidden;
-      border-right: 2px solid rgba(236, 72, 153, 1);
-      white-space: nowrap;
+      @apply absolute top-0 left-0 w-0 h-full overflow-hidden border-r-2 border-pink-500 whitespace-nowrap;
       animation: typing 2s steps(16, end) 0.5s forwards, blink-caret 1s infinite 2s;
       color: inherit;
       font-size: inherit;
@@ -313,57 +211,30 @@
     }
 
     .typing-container .typing-text {
-      margin-right: 5px;
-      opacity: 0;
+      @apply mr-1 opacity-0;
     }
 
-    /* Portfolio tab active state */
+    /* ========================================
+       PORTFOLIO & PROJECT STYLES
+    ======================================== */
     .portfolio-tab-active {
-      background: rgba(236, 72, 153, 0.2);
-      border: 1px solid rgba(236, 72, 153, 0.3);
-      box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+      background: rgb(236 72 153 / 0.2);
+      border: 1px solid rgb(236 72 153 / 0.3);
+      box-shadow: 0 0 20px rgb(236 72 153 / 0.3);
     }
 
-    /* Portfolio section transitions */
     .portfolio-section {
-      transition: all 0.3s ease;
+      @apply transition-all duration-300 ease-in-out;
     }
 
     .portfolio-section-hidden {
-      opacity: 0;
-      transform: translateY(20px);
+      @apply opacity-0 translate-y-5;
     }
 
     .portfolio-section-active {
-      opacity: 1;
-      transform: translateY(0);
+      @apply opacity-100 translate-y-0;
     }
 
-    /* Tech item hover effects */
-    .tech-item {
-      transition: all 0.3s ease;
-    }
-
-    .tech-item:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateX(5px);
-    }
-
-    /* Project card effects */
-    .project-card {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .project-card:hover {
-      box-shadow: 0 25px 50px -12px rgba(236, 72, 153, 0.25);
-    }
-
-    /* Certification card effects */
-    .cert-card:hover {
-      box-shadow: 0 20px 40px -12px rgba(236, 72, 153, 0.2);
-    }
-
-    /* Portfolio card initial state for animations */
     .portfolio-card-initial {
       opacity: 0;
       transform: translateY(30px);
@@ -375,7 +246,32 @@
       transform: translateY(0);
     }
 
-    /* Header and button animations */
+    /* ========================================
+       CARD HOVER EFFECTS
+    ======================================== */
+    .project-card {
+      @apply transition-all duration-300 ease-out;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 25px 50px -12px rgb(236 72 153 / 0.25);
+    }
+
+    .cert-card:hover {
+      box-shadow: 0 20px 40px -12px rgb(236 72 153 / 0.2);
+    }
+
+    .tech-item {
+      @apply transition-all duration-300 ease-in-out;
+    }
+
+    .tech-item:hover {
+      @apply bg-white/10 translate-x-1;
+    }
+
+    /* ========================================
+       SCROLL-TRIGGERED ANIMATIONS
+    ======================================== */
     .header-animate {
       opacity: 0;
       transform: translateY(30px);
@@ -408,7 +304,17 @@
       opacity: 1;
       transform: translateY(0);
     }
-  }
 
-  
+    /* ========================================
+       ACCESSIBILITY & PERFORMANCE
+    ======================================== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+  }
 </style>

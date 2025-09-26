@@ -1,12 +1,19 @@
 /**
  * Contacts section functionality
+ * Handles chat, comments, authentication, and contact form interactions
+ * @fileoverview Contact page interactive features
  */
 
-// Mock authentication state (in real app, this would be managed by your auth system)
+/** @type {boolean} Mock authentication state */
 let isAuthenticated = false;
+/** @type {Object|null} Current authenticated user data */
 let currentUser = null;
 
-// Chat Modal Functions (keeping for compatibility)
+/**
+ * Open chat modal dialog
+ * Shows the chat interface and prevents body scrolling
+ * @function openChatModal
+ */
 function openChatModal() {
   const modal = document.getElementById('chatModal');
   if (modal) {
@@ -15,6 +22,11 @@ function openChatModal() {
   }
 }
 
+/**
+ * Close chat modal dialog
+ * Hides the chat interface and restores body scrolling
+ * @function closeChatModal
+ */
 function closeChatModal() {
   const modal = document.getElementById('chatModal');
   if (modal) {
@@ -23,7 +35,11 @@ function closeChatModal() {
   }
 }
 
-// GitHub OAuth Login
+/**
+ * Initiate GitHub OAuth authentication flow
+ * Redirects user to GitHub for authentication (demo version simulates)
+ * @function loginWithGitHub
+ */
 function loginWithGitHub() {
   // Replace with your actual GitHub OAuth app client ID
   const clientId = 'YOUR_GITHUB_CLIENT_ID';
@@ -42,7 +58,11 @@ function loginWithGitHub() {
   // In production, use: window.location.href = authUrl;
 }
 
-// Simulate successful authentication (for demo)
+/**
+ * Simulate successful authentication for demo purposes
+ * Sets up mock user data and updates UI state
+ * @function simulateSuccessfulAuth
+ */
 function simulateSuccessfulAuth() {
   isAuthenticated = true;
   currentUser = {
@@ -54,7 +74,11 @@ function simulateSuccessfulAuth() {
   alert('Successfully authenticated with GitHub!\nYou can now chat and leave comments.');
 }
 
-// Update UI based on authentication state
+/**
+ * Update UI elements based on current authentication state
+ * Enables/disables chat and comment features based on login status
+ * @function updateAuthenticationUI
+ */
 function updateAuthenticationUI() {
   const chatAuthRequired = document.getElementById('chatAuthRequired');
   const chatInputArea = document.getElementById('chatInputArea');
@@ -104,7 +128,11 @@ function updateAuthenticationUI() {
   }
 }
 
-// Chat functionality
+/**
+ * Send a chat message to the conversation
+ * Validates authentication and creates new message elements
+ * @function sendMessage
+ */
 function sendMessage() {
   if (!isAuthenticated) {
     alert('Please login with GitHub first to send messages.');
@@ -153,7 +181,11 @@ function sendMessage() {
   }
 }
 
-// Comments functionality
+/**
+ * Add a new comment to the comments section
+ * Validates input and creates comment element with user data
+ * @function addComment
+ */
 function addComment() {
   if (!isAuthenticated) {
     alert('Please login with GitHub first to leave comments.');
@@ -203,7 +235,11 @@ function addComment() {
   }, 2000);
 }
 
-// Initialize contacts animations
+/**
+ * Initialize contacts section functionality
+ * Sets up form validation, keyboard shortcuts, and animations
+ * @function initializeContacts
+ */
 function initializeContacts() {
   // Initialize contact form validation
   const contactForm = document.querySelector('#contacts form');
@@ -259,7 +295,11 @@ function initializeContacts() {
   updateAuthenticationUI();
 }
 
-// Export functions for global use
+/**
+ * Contacts functionality namespace
+ * Global object containing all contact-related functions
+ * @namespace Contacts
+ */
 window.Contacts = {
   openChatModal,
   closeChatModal,

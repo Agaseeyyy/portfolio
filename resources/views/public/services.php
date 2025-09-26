@@ -1,7 +1,14 @@
-<!-- Services Section -->
-<section id="services" class="px-6 py-20 lg:px-8 xl:px-12">
+<?php
+/**
+ * Services Section Template  
+ * Displays offered services with detailed descriptions and features
+ * Features: Service cards, pricing information, interactive animations
+ */
+?>
+<!-- Services Section: Professional services and capabilities showcase -->
+<section id="services" class="px-6 py-8">
   <div class="mx-auto max-w-8xl">
-    <!-- Section Header -->
+    <!-- Section Header: Services introduction and value proposition -->
     <div class="mb-16 text-center header-animate">
       <h2 class="mb-4 text-3xl font-bold text-white lg:text-4xl">My Services</h2>
       <p class="max-w-3xl mx-auto text-lg text-gray-300">
@@ -9,15 +16,15 @@
       </p>
     </div>
 
-    <!-- Services Grid -->
+    <!-- Services Grid: Three-column layout of service offerings -->
     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <!-- Web Development Service -->
+      <!-- Web Development Service: Full-stack development offerings -->
       <div class="relative group">
-        <div class="relative flex flex-col h-full p-6 overflow-hidden border rounded-lg shadow-lg bg-pink-500/10 border-pink-500/30 hover:bg-pink-500/15 hover:border-pink-500/40 hover:scale-105 transition-all duration-300">
-          <!-- Top stroke with blue gradient - inside container -->
+        <div class="relative flex flex-col h-full p-6 overflow-hidden transition-all duration-300 border rounded-lg shadow-lg bg-pink-500/10 border-pink-500/30 hover:bg-pink-500/15 hover:border-pink-500/40 hover:scale-105">
+          <!-- Top stroke with blue gradient: Visual accent for web development -->
           <div class="absolute top-0 left-0 right-0 z-20 h-1 rounded-t-lg bg-gradient-to-r from-blue-400 to-cyan-400"></div>
           <div class="relative z-10 flex flex-col h-full">
-            <!-- Service Icon -->
+            <!-- Service Icon: Web development visual identifier -->
             <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-gradient-to-br from-blue-400/20 to-cyan-400/20">
               <img src="../public/images/icons/code-brackets.svg" alt="Web Development" class="w-6 h-6" style="filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(2618%) hue-rotate(177deg) brightness(99%) contrast(101%);">
             </div>
@@ -43,14 +50,14 @@
         </div>
       </div>
 
-      <!-- Mobile App Development Service -->
+      <!-- Mobile App Development Service: Cross-platform mobile solutions -->
       <div class="relative group optimized-animation">
         <div class="relative flex flex-col h-full p-6 overflow-hidden border rounded-lg shadow-lg simple-hover bg-pink-500/10 border-pink-500/30">
-          <!-- Top stroke with purple gradient - inside container -->
+          <!-- Top stroke with purple gradient: Visual accent for mobile development -->
           <div class="absolute top-0 left-0 right-0 z-20 h-1 rounded-t-lg bg-gradient-to-r from-purple-400 to-pink-400"></div>
           <div class="absolute inset-0 rounded-lg "></div>
           <div class="relative z-10 flex flex-col h-full">
-            <!-- Service Icon -->
+            <!-- Service Icon: Mobile development visual identifier -->
             <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-gradient-to-br from-purple-400/20 to-pink-400/20">
               <img src="../public/images/icons/mobile-phone.svg" alt="Mobile Development" class="w-6 h-6" style="filter: brightness(0) saturate(100%) invert(62%) sepia(36%) saturate(4482%) hue-rotate(265deg) brightness(108%) contrast(108%);">
             </div>
@@ -76,14 +83,14 @@
         </div>
       </div>
 
-      <!-- UI/UX Design Service -->
+      <!-- UI/UX Design Service: User experience and interface design -->
       <div class="relative group">
-        <div class="relative flex flex-col h-full p-6 overflow-hidden border rounded-lg shadow-lg bg-pink-500/10 border-pink-500/30 hover:bg-pink-500/15 hover:border-pink-500/40 hover:scale-105 transition-all duration-300">
-          <!-- Top stroke with green gradient - inside container -->
+        <div class="relative flex flex-col h-full p-6 overflow-hidden transition-all duration-300 border rounded-lg shadow-lg bg-pink-500/10 border-pink-500/30 hover:bg-pink-500/15 hover:border-pink-500/40 hover:scale-105">
+          <!-- Top stroke with green gradient: Visual accent for UI/UX design -->
           <div class="absolute top-0 left-0 right-0 z-20 h-1 rounded-t-lg bg-gradient-to-r from-green-400 to-emerald-400"></div>
           <div class="absolute inset-0 rounded-lg "></div>
           <div class="relative z-10 flex flex-col h-full">
-            <!-- Service Icon -->
+            <!-- Service Icon: UI/UX design visual identifier -->
             <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-gradient-to-br from-green-400/20 to-emerald-400/20">
               <img src="../public/images/icons/ui-ux-design.svg" alt="UI/UX Design" class="w-6 h-6" style="filter: brightness(0) saturate(100%) invert(64%) sepia(98%) saturate(1000%) hue-rotate(83deg) brightness(119%) contrast(119%);">
             </div>
@@ -109,14 +116,14 @@
         </div>
       </div>
 
-      <!-- Graphics Design Service -->
+      <!-- Graphics Design Service: Creative visual design solutions -->
       <div class="relative group">
-        <div class="relative flex flex-col h-full p-6 overflow-hidden border rounded-lg shadow-lg bg-pink-500/10 border-pink-500/30 hover:bg-pink-500/15 hover:border-pink-500/40 hover:scale-105 transition-all duration-300">
-          <!-- Top stroke with orange gradient - inside container -->
+        <div class="relative flex flex-col h-full p-6 overflow-hidden transition-all duration-300 border rounded-lg shadow-lg bg-pink-500/10 border-pink-500/30 hover:bg-pink-500/15 hover:border-pink-500/40 hover:scale-105">
+          <!-- Top stroke with orange gradient: Visual accent for graphics design -->
           <div class="absolute top-0 left-0 right-0 z-20 h-1 rounded-t-lg bg-gradient-to-r from-orange-400 to-red-400"></div>
           <div class="absolute inset-0 rounded-lg "></div>
           <div class="relative z-10 flex flex-col h-full">
-            <!-- Service Icon -->
+            <!-- Service Icon: Graphics design visual identifier -->
             <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-gradient-to-br from-orange-400/20 to-red-400/20">
               <img src="../public/images/icons/graphics-design.svg" alt="Graphics Design" class="w-6 h-6" style="filter: brightness(0) saturate(100%) invert(59%) sepia(96%) saturate(2067%) hue-rotate(10deg) brightness(101%) contrast(101%);">
             </div>
@@ -142,14 +149,14 @@
         </div>
       </div>
 
-      <!-- Video Editing Service -->
+      <!-- Video Editing Service: Professional video production and editing -->
       <div class="relative group">
-        <div class="relative flex flex-col h-full p-6 overflow-hidden border rounded-lg shadow-lg bg-pink-500/10 border-pink-500/30 hover:bg-pink-500/15 hover:border-pink-500/40 hover:scale-105 transition-all duration-300">
-          <!-- Top stroke with teal gradient - inside container -->
+        <div class="relative flex flex-col h-full p-6 overflow-hidden transition-all duration-300 border rounded-lg shadow-lg bg-pink-500/10 border-pink-500/30 hover:bg-pink-500/15 hover:border-pink-500/40 hover:scale-105">
+          <!-- Top stroke with teal gradient: Visual accent for video editing -->
           <div class="absolute top-0 left-0 right-0 z-20 h-1 rounded-t-lg bg-gradient-to-r from-teal-400 to-blue-400"></div>
           <div class="absolute inset-0 rounded-lg "></div>
           <div class="relative z-10 flex flex-col h-full">
-            <!-- Service Icon -->
+            <!-- Service Icon: Video editing visual identifier -->
             <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-gradient-to-br from-teal-400/20 to-blue-400/20">
               <img src="../public/images/icons/video-editing.svg" alt="Video Editing" class="w-6 h-6" style="filter: brightness(0) saturate(100%) invert(56%) sepia(98%) saturate(1000%) hue-rotate(154deg) brightness(103%) contrast(104%);">
             </div>
@@ -175,14 +182,14 @@
         </div>
       </div>
 
-      <!-- Computer & Phone Repair Service -->
+      <!-- Computer & Phone Repair Service: Hardware and software troubleshooting -->
       <div class="relative group optimized-animation">
         <div class="relative flex flex-col h-full p-6 overflow-hidden border rounded-lg shadow-lg simple-hover bg-pink-500/10 border-pink-500/30">
-          <!-- Top stroke with yellow gradient - inside container -->
+          <!-- Top stroke with yellow gradient: Visual accent for repair services -->
           <div class="absolute top-0 left-0 right-0 z-20 h-1 rounded-t-lg bg-gradient-to-r from-yellow-400 to-orange-400"></div>
           <div class="absolute inset-0 rounded-lg "></div>
           <div class="relative z-10 flex flex-col h-full">
-            <!-- Service Icon -->
+            <!-- Service Icon: Repair services visual identifier -->
             <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-gradient-to-br from-yellow-400/20 to-orange-400/20">
               <img src="../public/images/icons/computer-repair.svg" alt="Computer & Phone Repair" class="w-6 h-6" style="filter: brightness(0) saturate(100%) invert(82%) sepia(62%) saturate(467%) hue-rotate(359deg) brightness(102%) contrast(101%);">
             </div>
@@ -209,7 +216,7 @@
       </div>
     </div>
 
-  <!-- Call to Action -->
+  <!-- Call to Action: Encourage visitors to start a project -->
   <div class="mt-12 text-center button-animate">
     <a href="#contacts" id="certifications-show-more" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 border rounded-lg bg-gradient-to-r from-pink-500/90 to-rose-600/90 border-white/30 hover:from-pink-600 hover:to-rose-700 hover:scale-105 hover:shadow-xl">
       <img src="../public/images/icons/chat-message.svg" alt="Plus" class="w-4 h-4 transition-transform duration-300 filter brightness-0 invert">
