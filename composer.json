@@ -1,0 +1,22 @@
+{
+  "name": "agaseeyyy/portfolio",
+  "description": "Personal Portfolio Website",
+  "type": "project",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "app\\": "app/"
+    },
+    "files": [
+      "app/core/helpers.php",
+      "app/helpers/upload_helper.php"
+    ]
+  },
+  "require": {
+    "php": ">=8.1",
+    "vlucas/phpdotenv": "^5.6"
+  },
+  "config": {
+    "optimize-autoloader": true
+  }
+}

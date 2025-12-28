@@ -2,16 +2,17 @@
 /**
  * Environment Configuration Loader
  * 
- * Loads .env file and provides access to environment variables.
+ * Uses vlucas/phpdotenv for robust .env file handling.
  * Call Config::load() once at application bootstrap.
  */
 
 namespace app\core;
 
+use Dotenv\Dotenv;
+
 class Config
 {
     private static bool $loaded = false;
-    private static array $config = [];
 
     /**
      * Load environment variables from .env file
@@ -22,43 +23,16 @@ class Config
             return;
         }
 
-        $envFile = dirname(__DIR__, 2) . '/.env';
+        $basePath = dirname(__DIR__, 2);
         
-        if (!file_exists($envFile)) {
-            // Fall back to .env.example if .env doesn't exist
-            $envFile = dirname(__DIR__, 2) . '/.env.example';
-        }
-
-        if (file_exists($envFile)) {
-            $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-            
-            foreach ($lines as $line) {
-                // Skip comments
-                if (str_starts_with(trim($line), '#')) {
-                    continue;
-                }
-
-                // Parse KEY=value
-                if (str_contains($line, '=')) {
-                    [$key, $value] = explode('=', $line, 2);
-                    $key = trim($key);
-                    $value = trim($value);
-                    
-                    // Remove quotes if present
-                    if (preg_match('/^"(.*)"$/', $value, $matches)) {
-                        $value = $matches[1];
-                    } elseif (preg_match("/^'(.*)'$/", $value, $matches)) {
-                        $value = $matches[1];
-                    }
-
-                    self::$config[$key] = $value;
-                    
-                    // Also set as environment variable
-                    if (!getenv($key)) {
-                        putenv("$key=$value");
-                    }
-                }
-            }
+        // Load .env file if it exists
+        if (file_exists($basePath . '/.env')) {
+            $dotenv = Dotenv::createImmutable($basePath);
+            $dotenv->load();
+        } elseif (file_exists($basePath . '/.env.example')) {
+            // Fall back to .env.example for development
+            $dotenv = Dotenv::createImmutable($basePath, '.env.example');
+            $dotenv->load();
         }
 
         self::$loaded = true;
@@ -74,7 +48,8 @@ class Config
     public static function get(string $key, mixed $default = null): mixed
     {
         self::load();
-        return self::$config[$key] ?? getenv($key) ?: $default;
+        $value = $_ENV[$key] ?? getenv($key) ?: null;
+        return $value !== null ? $value : $default;
     }
 
     /**
@@ -82,7 +57,7 @@ class Config
      */
     public static function isDebug(): bool
     {
-        return self::get('APP_DEBUG', 'false') === 'true';
+        return strtolower(self::get('APP_DEBUG', 'false')) === 'true';
     }
 
     /**
@@ -91,5 +66,13 @@ class Config
     public static function env(): string
     {
         return self::get('APP_ENV', 'local');
+    }
+
+    /**
+     * Check if running in production
+     */
+    public static function isProduction(): bool
+    {
+        return self::env() === 'production';
     }
 }

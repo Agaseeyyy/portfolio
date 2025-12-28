@@ -6,21 +6,20 @@
  * - Public routes: resources/views/public/layout.php
  * - Admin routes: resources/views/admin/layout.php
  * 
- * Error display is controlled by APP_DEBUG in .env (handled by autoload.php)
+ * Error display is controlled by APP_DEBUG in .env
  */
 
 // Start session for flash messages
 session_start();
 
-require_once (__DIR__ . '/../app/core/autoload.php');
-require_once (__DIR__ . '/../app/core/helpers.php');
+// Bootstrap the application (Composer autoloader + config)
+require_once __DIR__ . '/../app/bootstrap.php';
 
 use app\core\Router;
 
+// Initialize router and load routes
 $router = new Router();
-require_once (__DIR__ . '/../routes/web.php');
+require_once __DIR__ . '/../routes/web.php';
 
-
-    // Admin routes - views handle their own complete HTML layout
-    $router->dispatch();
-   
+// Dispatch the request
+$router->dispatch();
