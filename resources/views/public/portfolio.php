@@ -2,11 +2,30 @@
 /**
  * Portfolio Section Template
  * Showcases projects, tech stack, and certifications with tabbed navigation
- * Features: Project gallery, technology showcase, certification display
+ * 
+ * @var array $projects - Projects data with technologies
+ * @var array $techstack - Tech stack data
+ * @var array $certifications - Certifications data
  */
+
+// Group techstack by category
+$categories = [
+    'frontend' => ['label' => 'Frontend', 'items' => []],
+    'backend' => ['label' => 'Backend', 'items' => []],
+    'database' => ['label' => 'Database', 'items' => []],
+    'tools' => ['label' => 'Tools & Others', 'items' => []],
+];
+if (!empty($techstack)) {
+    foreach ($techstack as $tech) {
+        $cat = $tech['category'] ?? 'tools';
+        if (isset($categories[$cat])) {
+            $categories[$cat]['items'][] = $tech;
+        }
+    }
+}
 ?>
 <!-- Portfolio Section: Main showcase of work and skills -->
-<section id="portfolio" class="px-6 py-8">
+<section id="portfolio" class="px-6 py-20">
   <div class="mx-auto max-w-8xl">
     <!-- Section Header: Portfolio introduction and navigation -->
     <div class="mb-16 text-center header-animate">
@@ -32,450 +51,183 @@
     <!-- Projects Section: Gallery of completed projects -->
     <div id="projects-section" class="portfolio-section portfolio-section-active">
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" id="projects-grid">
-        <!-- Project Card: E-commerce Platform -->
-        <div class="relative p-6 border shadow-lg simple-hover project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial" data-aos="fade-up" data-aos-delay="100">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10">
-            <div class="mb-4">
-              <img src="/placeholder.svg?height=200&width=300" alt="E-commerce Platform" class="object-cover w-full h-40 rounded-xl">
-            </div>
-            <h3 class="mb-3 text-xl font-semibold text-white">E-commerce Platform</h3>
-            <p class="mb-4 text-sm leading-relaxed text-gray-300">Full-stack e-commerce solution with user authentication, payment integration, and admin dashboard.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-3 py-1 text-sm text-pink-300 border rounded-full bg-pink-500/20 border-pink-500/30">PHP</span>
-              <span class="px-3 py-1 text-sm text-blue-300 border rounded-full bg-blue-500/20 border-blue-500/30">Laravel</span>
-              <span class="px-3 py-1 text-sm text-yellow-300 border rounded-full bg-yellow-500/20 border-yellow-500/30">JavaScript</span>
-            </div>
-            <div class="flex gap-3">
-              <a href="#" class="flex-1 px-4 py-3 text-sm text-center text-pink-300 transition-all duration-200 border rounded-xl bg-pink-500/20 border-pink-500/30 hover:bg-pink-500/30">
-                View
-              </a>
-              <a href="#" class="flex-1 px-4 py-3 text-sm text-center text-white transition-all duration-200 border rounded-xl bg-white/10 border-white/30 hover:bg-white/20">
-                GitHub
-              </a>
-            </div>
+        <?php if (!empty($projects)): ?>
+          <?php foreach ($projects as $index => $project): ?>
+            <a href="<?= base_url('project/' . $project['project_id']) ?>" class="relative p-6 border shadow-lg simple-hover project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial block <?= $index >= 3 ? 'hidden project-item' : '' ?>" data-aos="fade-up" data-aos-delay="<?= ($index % 3 + 1) * 100 ?>">
+              <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
+              <div class="relative z-10">
+                <div class="mb-4">
+                  <?php if (!empty($project['image'])): ?>
+                  <img src="<?= base_url($project['image']) ?>" alt="<?= htmlspecialchars($project['project_name']) ?>" class="object-cover w-full h-40 rounded-xl">
+                  <?php else: ?>
+                  <div class="flex items-center justify-center w-full h-40 rounded-xl bg-gray-700/50">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <?php endif; ?>
+                </div>
+                <h3 class="mb-3 text-xl font-semibold text-white group-hover:text-pink-300 transition-colors"><?= htmlspecialchars($project['project_name']) ?></h3>
+                <p class="mb-4 text-sm leading-relaxed text-gray-300 line-clamp-2"><?= htmlspecialchars($project['description'] ?? '') ?></p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <?php if (!empty($project['technologies'])): ?>
+                    <?php foreach (array_slice($project['technologies'], 0, 3) as $tech): ?>
+                    <span class="px-3 py-1 text-sm text-pink-300 border rounded-full bg-pink-500/20 border-pink-500/30"><?= htmlspecialchars($tech['tech_name']) ?></span>
+                    <?php endforeach; ?>
+                    <?php if (count($project['technologies']) > 3): ?>
+                    <span class="px-3 py-1 text-sm text-gray-400">+<?= count($project['technologies']) - 3 ?></span>
+                    <?php endif; ?>
+                  <?php endif; ?>
+                </div>
+                <div class="flex gap-3">
+                  <span class="flex-1 px-4 py-3 text-sm text-center text-pink-300 transition-all duration-200 border rounded-xl bg-pink-500/20 border-pink-500/30 group-hover:bg-pink-500/30">
+                    View Details
+                  </span>
+                  <?php if (!empty($project['project_link'])): ?>
+                  <span onclick="event.preventDefault(); event.stopPropagation(); window.open('<?= htmlspecialchars($project['project_link']) ?>', '_blank');" class="flex-1 px-4 py-3 text-sm text-center text-white transition-all duration-200 border rounded-xl bg-white/10 border-white/30 hover:bg-white/20 cursor-pointer">
+                    GitHub
+                  </span>
+                  <?php endif; ?>
+                </div>
+              </div>
+            </a>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <div class="col-span-full text-center py-12">
+            <p class="text-gray-400">No projects yet.</p>
           </div>
-        </div>
-
-        <!-- Project Card: Task Management System -->
-        <div class="relative p-6 border shadow-lg simple-hover project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial" data-aos="fade-up" data-aos-delay="200">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10">
-            <div class="mb-4">
-              <img src="/placeholder.svg?height=200&width=300" alt="Task Management App" class="object-cover w-full h-40 rounded-xl">
-            </div>
-            <h3 class="mb-3 text-xl font-semibold text-white">Task Management System</h3>
-            <p class="mb-4 text-sm leading-relaxed text-gray-300">Collaborative task management application with real-time updates and team collaboration features.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-3 py-1 text-sm text-green-300 border rounded-full bg-green-500/20 border-green-500/30">Vue.js</span>
-              <span class="px-3 py-1 text-sm text-purple-300 border rounded-full bg-purple-500/20 border-purple-500/30">PHP</span>
-              <span class="px-3 py-1 text-sm text-blue-300 border rounded-full bg-blue-500/20 border-blue-500/30">MySQL</span>
-            </div>
-            <div class="flex gap-3">
-              <a href="#" class="flex-1 px-4 py-3 text-sm text-center text-pink-300 transition-all duration-200 border rounded-xl bg-pink-500/20 border-pink-500/30 hover:bg-pink-500/30">
-                View
-              </a>
-              <a href="#" class="flex-1 px-4 py-3 text-sm text-center text-white transition-all duration-200 border rounded-xl bg-white/10 border-white/30 hover:bg-white/20">
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project Card: Weather Forecast App -->
-        <div class="relative p-6 border shadow-lg simple-hover project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial" data-aos="fade-up" data-aos-delay="300">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10">
-            <div class="mb-4">
-              <img src="/placeholder.svg?height=200&width=300" alt="Weather App" class="object-cover w-full h-40 rounded-xl">
-            </div>
-            <h3 class="mb-3 text-xl font-semibold text-white">Weather Forecast App</h3>
-            <p class="mb-4 text-sm leading-relaxed text-gray-300">Responsive weather application with location-based forecasts and interactive weather maps.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-3 py-1 text-sm text-yellow-300 border rounded-full bg-yellow-500/20 border-yellow-500/30">JavaScript</span>
-              <span class="px-3 py-1 text-sm border rounded-full bg-cyan-500/20 text-cyan-300 border-cyan-500/30">API Integration</span>
-              <span class="px-3 py-1 text-sm text-pink-300 border rounded-full bg-pink-500/20 border-pink-500/30">CSS3</span>
-            </div>
-            <div class="flex gap-3">
-              <a href="#" class="flex-1 px-4 py-3 text-sm text-center text-pink-300 transition-all duration-200 border rounded-xl bg-pink-500/20 border-pink-500/30 hover:bg-pink-500/30">
-                View
-              </a>
-              <a href="#" class="flex-1 px-4 py-3 text-sm text-center text-white transition-all duration-200 border rounded-xl bg-white/10 border-white/30 hover:bg-white/20">
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Hidden Project Card: Blog Platform (expandable content) -->
-        <div class="relative hidden p-6 border shadow-lg project-item simple-hover project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial" data-aos="fade-up" data-aos-delay="400">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10">
-            <div class="mb-4">
-              <img src="/placeholder.svg?height=200&width=300" alt="Blog Platform" class="object-cover w-full h-40 rounded-xl">
-            </div>
-            <h3 class="mb-3 text-xl font-semibold text-white">Blog Platform</h3>
-            <p class="mb-4 text-sm leading-relaxed text-gray-300">Multi-user blog platform with rich text editor and comment system.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-3 py-1 text-sm text-purple-300 border rounded-full bg-purple-500/20 border-purple-500/30">PHP</span>
-              <span class="px-3 py-1 text-sm text-blue-300 border rounded-full bg-blue-500/20 border-blue-500/30">MySQL</span>
-            </div>
-            <div class="flex gap-3">
-              <a href="#" class="flex-1 px-4 py-3 text-sm text-center text-pink-300 transition-all duration-200 border rounded-xl bg-pink-500/20 border-pink-500/30 hover:bg-pink-500/30">
-                View
-              </a>
-              <a href="#" class="flex-1 px-4 py-3 text-sm text-center text-white transition-all duration-200 border rounded-xl bg-white/10 border-white/30 hover:bg-white/20">
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Hidden Project Card: Portfolio Website (expandable content) -->
-        <div class="relative hidden p-6 border shadow-lg project-item simple-hover project-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation group portfolio-card-initial" data-aos="fade-up" data-aos-delay="500">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10">
-            <div class="mb-4">
-              <img src="/placeholder.svg?height=200&width=300" alt="Portfolio Website" class="object-cover w-full h-40 rounded-xl">
-            </div>
-            <h3 class="mb-3 text-xl font-semibold text-white">Portfolio Website</h3>
-            <p class="mb-4 text-sm leading-relaxed text-gray-300">Personal portfolio website with modern design and smooth animations.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-3 py-1 text-sm text-orange-300 border rounded-full bg-orange-500/20 border-orange-500/30">HTML</span>
-              <span class="px-3 py-1 text-sm text-blue-300 border rounded-full bg-blue-500/20 border-blue-500/30">CSS</span>
-              <span class="px-3 py-1 text-sm text-yellow-300 border rounded-full bg-yellow-500/20 border-yellow-500/30">JavaScript</span>
-            </div>
-            <div class="flex gap-3">
-              <a href="#" class="flex-1 px-4 py-3 text-sm text-center text-pink-300 transition-all duration-200 border rounded-xl bg-pink-500/20 border-pink-500/30 hover:bg-pink-500/30">
-                View
-              </a>
-              <a href="#" class="flex-1 px-4 py-3 text-sm text-center text-white transition-all duration-200 border rounded-xl bg-white/10 border-white/30 hover:bg-white/20">
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
+        <?php endif; ?>
       </div>
 
-      <!-- Show More Button: Toggle visibility of additional projects -->
+      <?php if (count($projects ?? []) > 3): ?>
+      <!-- Show More Button -->
       <div class="mt-12 text-center button-animate">
         <button id="projects-show-more" onclick="window.Portfolio.toggleProjects()" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 border rounded-lg bg-gradient-to-r from-pink-500/90 to-rose-600/90 border-white/30 hover:from-pink-600 hover:to-rose-700 hover:scale-105 hover:shadow-xl">
-          <img src="../public/images/icons/arrow-right.svg" alt="Show More" class="w-4 h-4 transition-transform duration-300" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
+          <img src="icons/arrow-right.svg" alt="Show More" class="w-4 h-4 transition-transform duration-300" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
           Show More Projects
         </button>
       </div>
+      <?php endif; ?>
     </div>
 
     <!-- Tech Stack Section: Display technical skills and proficiencies -->
     <div id="techstack-section" class="hidden portfolio-section">
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <!-- Frontend Technologies: Client-side development skills -->
-        <div class="relative p-6 border shadow-xl rounded-xl tech-category bg-gray-600/15 border-gray-500/25">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10">
-            <h3 class="mb-4 text-lg font-semibold text-center text-white">Frontend</h3>
-            <div class="space-y-3 overflow-y-auto max-h-60 scrollbar-themed">
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-cyan-400">
-                  <img src="../public/images/icons/react.svg" alt="React" class="w-full h-full" style="filter: brightness(0) saturate(100%) invert(68%) sepia(100%) saturate(1000%) hue-rotate(159deg) brightness(103%) contrast(104%);">
+        <?php foreach ($categories as $catKey => $category): ?>
+          <?php if (!empty($category['items'])): ?>
+          <div class="relative p-6 border shadow-xl rounded-xl tech-category bg-gray-600/15 border-gray-500/25">
+            <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
+            <div class="relative z-10">
+              <h3 class="mb-4 text-lg font-semibold text-center text-white"><?= htmlspecialchars($category['label']) ?></h3>
+              <div class="space-y-3 overflow-y-auto max-h-60 scrollbar-themed">
+                <?php foreach ($category['items'] as $tech): ?>
+                <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
+                  <div class="w-5 h-5">
+                    <?php if (!empty($tech['icon'])): ?>
+                    <img src="<?= htmlspecialchars($tech['icon']) ?>" alt="<?= htmlspecialchars($tech['tech_name']) ?>" class="w-full h-full">
+                    <?php endif; ?>
+                  </div>
+                  <span class="text-sm font-medium text-white"><?= htmlspecialchars($tech['tech_name']) ?></span>
                 </div>
-                <span class="text-sm font-medium text-white">React</span>
-              </div>
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-cyan-400">
-                  <img src="../public/images/icons/tailwind.svg" alt="Tailwind CSS" class="w-full h-full">
-                </div>
-                <span class="text-sm font-medium text-white">Tailwind CSS</span>
-              </div>
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-orange-500">
-                  <img src="../public/images/icons/html-tag.svg" alt="HTML5" class="w-full h-full">
-                </div>
-                <span class="text-sm font-medium text-white">HTML5</span>
-              </div>
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-blue-500">
-                  <img src="../public/images/icons/css.svg" alt="CSS3" class="w-full h-full">
-                </div>
-                <span class="text-sm font-medium text-white">CSS3</span>
-              </div>
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-yellow-400">
-                  <img src="../public/images/icons/javascript.svg" alt="JavaScript" class="w-full h-full" style="filter: brightness(0) saturate(100%) invert(82%) sepia(62%) saturate(467%) hue-rotate(359deg) brightness(102%) contrast(101%);">
-                </div>
-                <span class="text-sm font-medium text-white">JavaScript</span>
-              </div>
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-blue-400">
-                  <img src="../public/images/icons/react.svg" alt="React Native" class="w-full h-full" style="filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(2618%) hue-rotate(177deg) brightness(99%) contrast(101%);">
-                </div>
-                <span class="text-sm font-medium text-white">React Native</span>
+                <?php endforeach; ?>
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- Backend Technologies: Server-side development skills -->
-        <div class="relative p-6 border shadow-xl rounded-xl tech-category bg-gray-600/15 border-gray-500/25">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10">
-            <h3 class="mb-4 text-lg font-semibold text-center text-white">Backend</h3>
-            <div class="space-y-3">
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-green-600">
-                  <img src="../public/images/icons/spring-boot.svg" alt="Spring Boot" class="w-full h-full">
-                </div>
-                <span class="text-sm font-medium text-white">Spring Boot</span>
-              </div>
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-red-600">
-                  <img src="../public/images/icons/java.svg" alt="Java" class="w-full h-full">
-                </div>
-                <span class="text-sm font-medium text-white">Java</span>
-              </div>
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-red-500">
-                  <img src="../public/images/icons/laravel.svg" alt="Laravel" class="w-full h-full">
-                </div>
-                <span class="text-sm font-medium text-white">Laravel</span>
-              </div>
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-purple-500">
-                  <img src="../public/images/icons/php.svg" alt="PHP" class="w-full h-full">
-                </div>
-                <span class="text-sm font-medium text-white">PHP</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Database Technologies: Data storage and management skills -->
-        <div class="relative p-6 border shadow-xl rounded-xl tech-category bg-gray-600/15 border-gray-500/25">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10">
-            <h3 class="mb-4 text-lg font-semibold text-center text-white">Database</h3>
-            <div class="space-y-3">
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-blue-600">
-                  <img src="../public/images/icons/mysql.svg" alt="MySQL" class="w-full h-full">
-                </div>
-                <span class="text-sm font-medium text-white">MySQL</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tools & Others: Development tools and additional technologies -->
-        <div class="relative p-6 border shadow-xl rounded-xl tech-category bg-gray-600/15 border-gray-500/25">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10">
-            <h3 class="mb-4 text-lg font-semibold text-center text-white">Tools & Others</h3>
-            <div class="space-y-3 overflow-y-auto max-h-60 scrollbar-themed">
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-blue-500">
-                  <img src="../public/images/icons/vscode.svg" alt="VS Code" class="w-full h-full">
-                </div>
-                <span class="text-sm font-medium text-white">VS Code</span>
-              </div>
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-orange-600">
-                  <img src="../public/images/icons/git.svg" alt="Git" class="w-full h-full">
-                </div>
-                <span class="text-sm font-medium text-white">Git</span>
-              </div>
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-purple-400">
-                  <img src="../public/images/icons/figma.svg" alt="Figma" class="w-full h-full">
-                </div>
-                <span class="text-sm font-medium text-white">Figma</span>
-              </div>
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-orange-500">
-                  <img src="../public/images/icons/postman.svg" alt="Postman" class="w-full h-full">
-                </div>
-                <span class="text-sm font-medium text-white">Postman</span>
-              </div>
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-yellow-500">
-                  <img src="../public/images/icons/linux.svg" alt="Linux" class="w-full h-full">
-                </div>
-                <span class="text-sm font-medium text-white">Linux</span>
-              </div>
-              <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
-                <div class="w-5 h-5 text-blue-600">
-                  <img src="../public/images/icons/office.svg" alt="MS Office" class="w-full h-full">
-                </div>
-                <span class="text-sm font-medium text-white">MS Office</span>
-              </div>
-            </div>
-          </div>
-        </div>
+          <?php endif; ?>
+        <?php endforeach; ?>
       </div>
     </div>
 
     <!-- Certifications Section: Professional certifications and achievements -->
     <div id="certifications-section" class="hidden portfolio-section">
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" id="certifications-grid">
-        <!-- Certification Card: PHP Web Development -->
-        <div class="relative p-6 border shadow-lg simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10 text-center">
-            <div class="mb-4">
-              <div class="flex items-center justify-center w-10 h-10 mx-auto border rounded-full bg-gradient-to-br from-pink-500/20 to-rose-600/20 border-pink-500/30">
-                <img src="../public/images/icons/star.svg" alt="Star" class="w-5 h-5" style="filter: brightness(0) saturate(100%) invert(59%) sepia(83%) saturate(1739%) hue-rotate(233deg) brightness(101%) contrast(97%);">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" id="certifications-grid">
+        <?php if (!empty($certifications)): ?>
+          <?php foreach ($certifications as $index => $cert): ?>
+          <div class="relative overflow-hidden transition-all duration-300 border rounded-xl group bg-gray-800/50 border-gray-700/50 hover:border-pink-500/50 cert-card <?= $index >= 8 ? 'hidden cert-item' : '' ?>">
+            <!-- Image Container -->
+            <div class="relative aspect-[4/3] overflow-hidden bg-gray-900/50 cursor-pointer" onclick="viewCertImage('<?= base_url($cert['image'] ?? '') ?>')">
+              <?php if (!empty($cert['image'])): ?>
+              <img src="<?= base_url($cert['image']) ?>" alt="Certification" class="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105">
+              <?php else: ?>
+              <div class="flex items-center justify-center w-full h-full text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <?php endif; ?>
+              
+              <!-- Hover Overlay -->
+              <div class="absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 bg-black/60 group-hover:opacity-100">
+                <div class="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-pink-500/80 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                  </svg>
+                  View
+                </div>
               </div>
             </div>
-            <h3 class="mb-2 text-lg font-semibold text-white">PHP Web Development</h3>
-            <p class="mb-3 text-sm text-gray-300">Certified PHP Developer</p>
-            <p class="mb-4 text-xs text-gray-400">Issued by: Tech Academy • 2024</p>
-            <div class="flex justify-center gap-2">
-              <span class="px-2 py-1 text-xs text-purple-300 border rounded-full bg-purple-500/20 border-purple-500/30">PHP</span>
-              <span class="px-2 py-1 text-xs text-red-300 border rounded-full bg-red-500/20 border-red-500/30">Laravel</span>
+            
+            <!-- Card Footer -->
+            <div class="p-3 border-t border-gray-700/50">
+              <p class="text-xs text-gray-400">Added: <?= date('M d, Y', strtotime($cert['created_at'] ?? 'now')) ?></p>
             </div>
           </div>
-        </div>
-
-        <!-- Certification Card: JavaScript Fundamentals -->
-        <div class="relative p-6 border shadow-lg simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10 text-center">
-            <div class="mb-4">
-              <div class="flex items-center justify-center w-10 h-10 mx-auto border rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-600/20 border-blue-500/30">
-                <img src="../public/images/icons/star.svg" alt="Star" class="w-5 h-5" style="filter: brightness(0) saturate(100%) invert(59%) sepia(83%) saturate(1739%) hue-rotate(216deg) brightness(101%) contrast(97%);">
-              </div>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <div class="col-span-full flex flex-col items-center gap-4 py-12">
+            <div class="flex items-center justify-center w-16 h-16 rounded-full bg-pink-500/10">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+              </svg>
             </div>
-            <h3 class="mb-2 text-lg font-semibold text-white">JavaScript Fundamentals</h3>
-            <p class="mb-3 text-sm text-gray-300">Frontend Development Certificate</p>
-            <p class="mb-4 text-xs text-gray-400">Issued by: CodeCamp • 2024</p>
-            <div class="flex justify-center gap-2">
-              <span class="px-2 py-1 text-xs text-yellow-300 border rounded-full bg-yellow-500/20 border-yellow-500/30">JavaScript</span>
-              <span class="px-2 py-1 text-xs text-orange-300 border rounded-full bg-orange-500/20 border-orange-500/30">HTML/CSS</span>
-            </div>
+            <p class="text-gray-400">No certifications yet.</p>
           </div>
-        </div>
-
-        <!-- Certification Card: Database Management -->
-        <div class="relative p-6 border shadow-lg simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10 text-center">
-            <div class="mb-4">
-              <div class="flex items-center justify-center w-10 h-10 mx-auto border rounded-full bg-gradient-to-br from-green-500/20 to-emerald-600/20 border-green-500/30">
-                <img src="../public/images/icons/star.svg" alt="Star" class="w-5 h-5" style="filter: brightness(0) saturate(100%) invert(47%) sepia(91%) saturate(515%) hue-rotate(92deg) brightness(104%) contrast(101%);">
-              </div>
-            </div>
-            <h3 class="mb-2 text-lg font-semibold text-white">Database Management</h3>
-            <p class="mb-3 text-sm text-gray-300">MySQL & Database Design</p>
-            <p class="mb-4 text-xs text-gray-400">Issued by: DataBase Institute • 2023</p>
-            <div class="flex justify-center gap-2">
-              <span class="px-2 py-1 text-xs text-blue-300 border rounded-full bg-blue-500/20 border-blue-500/30">MySQL</span>
-              <span class="px-2 py-1 text-xs text-green-300 border rounded-full bg-green-500/20 border-green-500/30">Database Design</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Certification Card: Responsive Web Design -->
-        <div class="relative p-6 border shadow-lg simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10 text-center">
-            <div class="mb-4">
-              <div class="flex items-center justify-center w-10 h-10 mx-auto border rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-600/20 border-indigo-500/30">
-                <img src="../public/images/icons/star.svg" alt="Star" class="w-5 h-5" style="filter: brightness(0) saturate(100%) invert(30%) sepia(96%) saturate(3151%) hue-rotate(231deg) brightness(99%) contrast(103%);">
-              </div>
-            </div>
-            <h3 class="mb-2 text-lg font-semibold text-white">Responsive Web Design</h3>
-            <p class="mb-3 text-sm text-gray-300">Mobile-First Development</p>
-            <p class="mb-4 text-xs text-gray-400">Issued by: Design Academy • 2023</p>
-            <div class="flex justify-center gap-2">
-              <span class="px-2 py-1 text-xs border rounded-full bg-cyan-500/20 text-cyan-300 border-cyan-500/30">CSS3</span>
-              <span class="px-2 py-1 text-xs text-pink-300 border rounded-full bg-pink-500/20 border-pink-500/30">Responsive Design</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Certification Card: Git Version Control -->
-        <div class="relative p-6 border shadow-lg simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10 text-center">
-            <div class="mb-4">
-              <div class="flex items-center justify-center w-10 h-10 mx-auto border rounded-full bg-gradient-to-br from-red-500/20 to-pink-600/20 border-red-500/30">
-                <img src="../public/images/icons/star.svg" alt="Star" class="w-5 h-5" style="filter: brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);">
-              </div>
-            </div>
-            <h3 class="mb-2 text-lg font-semibold text-white">Git Version Control</h3>
-            <p class="mb-3 text-sm text-gray-300">Source Code Management</p>
-            <p class="mb-4 text-xs text-gray-400">Issued by: DevOps Academy • 2023</p>
-            <div class="flex justify-center gap-2">
-              <span class="px-2 py-1 text-xs text-gray-300 border rounded-full bg-gray-500/20 border-gray-500/30">Git</span>
-              <span class="px-2 py-1 text-xs text-purple-300 border rounded-full bg-purple-500/20 border-purple-500/30">GitHub</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Certification Card: React Development -->
-        <div class="relative p-6 border shadow-lg simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10 text-center">
-            <div class="mb-4">
-              <div class="flex items-center justify-center w-10 h-10 mx-auto border rounded-full bg-gradient-to-br from-orange-500/20 to-amber-600/20 border-orange-500/30">
-                <img src="../public/images/icons/star.svg" alt="Star" class="w-5 h-5" style="filter: brightness(0) saturate(100%) invert(59%) sepia(69%) saturate(959%) hue-rotate(1deg) brightness(102%) contrast(101%);">
-              </div>
-            </div>
-            <h3 class="mb-2 text-lg font-semibold text-white">React Development</h3>
-            <p class="mb-3 text-sm text-gray-300">Modern Frontend Framework</p>
-            <p class="mb-4 text-xs text-gray-400">Issued by: React Institute • 2024</p>
-            <div class="flex justify-center gap-2">
-              <span class="px-2 py-1 text-xs border rounded-full bg-cyan-500/20 text-cyan-300 border-cyan-500/30">React</span>
-              <span class="px-2 py-1 text-xs text-yellow-300 border rounded-full bg-yellow-500/20 border-yellow-500/30">JavaScript</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Hidden Certification Card: API Development (expandable content) -->
-        <div class="relative hidden p-6 border shadow-lg cert-item simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10 text-center">
-            <div class="mb-4">
-              <div class="flex items-center justify-center w-10 h-10 mx-auto border rounded-full bg-gradient-to-br from-teal-500/20 to-cyan-600/20 border-teal-500/30">
-                <img src="../public/images/icons/star.svg" alt="Star" class="w-5 h-5" style="filter: brightness(0) saturate(100%) invert(52%) sepia(50%) saturate(1226%) hue-rotate(141deg) brightness(95%) contrast(89%);">
-              </div>
-            </div>
-            <h3 class="mb-2 text-lg font-semibold text-white">API Development</h3>
-            <p class="mb-3 text-sm text-gray-300">RESTful API Design</p>
-            <p class="mb-4 text-xs text-gray-400">Issued by: API Academy • 2023</p>
-            <div class="flex justify-center gap-2">
-              <span class="px-2 py-1 text-xs text-green-300 border rounded-full bg-green-500/20 border-green-500/30">REST API</span>
-              <span class="px-2 py-1 text-xs text-blue-300 border rounded-full bg-blue-500/20 border-blue-500/30">JSON</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Hidden Certification Card: UI/UX Design (expandable content) -->
-        <div class="relative hidden p-6 border shadow-lg cert-item simple-hover cert-card rounded-xl bg-gray-600/15 border-gray-500/25 optimized-animation">
-          <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
-          <div class="relative z-10 text-center">
-            <div class="mb-4">
-              <div class="flex items-center justify-center w-10 h-10 mx-auto border rounded-full bg-gradient-to-br from-violet-500/20 to-purple-600/20 border-violet-500/30">
-                <img src="../public/images/icons/star.svg" alt="Star" class="w-5 h-5" style="filter: brightness(0) saturate(100%) invert(44%) sepia(96%) saturate(3151%) hue-rotate(260deg) brightness(99%) contrast(103%);">
-              </div>
-            </div>
-            <h3 class="mb-2 text-lg font-semibold text-white">UI/UX Design</h3>
-            <p class="mb-3 text-sm text-gray-300">User Experience Design</p>
-            <p class="mb-4 text-xs text-gray-400">Issued by: Design Institute • 2022</p>
-            <div class="flex justify-center gap-2">
-              <span class="px-2 py-1 text-xs text-purple-300 border rounded-full bg-purple-500/20 border-purple-500/30">Figma</span>
-              <span class="px-2 py-1 text-xs text-pink-300 border rounded-full bg-pink-500/20 border-pink-500/30">UI Design</span>
-            </div>
-          </div>
-        </div>
+        <?php endif; ?>
       </div>
 
-      <!-- Show More Button: Toggle visibility of additional certifications -->
+      <?php if (count($certifications ?? []) > 8): ?>
+      <!-- Show More Button -->
       <div class="mt-12 text-center button-animate">
         <button id="certifications-show-more" onclick="window.Portfolio.toggleCertifications()" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 border rounded-lg bg-gradient-to-r from-pink-500/90 to-rose-600/90 border-white/30 hover:from-pink-600 hover:to-rose-700 hover:scale-105 hover:shadow-xl">
-          <img src="../public/images/icons/plus.svg" alt="Plus" class="w-4 h-4 transition-transform duration-300 filter brightness-0 invert">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
           Show More Certifications
         </button>
       </div>
+      <?php endif; ?>
     </div>
   </div>
+
+  <!-- Certificate Image Modal -->
+  <div id="certImageModal" class="fixed inset-0 z-50 items-center justify-center hidden p-4 bg-black/90" onclick="closeCertModal(event)">
+    <button onclick="closeCertModal()" class="absolute text-white top-4 right-4 hover:text-pink-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <img id="certModalImage" src="" alt="Certificate" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl">
+  </div>
+
+  <script>
+    function viewCertImage(src) {
+      if (!src) return;
+      document.getElementById('certModalImage').src = src;
+      document.getElementById('certImageModal').classList.remove('hidden');
+      document.getElementById('certImageModal').classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCertModal(event) {
+      if (event && event.target !== event.currentTarget) return;
+      document.getElementById('certImageModal').classList.add('hidden');
+      document.getElementById('certImageModal').classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    // Close on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeCertModal();
+    });
+  </script>
 </section>

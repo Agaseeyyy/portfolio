@@ -1,13 +1,11 @@
-Options -MultiViews
 RewriteEngine On
 
-RewriteBase /portfolio/public
+RewriteBase /
 
-#accept loading files of actual files or directories
+# If the file exists serve it
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# send everything else to index
+# Send everything to index.php
+# Use index.php (no slash) so it stays relative to this folder
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
-
-

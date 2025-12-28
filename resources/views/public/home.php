@@ -3,28 +3,66 @@
  * Home/Hero Section Template
  * Main landing page with introduction, avatar, and call-to-action buttons
  * Features: Typing animation, social links, animated tech stack orbits
+ * 
+ * @var array $home - Home section data
+ * @var array $contact - Contact info data
+ * @var array $projects - Projects data
+ * @var array $techstack - Tech stack data
+ * @var array $services - Services data
+ * @var array $certifications - Certifications data
  */
+
+use app\core\View;
+
+// Extend the public layout
+View::extend('public/layout');
+
+// Ensure data arrays exist
+$home = $home ?? [];
+$contact = $contact ?? [];
+$techstack = $techstack ?? [];
+$projects = $projects ?? [];
+$services = $services ?? [];
+$certifications = $certifications ?? [];
+
+$name = $home['name'] ?? 'Agassi Bustarga';
+$role = $home['role'] ?? 'Student Developer';
+$bio = $home['short_bio'] ?? 'A passionate and dedicated information technology student with a knack for problem-solving and a love for coding.';
+$profilePhoto = empty($home['profile_photo']) ? $home['profile_photo'] : 'images/def-avatar.png';
+$hoverPhoto = 'images/hover-avatar.png';
+
+// Contact/Social links
+$githubLink = $contact['github_link'] ?? '#';
+$linkedinLink = $contact['linkedin_link'] ?? '#';
+$instagramLink = $contact['instagram_link'] ?? '#';
+$email = $contact['email'] ?? '';
 ?>
+
+<?php View::section('title') ?>
+Portfolio - <?= htmlspecialchars($name) ?>
+<?php View::endSection() ?>
+
+<?php View::section('content') ?>
 <header id="home" class="flex flex-col items-center justify-center min-h-screen gap-8 px-6 max-w-8xl lg:flex-row lg:gap-16 xl:gap-20">
   
   <!-- Text Content Section: Introduction and call-to-action buttons -->
   <div class="relative w-full max-w-xl p-6 border shadow-md opacity-0 lg:w-auto lg:max-w-2xl xl:max-w-3xl rounded-xl bg-pink-500/10 border-pink-500/30 animate-slide-in-left">
     <div class="relative z-10 space-y-5">
-      <h3 class="text-xl font-semibold text-pink-500">Hi, I'm Agassi Bustarga</h3>
+      <h3 class="text-xl font-semibold text-pink-500">Hi, I'm <?= htmlspecialchars($name) ?></h3>
       <h1 class="text-2xl font-bold text-white lg:text-3xl xl:text-4xl drop-shadow-lg">Full-stack Web
-        <span class="text-pink-500"><br><span class="typing-container" data-text="Student Developer"><span class="typing-text">Student Developer</span></span></span>
+        <span class="text-pink-500"><br><span class="typing-container" data-text="<?= htmlspecialchars($role) ?>"><span class="typing-text"><?= htmlspecialchars($role) ?></span></span></span>
       </h1>
-      <p class="max-w-2xl text-base text-gray-100 drop-shadow-md">A passionate and dedicated information technology student with a knack for problem-solving and a love for coding. Eager to learn and grow in the tech industry.</p>
+      <p class="max-w-2xl text-base text-gray-100 drop-shadow-md"><?= htmlspecialchars($bio) ?></p>
       
       <!-- Action buttons: Primary CTA buttons for CV download and portfolio exploration -->
       <div class="flex flex-row gap-4 mt-6 opacity-0 max-sm:justify-center lg:gap-6 animate-fade-in-up animation-delay-1000">
         <a href="#projects" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 border rounded-lg shadow-lg bg-gradient-to-r from-pink-500/90 to-rose-600/90 border-white/30 hover:from-pink-600 hover:to-rose-700 hover:scale-105 hover:shadow-xl">
-          <img src="../public/images/icons/download.svg" alt="Download" class="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-1" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
+          <img src="icons/download.svg" alt="Download" class="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-1" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
           Download CV
         </a>
 
         <a href="#portfolio" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 border rounded-lg shadow-lg border-pink-500/50 hover:from-pink-600/30 hover:to-rose-700/30 hover:scale-105 hover:shadow-xl bg-gradient-to-r from-pink-500/20 to-rose-600/20">
-          <img src="../public/images/icons/arrow-right.svg" alt="Arrow Right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
+          <img src="icons/arrow-right.svg" alt="Arrow Right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
           Explore More
         </a>
       </div>
@@ -32,28 +70,36 @@
       <!-- Social Media Icons: External profile links with hover animations -->
       <div class="flex gap-6 pt-8 mt-8 border-t opacity-0 border-white/30 animate-scale-in animation-delay-1500">
         <!-- Github -->
-        <a href="https://github.com/agaseeyyy" target="_blank" 
+        <?php if (!empty($githubLink) && $githubLink !== '#'): ?>
+        <a href="<?= htmlspecialchars($githubLink) ?>" target="_blank" 
            class="p-3 transition-all duration-200 border rounded-full border-white/30 bg-white/20 hover:bg-pink-500/20 hover:border-pink-500/50 hover:scale-110 hover:rotate-12">
-          <img src="../public/images/icons/github.svg" alt="GitHub" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
+          <img src="icons/github.svg" alt="GitHub" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
         </a>
+        <?php endif; ?>
         
         <!-- Linkedin -->
-        <a href="https://linkedin.com/in/agassi-bustarga" target="_blank" 
+        <?php if (!empty($linkedinLink) && $linkedinLink !== '#'): ?>
+        <a href="<?= htmlspecialchars($linkedinLink) ?>" target="_blank" 
            class="p-3 transition-all duration-200 border rounded-full border-white/30 bg-white/20 hover:bg-pink-500/20 hover:border-pink-500/50 hover:scale-110 hover:-rotate-12">
-          <img src="../public/images/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
+          <img src="icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
         </a>
+        <?php endif; ?>
         
         <!-- Instagram -->
-        <a href="https://instagram.com/_agaseeyyy" target="_blank" 
+        <?php if (!empty($instagramLink) && $instagramLink !== '#'): ?>
+        <a href="<?= htmlspecialchars($instagramLink) ?>" target="_blank" 
            class="p-3 transition-all duration-200 border rounded-full border-white/30 bg-white/20 hover:bg-pink-500/20 hover:border-pink-500/50 hover:scale-110 hover:rotate-12">
-          <img src="../public/images/icons/instagram.svg" alt="Instagram" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
+          <img src="icons/instagram.svg" alt="Instagram" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
         </a>
+        <?php endif; ?>
         
         <!-- Gmail -->
-        <a href="mailto:bustargaagassi1018@gmail.com" target="_blank" 
+        <?php if (!empty($email)): ?>
+        <a href="mailto:<?= htmlspecialchars($email) ?>" target="_blank" 
            class="p-3 transition-all duration-200 border rounded-full border-white/30 bg-white/20 hover:bg-pink-500/20 hover:border-pink-500/50 hover:scale-110 hover:-rotate-12">
-          <img src="../public/images/icons/gmail.svg" alt="Gmail" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
+          <img src="icons/gmail.svg" alt="Gmail" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
         </a>
+        <?php endif; ?>
       </div>
     </div>
   </div>
@@ -64,49 +110,41 @@
     <div class="absolute inset-0 flex items-center justify-center" style="width: 200%; height: 200%; left: -50%; top: -50%;">
       <!-- Outer Orbit: First ring of technology icons -->
       <div class="absolute w-[32rem] h-[32rem] lg:w-[40rem] lg:h-[40rem] xl:w-[48rem] xl:h-[48rem] border rounded-full border-pink-500/20 animate-spin" style="animation-duration: 20s;">
-      <!-- React Icon -->
-      <div class="absolute z-30 w-6 h-6 text-blue-400 transform -translate-x-1/2 opacity-30 -top-3 left-1/2 lg:w-8 lg:h-8 xl:w-10 xl:h-10">
-        <img src="../public/images/icons/react.svg" alt="React" class="w-full h-full" style="filter: brightness(0) saturate(100%) invert(42%) sepia(93%) saturate(3777%) hue-rotate(203deg) brightness(101%) contrast(101%);">
+        <?php 
+        // Display first 4 tech icons in outer orbit
+        $orbitPositions = [
+          '-top-3 left-1/2 -translate-x-1/2',
+          'top-1/2 -right-3 -translate-y-1/2',
+          '-bottom-3 left-1/2 -translate-x-1/2',
+          'top-1/2 -left-3 -translate-y-1/2'
+        ];
+        $outerTech = array_slice($techstack ?? [], 0, 4);
+        foreach ($outerTech as $i => $tech):
+          $pos = $orbitPositions[$i] ?? $orbitPositions[0];
+        ?>
+        <div class="absolute z-30 w-6 h-6 opacity-30 <?= $pos ?> lg:w-8 lg:h-8 xl:w-10 xl:h-10">
+          <?php if (!empty($tech['icon'])): ?>
+          <img src="<?= htmlspecialchars($tech['icon']) ?>" alt="<?= htmlspecialchars($tech['tech_name']) ?>" class="w-full h-full">
+          <?php endif; ?>
+        </div>
+        <?php endforeach; ?>
       </div>
-      
-      <!-- Spring Boot Icon -->
-      <div class="absolute z-30 w-6 h-6 text-green-500 transform -translate-y-1/2 opacity-30 top-1/2 -right-3 lg:w-8 lg:h-8 xl:w-10 xl:h-10">
-        <img src="../public/images/icons/spring-boot.svg" alt="Spring Boot" class="w-full h-full" style="filter: brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);">
-      </div>
-      
-      <!-- HTML Icon -->
-      <div class="absolute z-30 w-6 h-6 text-orange-500 transform -translate-x-1/2 opacity-30 -bottom-3 left-1/2 lg:w-8 lg:h-8 xl:w-10 xl:h-10">
-        <img src="../public/images/icons/html-tag.svg" alt="HTML" class="w-full h-full">
-      </div>
-      
-      <!-- JavaScript Icon -->
-      <div class="absolute z-30 w-6 h-6 text-yellow-400 transform -translate-y-1/2 opacity-30 top-1/2 -left-3 lg:w-8 lg:h-8 xl:w-10 xl:h-10">
-        <img src="../public/images/icons/javascript.svg" alt="JavaScript" class="w-full h-full" style="filter: brightness(0) saturate(100%) invert(82%) sepia(62%) saturate(467%) hue-rotate(359deg) brightness(102%) contrast(101%);">
-      </div>
-    </div>
     
-    <!-- Inner Orbit: Second ring of technology icons (reverse rotation) -->
-    <div class="absolute border overscroll-none rounded-full w-[26rem] h-[26rem] lg:w-[32rem] lg:h-[32rem] xl:w-[38rem] xl:h-[38rem] border-rose-400/20 animate-spin" style="animation-duration: 15s; animation-direction: reverse;">
-      <!-- Java Icon -->
-      <div class="absolute z-30 w-6 h-6 text-red-500 transform -translate-x-1/2 opacity-40 -top-3 left-1/2 lg:w-8 lg:h-8 xl:w-10 xl:h-10">
-        <img src="../public/images/icons/java.svg" alt="Java" class="w-full h-full">
+      <!-- Inner Orbit: Second ring of technology icons (reverse rotation) -->
+      <div class="absolute border overscroll-none rounded-full w-[26rem] h-[26rem] lg:w-[32rem] lg:h-[32rem] xl:w-[38rem] xl:h-[38rem] border-rose-400/20 animate-spin" style="animation-duration: 15s; animation-direction: reverse;">
+        <?php 
+        // Display next 4 tech icons in inner orbit
+        $innerTech = array_slice($techstack ?? [], 4, 4);
+        foreach ($innerTech as $i => $tech):
+          $pos = $orbitPositions[$i] ?? $orbitPositions[0];
+        ?>
+        <div class="absolute z-30 w-6 h-6 opacity-40 <?= $pos ?> lg:w-8 lg:h-8 xl:w-10 xl:h-10">
+          <?php if (!empty($tech['icon'])): ?>
+          <img src="<?= htmlspecialchars($tech['icon']) ?>" alt="<?= htmlspecialchars($tech['tech_name']) ?>" class="w-full h-full">
+          <?php endif; ?>
+        </div>
+        <?php endforeach; ?>
       </div>
-      
-      <!-- Tailwind CSS Icon -->
-      <div class="absolute z-30 w-6 h-6 transform -translate-y-1/2 opacity-30 text-cyan-400 top-1/2 -right-3 lg:w-8 lg:h-8 xl:w-10 xl:h-10">
-        <img src="../public/images/icons/tailwind.svg" alt="Tailwind CSS" class="w-full h-full" style="filter: brightness(0) saturate(100%) invert(68%) sepia(100%) saturate(1000%) hue-rotate(159deg) brightness(103%) contrast(104%);">
-      </div>
-      
-      <!-- PHP Icon -->
-      <div class="absolute z-30 w-6 h-6 text-purple-500 transform -translate-y-1/2 opacity-40 top-1/2 -left-3 lg:w-8 lg:h-8 xl:w-10 xl:h-10">
-        <img src="../public/images/icons/php.svg" alt="php" class="w-full h-full">
-      </div>
-      
-      <!-- Laravel Icon -->
-      <div class="absolute z-30 w-6 h-6 text-red-400 transform -translate-x-1/2 -translate-y-1/2 opacity-50 -bottom-8 left-1/2 lg:w-8 lg:h-8 xl:w-10 xl:h-10">
-        <img src="../public/images/icons/laravel.svg" alt="Laravel" class="w-full h-full">
-      </div>
-    </div>
     </div>
     
     <!-- Avatar Container: Main profile image with glow effects -->
@@ -122,9 +160,9 @@
         <!-- Avatar Image: Interactive profile photo with hover state -->
         <div class="relative z-20 flex items-center justify-center w-[16rem] h-[16rem] lg:w-[20rem] lg:h-[20rem] xl:w-[24rem] xl:h-[24rem] overflow-hidden rounded-full cursor-pointer">
           <img
-            src="../public/images/def-avatar.png"
-            onmouseover="this.src='../public/images/hover-avatar.png'"
-            onmouseout="this.src='../public/images/def-avatar.png'"
+            src="<?= htmlspecialchars($profilePhoto) ?>"
+            onmouseover="this.src='<?= htmlspecialchars($hoverPhoto) ?>'"
+            onmouseout="this.src='<?= htmlspecialchars($profilePhoto) ?>'"
             alt="avatar"
             class="object-cover w-full h-full"
           />
@@ -136,8 +174,8 @@
 
 <?php 
 // Include other page sections
-include 'portfolio.php'; 
-include 'services.php'; 
-include 'contacts.php'; 
+include __DIR__ . '/portfolio.php'; 
+include __DIR__ . '/services.php'; 
+include __DIR__ . '/contacts.php'; 
 ?>
-
+<?php View::endSection() ?>

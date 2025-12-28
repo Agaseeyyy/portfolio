@@ -1,8 +1,14 @@
 Options -Indexes
-
 RewriteEngine On
+RewriteBase /portfolio/
 
-# Redirect everything to /portfolio/public
-RewriteCond %{REQUEST_URI} !^/portfolio/public
-RewriteCond %{REQUEST_URI} !^/portfolio/resources/js
-RewriteRule ^(.*)$ /portfolio/public/$1 [L,R=302]
+# 1. Allow resources (JS/CSS/Images) to bypass the router
+RewriteCond %{REQUEST_URI} ^/portfolio/resources/ [NC]
+RewriteRule ^ - [L]
+
+# 2. This covers assets, images, icons, etc. in one line
+RewriteCond %{REQUEST_URI} ^/portfolio/(assets|images|icons|uploads)/ [NC]
+RewriteRule ^(.*)$ public/$1 [L]
+
+# 3. Silently rewrite to public/index.php and pass the 'url' parameter
+RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]

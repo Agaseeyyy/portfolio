@@ -1,2 +1,64 @@
 <?php
+/**
+ * Helper Functions
+ * 
+ * Global functions available throughout the application.
+ */
 
+if (!function_exists('base_url')) {
+    /**
+     * Get base URL for the application
+     * 
+     * @param string $path Optional path to append
+     * @return string
+     */
+    function base_url(string $path = ''): string
+    {
+        if ($_SERVER['HTTP_HOST'] !== 'localhost') {
+            return '/' . ltrim($path, '/');
+        }
+
+        return '/portfolio/' . ltrim($path, '/');
+    }
+}
+
+if (!function_exists('set_flash')) {
+    /**
+     * Set a flash message in session
+     * 
+     * @param string $type Message type (success, error, warning, info)
+     * @param string $message The message content
+     */
+    function set_flash(string $type, string $message): void
+    {
+        $_SESSION['flash'][$type] = $message;
+    }
+}
+
+if (!function_exists('get_flash')) {
+    /**
+     * Get and clear a flash message
+     * 
+     * @param string $type Message type
+     * @return string|null The message or null if not exists
+     */
+    function get_flash(string $type): ?string
+    {
+        $message = $_SESSION['flash'][$type] ?? null;
+        unset($_SESSION['flash'][$type]);
+        return $message;
+    }
+}
+
+if (!function_exists('has_flash')) {
+    /**
+     * Check if a flash message exists
+     * 
+     * @param string $type Message type
+     * @return bool
+     */
+    function has_flash(string $type): bool
+    {
+        return !empty($_SESSION['flash'][$type]);
+    }
+}
