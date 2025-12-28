@@ -3,26 +3,16 @@
  * Navigation Bar
  * Uses dynamic data from contacts and home
  * 
- * @var array $home - Home section data (name)
+ * @var string $firstName - First name (from controller)
+ * @var string $lastName - Last name (from controller)
  * @var array $contact - Contact data with social links
  */
 
 use app\core\View;
 $data = View::getData();
-$home = $data['home'] ?? [];
+$firstName = $data['firstName'] ?? 'Agassi';
+$lastName = $data['lastName'] ?? 'Bustarga';
 $contact = $data['contact'] ?? [];
-
-// Get name parts
-$fullName = $home['name'] ?? 'Agassi Bustarga';
-$nameParts = explode(' ', $fullName, 2);
-$firstName = $nameParts[0] ?? '';
-$lastName = $nameParts[1] ?? '';
-
-// Social links
-$github = $contact['github_link'] ?? '';
-$linkedin = $contact['linkedin_link'] ?? '';
-$instagram = $contact['instagram_link'] ?? '';
-$email = $contact['email'] ?? '';
 ?>
 <nav class="sticky top-0 z-50 px-6 text-white transition-all duration-300 border-b shadow-md bg-black/70 backdrop-blur-sm border-pink-500/20 h-fit max-lg:backdrop-blur-none">
   <div class="flex items-center justify-between py-6 mx-auto max-w-8xl h-fit">
@@ -56,8 +46,8 @@ $email = $contact['email'] ?? '';
       <!-- Single Social Links - Inside mobile menu, beside desktop nav -->
       <div class="flex justify-center gap-6 pt-8 border-t border-gray-700 lg:border-t-0 lg:pt-0 lg:pl-8">
         <!-- Github -->
-        <?php if (!empty($github)): ?>
-        <a href="<?= htmlspecialchars($github) ?>" target="_blank"
+        <?php if (!empty($contact['github_link'])): ?>
+        <a href="<?= htmlspecialchars($contact['github_link']) ?>" target="_blank"
            class="[&>svg]:h-6 [&>svg]:w-6 lg:[&>svg]:h-5 lg:[&>svg]:w-5
                   hover:text-pink-500 transition-all duration-200 hover:scale-110
                   transform hover:rotate-12">
@@ -68,8 +58,8 @@ $email = $contact['email'] ?? '';
         <?php endif; ?>
     
         <!-- Linkedin -->
-        <?php if (!empty($linkedin)): ?>
-        <a href="<?= htmlspecialchars($linkedin) ?>" target="_blank"
+        <?php if (!empty($contact['linkedin_link'])): ?>
+        <a href="<?= htmlspecialchars($contact['linkedin_link']) ?>" target="_blank"
            class="[&>svg]:h-6 [&>svg]:w-6 lg:[&>svg]:h-5 lg:[&>svg]:w-5
                   hover:text-pink-500 transition-all duration-200 hover:scale-110
                   transform hover:-rotate-12">
@@ -80,8 +70,8 @@ $email = $contact['email'] ?? '';
         <?php endif; ?>
     
         <!-- Instagram -->
-        <?php if (!empty($instagram)): ?>
-        <a href="<?= htmlspecialchars($instagram) ?>" target="_blank"
+        <?php if (!empty($contact['instagram_link'])): ?>
+        <a href="<?= htmlspecialchars($contact['instagram_link']) ?>" target="_blank"
            class="[&>svg]:h-6 [&>svg]:w-6 lg:[&>svg]:h-5 lg:[&>svg]:w-5
                   hover:text-pink-500 transition-all duration-200 hover:scale-110
                   transform hover:rotate-12">
@@ -92,8 +82,8 @@ $email = $contact['email'] ?? '';
         <?php endif; ?>
     
         <!-- Email -->
-        <?php if (!empty($email)): ?>
-        <a href="mailto:<?= htmlspecialchars($email) ?>" target="_blank"
+        <?php if (!empty($contact['email'])): ?>
+        <a href="mailto:<?= htmlspecialchars($contact['email']) ?>" target="_blank"
            class="[&>svg]:h-6 [&>svg]:w-6 lg:[&>svg]:h-5 lg:[&>svg]:w-5
                   hover:text-pink-500 transition-all duration-200 hover:scale-110
                   transform hover:-rotate-12">

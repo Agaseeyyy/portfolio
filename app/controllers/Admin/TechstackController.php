@@ -18,11 +18,28 @@ class TechstackController extends Controller
 
     public function index(): void
     {
+        $techstack = $this->model->all() ?? [];
+        
+        // Group techstack by category
+        $techCategories = [
+            'frontend' => ['label' => 'Frontend', 'items' => []],
+            'backend' => ['label' => 'Backend', 'items' => []],
+            'database' => ['label' => 'Database', 'items' => []],
+            'tools' => ['label' => 'Tools & Others', 'items' => []],
+        ];
+        foreach ($techstack as $tech) {
+            $cat = $tech['category'] ?? 'tools';
+            if (isset($techCategories[$cat])) {
+                $techCategories[$cat]['items'][] = $tech;
+            }
+        }
+
         $data = [
             'pageTitle' => 'Tech Stack',
             'pageDescription' => 'Manage your technology stack',
             'activeMenu' => 'techstack',
-            'techstack' => $this->model->all(),
+            'techstack' => $techstack,
+            'techCategories' => $techCategories,
         ];
 
         $this->view('admin/techstack', $data);

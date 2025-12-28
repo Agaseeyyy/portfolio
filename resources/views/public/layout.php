@@ -37,11 +37,11 @@ use app\core\View;
   </div>
 
   <!-- JavaScript Files -->
-  <script src="/portfolio/resources/js/animations.js" defer></script>
-  <script src="/portfolio/resources/js/portfolio.js" defer></script>
-  <script src="/portfolio/resources/js/services.js" defer></script>
-  <script src="/portfolio/resources/js/contacts.js" defer></script>
-  <script src="/portfolio/resources/js/script.js" defer></script>
+  <script src="<?= base_url('resources/js/animations.js') ?>" defer></script>
+  <script src="<?= base_url('resources/js/portfolio.js') ?>" defer></script>
+  <script src="<?= base_url('resources/js/services.js') ?>" defer></script>
+  <script src="<?= base_url('resources/js/contacts.js') ?>" defer></script>
+  <script src="<?= base_url('resources/js/script.js') ?>" defer></script>
 
   <?= View::renderSection('scripts') ?>
 </body>

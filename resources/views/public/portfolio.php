@@ -5,24 +5,9 @@
  * 
  * @var array $projects - Projects data with technologies
  * @var array $techstack - Tech stack data
+ * @var array $techCategories - Techstack grouped by category (from controller)
  * @var array $certifications - Certifications data
  */
-
-// Group techstack by category
-$categories = [
-    'frontend' => ['label' => 'Frontend', 'items' => []],
-    'backend' => ['label' => 'Backend', 'items' => []],
-    'database' => ['label' => 'Database', 'items' => []],
-    'tools' => ['label' => 'Tools & Others', 'items' => []],
-];
-if (!empty($techstack)) {
-    foreach ($techstack as $tech) {
-        $cat = $tech['category'] ?? 'tools';
-        if (isset($categories[$cat])) {
-            $categories[$cat]['items'][] = $tech;
-        }
-    }
-}
 ?>
 <!-- Portfolio Section: Main showcase of work and skills -->
 <section id="portfolio" class="px-6 py-20">
@@ -113,7 +98,7 @@ if (!empty($techstack)) {
     <!-- Tech Stack Section: Display technical skills and proficiencies -->
     <div id="techstack-section" class="hidden portfolio-section">
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <?php foreach ($categories as $catKey => $category): ?>
+        <?php foreach ($techCategories as $catKey => $category): ?>
           <?php if (!empty($category['items'])): ?>
           <div class="relative p-6 border shadow-xl rounded-xl tech-category bg-gray-600/15 border-gray-500/25">
             <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>

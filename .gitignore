@@ -1,0 +1,33 @@
+# Environment files
+.env
+!.env.example
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# Build outputs
+/public/css/tailwind-output.css
+/public/css/*.map
+
+# Uploads (but keep directory structure)
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# Logs
+*.log
+
+# Cache
+/cache/
+*.cache

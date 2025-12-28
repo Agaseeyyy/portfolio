@@ -5,6 +5,8 @@
  * Global functions available throughout the application.
  */
 
+use app\core\Config;
+
 if (!function_exists('base_url')) {
     /**
      * Get base URL for the application
@@ -14,11 +16,14 @@ if (!function_exists('base_url')) {
      */
     function base_url(string $path = ''): string
     {
-        if ($_SERVER['HTTP_HOST'] !== 'localhost') {
+        $appPath = Config::get('APP_PATH', '');
+        
+        // If no app path configured or on production, use root
+        if (empty($appPath) || $_SERVER['HTTP_HOST'] !== 'localhost') {
             return '/' . ltrim($path, '/');
         }
 
-        return '/portfolio/' . ltrim($path, '/');
+        return rtrim($appPath, '/') . '/' . ltrim($path, '/');
     }
 }
 

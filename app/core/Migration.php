@@ -75,7 +75,7 @@ abstract class Migration
     public static function ensureDatabase(): void
     {
         $pdo = Database::getServerConnection();
-        $dbname = Database::getDbName();
+        $dbname = Database::getDatabaseName();
         $pdo->exec("CREATE DATABASE IF NOT EXISTS `{$dbname}`");
     }
 }

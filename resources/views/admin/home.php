@@ -6,16 +6,13 @@
  * @var string $pageDescription
  * @var string $activeMenu
  * @var array $data
+ * @var string $photoSrc - Profile photo path (from controller)
  */
 
 use app\core\View;
 
 // Extend the admin layout
 View::extend('admin/layout');
-
-// Helper function
-
-$photoSrc = !empty($data['profile_photo']) ? base_url($data['profile_photo']) : base_url('images/def-avatar.png');
 ?>
 
 <?php View::section('title') ?>
@@ -101,7 +98,7 @@ $photoSrc = !empty($data['profile_photo']) ? base_url($data['profile_photo']) : 
                     <!-- Current Photo Preview -->
                     <div class="flex items-center gap-4 p-4 mb-4 rounded-lg bg-base-300">
                         <div class="w-20 h-20 overflow-hidden rounded-full ring-2 ring-pink-500/50">
-                            <img id="current-photo" src="<?= $photoSrc ?>" alt="Current Photo" class="object-cover w-full h-full">
+                            <img id="current-photo" src="<?= base_url($photoSrc) ?>" alt="Current Photo" class="object-cover w-full h-full">
                         </div>
                         <div>
                             <p class="text-sm text-gray-300">Current Photo</p>
@@ -146,7 +143,7 @@ $photoSrc = !empty($data['profile_photo']) ? base_url($data['profile_photo']) : 
         <div class="p-6 rounded-lg bg-gradient-to-br from-pink-500/10 to-rose-500/10 border border-pink-500/20">
             <div class="flex flex-col items-center gap-6">
                 <div class="w-32 h-32 overflow-hidden rounded-full ring-2 ring-pink-500/50 bg-base-300">
-                    <img id="preview-photo" src="<?= $photoSrc ?>" alt="Preview" class="object-cover w-full h-full">
+                    <img id="preview-photo" src="<?= base_url($photoSrc) ?>" alt="Preview" class="object-cover w-full h-full">
                 </div>
                 <div class="text-center">
                     <p class="text-pink-400">Hi, I'm <span id="preview-name"><?= htmlspecialchars($data['name'] ?? 'Your Name') ?></span></p>

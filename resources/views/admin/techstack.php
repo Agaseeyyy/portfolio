@@ -29,26 +29,9 @@ use app\core\View;
     </div>
 
     <!-- Tech Stack Grid -->
-    <?php
-    // Group techstack by category
-    $categories = [
-        'frontend' => ['label' => 'Frontend', 'items' => []],
-        'backend' => ['label' => 'Backend', 'items' => []],
-        'database' => ['label' => 'Database', 'items' => []],
-        'tools' => ['label' => 'Tools & Others', 'items' => []],
-    ];
-    if (!empty($techstack)) {
-        foreach ($techstack as $tech) {
-            $cat = $tech['category'] ?? 'tools';
-            if (isset($categories[$cat])) {
-                $categories[$cat]['items'][] = $tech;
-            }
-        }
-    }
-    ?>
     <div class="space-y-6">
         <?php if (!empty($techstack)): ?>
-            <?php foreach ($categories as $catKey => $category): ?>
+            <?php foreach ($techCategories as $catKey => $category): ?>
                 <?php if (!empty($category['items'])): ?>
                 <div>
                     <h4 class="mb-3 text-sm font-semibold text-pink-400 uppercase tracking-wider"><?= $category['label'] ?></h4>

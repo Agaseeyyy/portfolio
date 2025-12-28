@@ -2,6 +2,7 @@
 namespace app\controllers\Admin;
 
 use app\core\Controller;
+use app\core\Config;
 use app\models\HomeModel;
 
 /**
@@ -18,11 +19,14 @@ class HomeController extends Controller
 
     public function index(): void
     {
+        $homeData = $this->model->first() ?? [];
+        
         $data = [
             'pageTitle' => 'Home Section',
             'pageDescription' => "Manage your portfolio's hero section content",
             'activeMenu' => 'home',
-            'data' => $this->model->first() ?? [],
+            'data' => $homeData,
+            'photoSrc' => !empty($homeData['profile_photo']) ? $homeData['profile_photo'] : Config::get('DEFAULT_AVATAR', 'images/def-avatar.png'),
         ];
 
         $this->view('admin/home', $data);

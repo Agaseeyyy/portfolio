@@ -7,7 +7,7 @@ namespace app\core;
  * Provides a single shared PDO connection across the application.
  * Use Database::getInstance() to get the PDO connection.
  * 
- * Configuration is centralized here - change credentials in one place.
+ * Configuration is loaded from .env file via Config class.
  */
 class Database
 {
@@ -22,12 +22,12 @@ class Database
     private ?\PDO $pdo = null;
 
     /**
-     * Database configuration - CHANGE THESE FOR YOUR ENVIRONMENT
+     * Database configuration - loaded from .env
      */
-    private const HOST = 'localhost';
-    private const DBNAME = 'bustarga_portfolio_web';
-    private const USERNAME = 'root';
-    private const PASSWORD = '';
+    private static function getHost(): string { return Config::get('DB_HOST', 'localhost'); }
+    private static function getDbName(): string { return Config::get('DB_NAME', 'sample_db'); }
+    private static function getUsername(): string { return Config::get('DB_USER', 'root'); }
+    private static function getPassword(): string { return Config::get('DB_PASS', ''); }
     private const CHARSET = 'utf8mb4';
 
     /**
@@ -61,9 +61,9 @@ class Database
      * 
      * @return string
      */
-    public static function getDbName(): string
+    public static function getDatabaseName(): string
     {
-        return self::DBNAME;
+        return self::getDbName();
     }
 
     /**
@@ -74,8 +74,8 @@ class Database
      */
     public static function getServerConnection(): \PDO
     {
-        $dsn = "mysql:host=" . self::HOST . ";charset=" . self::CHARSET;
-        return new \PDO($dsn, self::USERNAME, self::PASSWORD, [
+        $dsn = "mysql:host=" . self::getHost() . ";charset=" . self::CHARSET;
+        return new \PDO($dsn, self::getUsername(), self::getPassword(), [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
         ]);
     }
@@ -86,8 +86,8 @@ class Database
     private function connect(): void
     {
         try {
-            $dsn = "mysql:host=" . self::HOST . ";dbname=" . self::DBNAME . ";charset=" . self::CHARSET;
-            $this->pdo = new \PDO($dsn, self::USERNAME, self::PASSWORD, [
+            $dsn = "mysql:host=" . self::getHost() . ";dbname=" . self::getDbName() . ";charset=" . self::CHARSET;
+            $this->pdo = new \PDO($dsn, self::getUsername(), self::getPassword(), [
                 \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
                 \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
                 \PDO::ATTR_EMULATE_PREPARES => false,
@@ -97,3 +97,4 @@ class Database
         }
     }
 }
+

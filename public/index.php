@@ -5,13 +5,10 @@
  * Clean router dispatcher. Layout rendering is handled by:
  * - Public routes: resources/views/public/layout.php
  * - Admin routes: resources/views/admin/layout.php
+ * 
+ * Error display is controlled by APP_DEBUG in .env (handled by autoload.php)
  */
 
-// Show ALL errors for development
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-ini_set('html_errors', 1);
-error_reporting(E_ALL);
 // Start session for flash messages
 session_start();
 

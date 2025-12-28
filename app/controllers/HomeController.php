@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\core\Controller;
+use app\core\Config;
 use app\models\HomeModel;
 use app\models\ContactInfoModel;
 use app\models\ProjectModel;
@@ -26,13 +27,41 @@ class HomeController extends Controller
 		$serviceModel = new ServiceModel();
 		$certModel = new CertificationModel();
 
+		$home = $homeModel->first() ?? [];
+		$contact = $contactModel->first() ?? [];
+		$techstack = $techModel->all() ?? [];
+
+		// Process name parts for nav
+		$fullName = $home['name'] ?? 'Agassi Bustarga';
+		$nameParts = explode(' ', $fullName, 2);
+
+		// Group techstack by category
+		$techCategories = [
+			'frontend' => ['label' => 'Frontend', 'items' => []],
+			'backend' => ['label' => 'Backend', 'items' => []],
+			'database' => ['label' => 'Database', 'items' => []],
+			'tools' => ['label' => 'Tools & Others', 'items' => []],
+		];
+		foreach ($techstack as $tech) {
+			$cat = $tech['category'] ?? 'tools';
+			if (isset($techCategories[$cat])) {
+				$techCategories[$cat]['items'][] = $tech;
+			}
+		}
+
 		$data = [
-			'home' => $homeModel->first(),
-			'contact' => $contactModel->first(),
+			'home' => $home,
+			'contact' => $contact,
 			'projects' => $projectModel->getProjectsWithTech(),
-			'techstack' => $techModel->all(),
+			'techstack' => $techstack,
+			'techCategories' => $techCategories,
 			'services' => $serviceModel->all(),
 			'certifications' => $certModel->all(),
+			// Processed values for views
+			'firstName' => $nameParts[0] ?? '',
+			'lastName' => $nameParts[1] ?? '',
+			'profilePhoto' => !empty($home['profile_photo']) ? $home['profile_photo'] : Config::get('DEFAULT_AVATAR', 'images/def-avatar.png'),
+			'hoverPhoto' => Config::get('HOVER_AVATAR', 'images/hover-avatar.png'),
 		];
 
 		return $this->view('/public/home', $data);

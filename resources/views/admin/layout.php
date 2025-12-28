@@ -12,6 +12,7 @@
  */
 
 use app\core\View;
+use app\core\Config;
 use app\models\HomeModel;
 
 // Fetch fresh homeData for sidebar/header (name, photo)
@@ -168,7 +169,7 @@ $homeData = $homeModel->first() ?? [];
                     <div class="w-10 h-10 overflow-hidden rounded-full ring-2 ring-primary/50">
                         <?php 
                         $photo = $homeData['profile_photo'] ?? '';
-                        $photoUrl = !empty($photo) ? base_url($photo) : base_url('images/def-avatar.png');
+                        $photoUrl = !empty($photo) ? base_url($photo) : base_url(Config::get('DEFAULT_AVATAR', 'images/def-avatar.png'));
                         ?>
                         <img src="<?= $photoUrl ?>" alt="Admin" class="object-cover w-full h-full">
                     </div>

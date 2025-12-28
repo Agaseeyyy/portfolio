@@ -2,44 +2,22 @@
 /**
  * Home/Hero Section Template
  * Main landing page with introduction, avatar, and call-to-action buttons
- * Features: Typing animation, social links, animated tech stack orbits
  * 
  * @var array $home - Home section data
  * @var array $contact - Contact info data
- * @var array $projects - Projects data
- * @var array $techstack - Tech stack data
- * @var array $services - Services data
- * @var array $certifications - Certifications data
+ * @var string $firstName - First name (processed in controller)
+ * @var string $lastName - Last name (processed in controller)
+ * @var string $profilePhoto - Profile photo path with default fallback
  */
 
 use app\core\View;
 
 // Extend the public layout
 View::extend('public/layout');
-
-// Ensure data arrays exist
-$home = $home ?? [];
-$contact = $contact ?? [];
-$techstack = $techstack ?? [];
-$projects = $projects ?? [];
-$services = $services ?? [];
-$certifications = $certifications ?? [];
-
-$name = $home['name'] ?? 'Agassi Bustarga';
-$role = $home['role'] ?? 'Student Developer';
-$bio = $home['short_bio'] ?? 'A passionate and dedicated information technology student with a knack for problem-solving and a love for coding.';
-$profilePhoto = empty($home['profile_photo']) ? $home['profile_photo'] : 'images/def-avatar.png';
-$hoverPhoto = 'images/hover-avatar.png';
-
-// Contact/Social links
-$githubLink = $contact['github_link'] ?? '#';
-$linkedinLink = $contact['linkedin_link'] ?? '#';
-$instagramLink = $contact['instagram_link'] ?? '#';
-$email = $contact['email'] ?? '';
 ?>
 
 <?php View::section('title') ?>
-Portfolio - <?= htmlspecialchars($name) ?>
+Portfolio - <?= htmlspecialchars($home['name'] ?? 'Agassi Bustarga') ?>
 <?php View::endSection() ?>
 
 <?php View::section('content') ?>
@@ -48,11 +26,11 @@ Portfolio - <?= htmlspecialchars($name) ?>
   <!-- Text Content Section: Introduction and call-to-action buttons -->
   <div class="relative w-full max-w-xl p-6 border shadow-md opacity-0 lg:w-auto lg:max-w-2xl xl:max-w-3xl rounded-xl bg-pink-500/10 border-pink-500/30 animate-slide-in-left">
     <div class="relative z-10 space-y-5">
-      <h3 class="text-xl font-semibold text-pink-500">Hi, I'm <?= htmlspecialchars($name) ?></h3>
+      <h3 class="text-xl font-semibold text-pink-500">Hi, I'm <?= htmlspecialchars($home['name'] ?? 'Agassi Bustarga') ?></h3>
       <h1 class="text-2xl font-bold text-white lg:text-3xl xl:text-4xl drop-shadow-lg">Full-stack Web
-        <span class="text-pink-500"><br><span class="typing-container" data-text="<?= htmlspecialchars($role) ?>"><span class="typing-text"><?= htmlspecialchars($role) ?></span></span></span>
+        <span class="text-pink-500"><br><span class="typing-container" data-text="<?= htmlspecialchars($home['role'] ?? 'Student Developer') ?>"><span class="typing-text"><?= htmlspecialchars($home['role'] ?? 'Student Developer') ?></span></span></span>
       </h1>
-      <p class="max-w-2xl text-base text-gray-100 drop-shadow-md"><?= htmlspecialchars($bio) ?></p>
+      <p class="max-w-2xl text-base text-gray-100 drop-shadow-md"><?= htmlspecialchars($home['short_bio'] ?? '') ?></p>
       
       <!-- Action buttons: Primary CTA buttons for CV download and portfolio exploration -->
       <div class="flex flex-row gap-4 mt-6 opacity-0 max-sm:justify-center lg:gap-6 animate-fade-in-up animation-delay-1000">
@@ -70,32 +48,32 @@ Portfolio - <?= htmlspecialchars($name) ?>
       <!-- Social Media Icons: External profile links with hover animations -->
       <div class="flex gap-6 pt-8 mt-8 border-t opacity-0 border-white/30 animate-scale-in animation-delay-1500">
         <!-- Github -->
-        <?php if (!empty($githubLink) && $githubLink !== '#'): ?>
-        <a href="<?= htmlspecialchars($githubLink) ?>" target="_blank" 
+        <?php if (!empty($contact['github_link'])): ?>
+        <a href="<?= htmlspecialchars($contact['github_link']) ?>" target="_blank" 
            class="p-3 transition-all duration-200 border rounded-full border-white/30 bg-white/20 hover:bg-pink-500/20 hover:border-pink-500/50 hover:scale-110 hover:rotate-12">
           <img src="icons/github.svg" alt="GitHub" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
         </a>
         <?php endif; ?>
         
         <!-- Linkedin -->
-        <?php if (!empty($linkedinLink) && $linkedinLink !== '#'): ?>
-        <a href="<?= htmlspecialchars($linkedinLink) ?>" target="_blank" 
+        <?php if (!empty($contact['linkedin_link'])): ?>
+        <a href="<?= htmlspecialchars($contact['linkedin_link']) ?>" target="_blank" 
            class="p-3 transition-all duration-200 border rounded-full border-white/30 bg-white/20 hover:bg-pink-500/20 hover:border-pink-500/50 hover:scale-110 hover:-rotate-12">
           <img src="icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
         </a>
         <?php endif; ?>
         
         <!-- Instagram -->
-        <?php if (!empty($instagramLink) && $instagramLink !== '#'): ?>
-        <a href="<?= htmlspecialchars($instagramLink) ?>" target="_blank" 
+        <?php if (!empty($contact['instagram_link'])): ?>
+        <a href="<?= htmlspecialchars($contact['instagram_link']) ?>" target="_blank" 
            class="p-3 transition-all duration-200 border rounded-full border-white/30 bg-white/20 hover:bg-pink-500/20 hover:border-pink-500/50 hover:scale-110 hover:rotate-12">
           <img src="icons/instagram.svg" alt="Instagram" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
         </a>
         <?php endif; ?>
         
         <!-- Gmail -->
-        <?php if (!empty($email)): ?>
-        <a href="mailto:<?= htmlspecialchars($email) ?>" target="_blank" 
+        <?php if (!empty($contact['email'])): ?>
+        <a href="mailto:<?= htmlspecialchars($contact['email']) ?>" target="_blank" 
            class="p-3 transition-all duration-200 border rounded-full border-white/30 bg-white/20 hover:bg-pink-500/20 hover:border-pink-500/50 hover:scale-110 hover:-rotate-12">
           <img src="icons/gmail.svg" alt="Gmail" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
         </a>
