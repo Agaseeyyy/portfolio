@@ -20,6 +20,7 @@ class HomeController extends Controller
 
     public function index(): void
     {
+        require_auth();
         $homeData = $this->model->first() ?? [];
 
         $data = [
@@ -35,6 +36,7 @@ class HomeController extends Controller
 
     public function store(): void
     {
+        require_auth();
         $data = $_POST;
         $isUpdate = !empty($data['id']);
 

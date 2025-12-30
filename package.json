@@ -5,8 +5,10 @@
   "scripts": {
     "build:admin": "npx @tailwindcss/cli -i ./resources/css/admin.css -o ./resources/css/admin-compiled.css",
     "watch:admin": "npx @tailwindcss/cli -i ./resources/css/admin.css -o ./resources/css/admin-compiled.css --watch",
-    "build": "npm run build:admin",
-    "dev": "npm run watch:admin"
+    "build:public": "npx @tailwindcss/cli -i ./resources/css/public.css -o ./resources/css/public-compiled.css",
+    "watch:public": "npx @tailwindcss/cli -i ./resources/css/public.css -o ./resources/css/public-compiled.css --watch",
+    "build": "npm run build:admin && npm run build:public",
+    "dev": "npm run watch:admin && npm run watch:public"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.0",

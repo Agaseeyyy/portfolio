@@ -19,6 +19,7 @@ class TechstackController extends Controller
 
     public function index(): void
     {
+        require_auth();
         $techstack = $this->model->all() ?? [];
 
         // Group techstack by category
@@ -48,6 +49,7 @@ class TechstackController extends Controller
 
     public function store(): void
     {
+        require_auth();
         $data = $_POST;
         $isUpdate = !empty($data['tech_id']);
 
@@ -89,6 +91,7 @@ class TechstackController extends Controller
 
     public function delete(int $id): void
     {
+        require_auth();
         $tech = $this->model->find($id);
 
         if (!$tech) {

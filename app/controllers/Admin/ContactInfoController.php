@@ -19,6 +19,7 @@ class ContactInfoController extends Controller
 
     public function index(): void
     {
+        require_auth();
         $data = [
             'pageTitle' => 'Contact Information',
             'pageDescription' => 'Manage your contact details and social links',
@@ -31,6 +32,7 @@ class ContactInfoController extends Controller
 
     public function store(): void
     {
+        require_auth();
         $data = $_POST;
         $isUpdate = !empty($data['contact_id']);
 

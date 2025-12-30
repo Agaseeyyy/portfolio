@@ -17,6 +17,7 @@ class DashboardController extends Controller
 {
     public function index(): void
     {
+        require_auth();
         $data = [
             'pageTitle' => 'Dashboard',
             'pageDescription' => 'Overview of your portfolio content',

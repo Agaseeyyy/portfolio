@@ -19,6 +19,7 @@ class ServiceController extends Controller
 
     public function index(): void
     {
+        require_auth();
         $data = [
             'pageTitle' => 'Services',
             'pageDescription' => 'Manage your offered services',
@@ -31,6 +32,7 @@ class ServiceController extends Controller
 
     public function store(): void
     {
+        require_auth();
         $data = $_POST;
         $isUpdate = !empty($data['service_id']);
 
@@ -72,6 +74,7 @@ class ServiceController extends Controller
 
     public function delete(int $id): void
     {
+        require_auth();
         $service = $this->model->find($id);
 
         if (!$service) {

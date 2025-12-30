@@ -19,6 +19,7 @@ class CertificationController extends Controller
 
     public function index(): void
     {
+        require_auth();
         $data = [
             'pageTitle' => 'Certifications',
             'pageDescription' => 'Manage your certification images',
@@ -31,6 +32,7 @@ class CertificationController extends Controller
 
     public function store(): void
     {
+        require_auth();
         $data = $_POST;
         $isUpdate = !empty($data['certification_id']);
 
@@ -76,6 +78,7 @@ class CertificationController extends Controller
 
     public function delete(int $id): void
     {
+        require_auth();
         $cert = $this->model->find($id);
 
         if (!$cert) {

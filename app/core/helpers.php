@@ -68,3 +68,30 @@ if (!function_exists('has_flash')) {
         return !empty($_SESSION['flash'][$type]);
     }
 }
+
+if (!function_exists('is_authenticated')) {
+    /**
+     * Check if admin user is authenticated
+     * 
+     * @return bool
+     */
+    function is_authenticated(): bool
+    {
+        return !empty($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true;
+    }
+}
+
+if (!function_exists('require_auth')) {
+    /**
+     * Require authentication, redirect to login if not authenticated
+     * 
+     * @return void
+     */
+    function require_auth(): void
+    {
+        if (!is_authenticated()) {
+            header('Location: ' . base_url('admin/login'));
+            exit;
+        }
+    }
+}

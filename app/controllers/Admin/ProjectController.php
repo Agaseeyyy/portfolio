@@ -23,6 +23,7 @@ class ProjectController extends Controller
 
     public function index(): void
     {
+        require_auth();
         $data = [
             'pageTitle' => 'Projects',
             'pageDescription' => 'Manage your portfolio projects',
@@ -36,6 +37,7 @@ class ProjectController extends Controller
 
     public function store(): void
     {
+        require_auth();
         $data = $_POST;
         $technologies = $data['technologies'] ?? [];
         unset($data['technologies']);
@@ -106,6 +108,7 @@ class ProjectController extends Controller
 
     public function delete(int $id): void
     {
+        require_auth();
         $project = $this->model->find($id);
 
         if (!$project) {

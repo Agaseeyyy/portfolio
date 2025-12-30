@@ -7,6 +7,7 @@
  */
 
 use app\controllers\HomeController;
+use app\controllers\Admin\AuthController;
 use app\controllers\Admin\DashboardController;
 use app\controllers\Admin\HomeController as AdminHomeController;
 use app\controllers\Admin\ContactInfoController;
@@ -18,6 +19,11 @@ use app\controllers\Admin\CertificationController;
 // Public routes
 $router->get('/', [HomeController::class, 'index']);
 $router->get('/project/{id}', [HomeController::class, 'projectDetail']);
+
+// Admin - Authentication
+$router->get('/admin/login', [AuthController::class, 'login']);
+$router->post('/admin/authenticate', [AuthController::class, 'authenticate']);
+$router->get('/admin/logout', [AuthController::class, 'logout']);
 
 // Admin - Dashboard
 $router->get('/admin', [DashboardController::class, 'index']);

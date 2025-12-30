@@ -38,7 +38,7 @@ $homeData = $homeModel->first() ?? [];
 
 <body class="bg-base-100">
     <!-- DaisyUI Drawer - responsive sidebar -->
-    <div class="drawer lg:drawer-open">
+    <div class="drawer drawer-mobile lg:drawer-open">
         <!-- Drawer toggle (hidden checkbox) -->
         <input id="admin-drawer" type="checkbox" class="drawer-toggle" />
 
@@ -57,19 +57,44 @@ $homeData = $homeModel->first() ?? [];
                     <p class="text-sm text-base-content/60"><?= htmlspecialchars($pageDescription ?? 'Admin Panel') ?></p>
                 </div>
                 <div class="flex items-center gap-4">
-                    <!-- User Info -->
-                    <div class="flex items-center gap-3">
-                        <div class="hidden text-right sm:block">
-                            <p class="text-sm font-medium text-base-content"><?= htmlspecialchars($homeData['name'] ?? 'Admin') ?></p>
-                            <p class="text-xs text-base-content/60">Administrator</p>
+                    <!-- Profile Dropdown -->
+                    <div class="dropdown dropdown-end">
+                        <div tabindex="0" role="button" class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity">
+                            <div class="hidden text-right sm:block">
+                                <p class="text-sm font-medium text-base-content"><?= htmlspecialchars($homeData['name'] ?? 'Admin') ?></p>
+                                <p class="text-xs text-base-content/60">Administrator</p>
+                            </div>
+                            <div class="w-10 h-10 overflow-hidden rounded-full ring-2 ring-primary/50">
+                                <?php
+                                $photo = $homeData['profile_photo'] ?? '';
+                                $photoUrl = !empty($photo) ? base_url($photo) : base_url(Config::get('DEFAULT_AVATAR', 'images/def-avatar.png'));
+                                ?>
+                                <img src="<?= $photoUrl ?>" alt="Admin" class="object-cover w-full h-full">
+                            </div>
                         </div>
-                        <div class="w-10 h-10 overflow-hidden rounded-full ring-2 ring-primary/50">
-                            <?php
-                            $photo = $homeData['profile_photo'] ?? '';
-                            $photoUrl = !empty($photo) ? base_url($photo) : base_url(Config::get('DEFAULT_AVATAR', 'images/def-avatar.png'));
-                            ?>
-                            <img src="<?= $photoUrl ?>" alt="Admin" class="object-cover w-full h-full">
-                        </div>
+                        <ul tabindex="-1" class="dropdown-content menu bg-base-200 rounded-box z-50 w-52 p-2 shadow-lg border border-primary/20 mt-2">
+                            <li class="menu-title px-4 py-2">
+                                <span class="text-xs text-base-content/50">Signed in as</span>
+                                <span class="text-sm font-medium text-base-content"><?= htmlspecialchars($homeData['name'] ?? 'Admin') ?></span>
+                            </li>
+                            <div class="divider my-1"></div>
+                            <li>
+                                <a href="<?= base_url('admin/home') ?>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                    Edit Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url('admin/logout') ?>" class="text-error">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                    </svg>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </header>
