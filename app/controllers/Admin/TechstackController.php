@@ -1,4 +1,5 @@
 <?php
+
 namespace app\controllers\Admin;
 
 use app\core\Controller;
@@ -19,7 +20,7 @@ class TechstackController extends Controller
     public function index(): void
     {
         $techstack = $this->model->all() ?? [];
-        
+
         // Group techstack by category
         $techCategories = [
             'frontend' => ['label' => 'Frontend', 'items' => []],
@@ -49,7 +50,7 @@ class TechstackController extends Controller
     {
         $data = $_POST;
         $isUpdate = !empty($data['tech_id']);
-        
+
         if (!$isUpdate) {
             unset($data['tech_id']);
         }
@@ -76,7 +77,7 @@ class TechstackController extends Controller
             unset($data['icon']);
         }
 
-        if(!$this->model->save($data)) {
+        if (!$this->model->save($data)) {
             set_flash('error', 'Failed to save technology. Please try again.');
             $this->redirect('admin/techstack');
             return;

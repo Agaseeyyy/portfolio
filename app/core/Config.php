@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Environment Configuration Loader
  * 
@@ -24,7 +25,7 @@ class Config
         }
 
         $basePath = dirname(__DIR__, 2);
-        
+
         // Load .env file if it exists
         if (file_exists($basePath . '/.env')) {
             $dotenv = Dotenv::createImmutable($basePath);

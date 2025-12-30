@@ -1,4 +1,5 @@
 <?php
+
 namespace app\core;
 
 /**
@@ -24,10 +25,22 @@ class Database
     /**
      * Database configuration - loaded from .env
      */
-    private static function getHost(): string { return Config::get('DB_HOST', 'localhost'); }
-    private static function getDbName(): string { return Config::get('DB_NAME', 'sample_db'); }
-    private static function getUsername(): string { return Config::get('DB_USER', 'root'); }
-    private static function getPassword(): string { return Config::get('DB_PASS', ''); }
+    private static function getHost(): string
+    {
+        return Config::get('DB_HOST', 'localhost');
+    }
+    private static function getDbName(): string
+    {
+        return Config::get('DB_NAME', 'sample_db');
+    }
+    private static function getUsername(): string
+    {
+        return Config::get('DB_USER', 'root');
+    }
+    private static function getPassword(): string
+    {
+        return Config::get('DB_PASS', '');
+    }
     private const CHARSET = 'utf8mb4';
 
     /**
@@ -97,4 +110,3 @@ class Database
         }
     }
 }
-

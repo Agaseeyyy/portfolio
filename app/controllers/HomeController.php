@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace app\controllers;
 
 use app\core\Controller;
@@ -88,12 +89,12 @@ class HomeController extends Controller
 		// Calculate duration and date range
 		$duration = '';
 		$dateRange = '';
-		
+
 		if ($startDate = $project['start_date'] ?? '') {
 			$start = new \DateTime($startDate);
 			$end = new \DateTime($project['end_date'] ?: 'now');
 			$diff = $start->diff($end);
-			
+
 			// Build duration string from non-zero parts
 			$parts = [];
 			if ($diff->y) $parts[] = $diff->y . ' year' . ($diff->y > 1 ? 's' : '');
@@ -102,8 +103,8 @@ class HomeController extends Controller
 			$duration = implode(', ', $parts);
 
 			// Format date range
-			$dateRange = date('M Y', strtotime($startDate)) . ' - ' . 
-			             ($project['end_date'] ? date('M Y', strtotime($project['end_date'])) : 'Present');
+			$dateRange = date('M Y', strtotime($startDate)) . ' - ' .
+				($project['end_date'] ? date('M Y', strtotime($project['end_date'])) : 'Present');
 		}
 
 		$data = [

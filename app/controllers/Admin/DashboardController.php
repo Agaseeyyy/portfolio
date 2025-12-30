@@ -1,4 +1,5 @@
 <?php
+
 namespace app\controllers\Admin;
 
 use app\core\Controller;

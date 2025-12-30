@@ -1,4 +1,5 @@
 <?php
+
 namespace app\core;
 
 /**
@@ -27,16 +28,16 @@ class Router
 	{
 		$this->routes[$path] = $method;
 	}
-	
+
 	public function dispatch(): void
 	{
 		$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 		// Get the path from the .htaccess 'url' param, default to '/'
-    $url = $_GET['url'] ?? '/';
-    
-    // Normalize: Ensure it starts with / and remove trailing slashes
-    $path = '/' . trim($url, '/');
+		$url = $_GET['url'] ?? '/';
+
+		// Normalize: Ensure it starts with / and remove trailing slashes
+		$path = '/' . trim($url, '/');
 
 		// Try exact match first
 		if (isset($this->routes[$path])) {

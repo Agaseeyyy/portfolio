@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Upload Helper Functions
  * 
@@ -43,7 +44,7 @@ function upload_file(string $fieldName, string $uploadPath, ?string $oldFile = n
     // Validate file type
     $finfo = new finfo(FILEINFO_MIME_TYPE);
     $mimeType = $finfo->file($file['tmp_name']);
-    
+
     if (!in_array($mimeType, $allowedTypes)) {
         return [
             'success' => false,
@@ -102,7 +103,7 @@ function upload_file(string $fieldName, string $uploadPath, ?string $oldFile = n
 function delete_uploaded_file(?string $filePath): bool
 {
     if (!$filePath) return false;
-    
+
     $fullPath = dirname(__DIR__, 2) . '/public/' . $filePath;
     if (file_exists($fullPath)) {
         return unlink($fullPath);

@@ -1,4 +1,5 @@
 <?php
+
 namespace app\core;
 
 /**
@@ -38,17 +39,17 @@ abstract class Seeder
     {
         $columns = array_keys($data);
         $placeholders = array_fill(0, count($columns), '?');
-        
+
         $sql = sprintf(
             "INSERT INTO `%s` (%s) VALUES (%s)",
             $table,
             implode(', ', $columns),
             implode(', ', $placeholders)
         );
-        
+
         $stmt = $this->db->prepare($sql);
         $stmt->execute(array_values($data));
-        
+
         return (int) $this->db->lastInsertId();
     }
 

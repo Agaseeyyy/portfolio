@@ -3,17 +3,14 @@
   "version": "1.0.0",
   "description": "Portfolio Admin Panel",
   "scripts": {
-    "build:admin": "tailwindcss -i ./public/css/admin.css -o ./public/css/admin-compiled.css",
-    "watch:admin": "tailwindcss -i ./public/css/admin.css -o ./public/css/admin-compiled.css --watch",
+    "build:admin": "npx @tailwindcss/cli -i ./resources/css/admin.css -o ./resources/css/admin-compiled.css",
+    "watch:admin": "npx @tailwindcss/cli -i ./resources/css/admin.css -o ./resources/css/admin-compiled.css --watch",
     "build": "npm run build:admin",
     "dev": "npm run watch:admin"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.17",
-    "daisyui": "^4.12.23"
+    "@tailwindcss/cli": "^4.0.0",
+    "tailwindcss": "^4.0.0",
+    "daisyui": "^5.0.0"
   }
 }
-
-
-
-

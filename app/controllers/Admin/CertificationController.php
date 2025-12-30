@@ -1,4 +1,5 @@
 <?php
+
 namespace app\controllers\Admin;
 
 use app\core\Controller;
@@ -32,7 +33,7 @@ class CertificationController extends Controller
     {
         $data = $_POST;
         $isUpdate = !empty($data['certification_id']);
-        
+
         if (!$isUpdate) {
             unset($data['certification_id']);
         }
@@ -64,7 +65,7 @@ class CertificationController extends Controller
             unset($data['image']);
         }
 
-        if(!$this->model->save($data)) {
+        if (!$this->model->save($data)) {
             set_flash('error', 'Failed to save certification. Please try again.');
             $this->redirect('admin/certifications');
             return;

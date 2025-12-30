@@ -1,4 +1,5 @@
 <?php
+
 namespace app\controllers\Admin;
 
 use app\core\Controller;
@@ -20,7 +21,7 @@ class HomeController extends Controller
     public function index(): void
     {
         $homeData = $this->model->first() ?? [];
-        
+
         $data = [
             'pageTitle' => 'Home Section',
             'pageDescription' => "Manage your portfolio's hero section content",
@@ -36,7 +37,7 @@ class HomeController extends Controller
     {
         $data = $_POST;
         $isUpdate = !empty($data['id']);
-        
+
         if (!$isUpdate) {
             unset($data['id']);
         }

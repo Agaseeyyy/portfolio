@@ -1,0 +1,239 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, admin
+}
+
+@plugin "daisyui/theme" {
+  name: "admin";
+  default: true;
+  --color-base-100: #111827;
+  --color-base-200: #1f2937;
+  --color-base-300: #374151;
+  --color-base-content: #f3f4f6;
+  --color-primary: #ec4899;
+  --color-primary-content: #ffffff;
+  --color-secondary: #f472b6;
+  --color-secondary-content: #ffffff;
+  --color-accent: #f9a8d4;
+  --color-accent-content: #1f2937;
+  --color-neutral: #1f2937;
+  --color-neutral-content: #d1d5db;
+  --color-info: #3b82f6;
+  --color-info-content: #ffffff;
+  --color-success: #22c55e;
+  --color-success-content: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-content: #ffffff;
+  --color-error: #ef4444;
+  --color-error-content: #ffffff;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* ========================================
+   BASE STYLES
+======================================== */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply min-h-screen bg-base-100 text-base-content;
+    font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply rounded bg-base-300/50;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded bg-primary/40;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/60;
+  }
+}
+
+/* ========================================
+   DAISYUI 5 DEFAULT OVERRIDES
+   Override DaisyUI defaults to match admin theme
+======================================== */
+@layer utilities {
+  /* Input */
+  .input, .textarea, .select, .file-input {
+    @apply w-full bg-base-300 border border-primary/20 focus:border-primary focus:outline-none focus-within:outline-none focus-within:border-primary;
+  }
+
+  .file-input::file-selector-button {
+    @apply border-none bg-primary text-primary-content;
+  }
+
+  .fieldset {
+    @apply w-full;
+  }
+
+  .fieldset-legend {
+    @apply w-full text-gray-300 text-sm font-medium;
+  }
+
+  /* Cards */
+  .card {
+    @apply p-6 border shadow-lg bg-base-200 border-primary/20;
+  }
+
+  .card-body {
+    @apply p-0;
+  }
+
+  .divider {
+    &::before, &::after {
+      @apply bg-primary/20 h-px;
+    }
+
+    @apply h-px;
+  }
+
+   /* Modal */
+  .modal-box {
+    @apply max-w-3xl border bg-base-200 border-primary/20 max-h-[calc(100vh-5rem)];
+  }
+
+  .modal-title {
+    @apply mb-4 text-xl font-bold text-base-content;
+  }
+
+  /* Tables */
+  .table {
+    @apply table;
+  }
+
+  .table thead tr {
+    @apply bg-base-300;
+  }
+
+  .table thead th {
+    @apply text-sm font-semibold tracking-wider uppercase text-primary;
+  }
+
+  .table tbody tr {
+    @apply transition-colors border-b border-primary/10 hover:bg-primary/5;
+  }
+
+  .table tbody td {
+    @apply text-base-content/80;
+  }
+
+  /* Stats */
+  .stat {
+    @apply transition-all duration-300 border bg-base-200 border-primary/20 rounded-xl hover:border-primary/40;
+  }
+
+  .stat-value {
+    @apply text-primary;
+  }
+  /*
+  .stat-label {
+    @apply text-sm text-base-content/60;
+  }*/
+
+  .stat-figure {
+    @apply flex items-center justify-center size-12 rounded-lg bg-primary/20;
+  }
+
+  /* Buttons */
+  .btn-secondary {
+    @apply border bg-base-300 hover:bg-base-200 text-base-content border-primary/20;
+  }
+  
+
+  .btn-ghost {
+    @apply border-0 hover:border-0 text-base-content/70 hover:bg-primary/10 hover:text-primary;
+  }
+
+  /* Menu Styling for Drawer Sidebar */
+  .menu a {
+    @apply flex items-center gap-3 px-4 py-3 rounded-lg text-base-content/70 transition-all duration-200;
+  }
+
+  .menu a:hover {
+    @apply bg-primary/10 text-primary;
+  }
+
+  .menu a.active {
+    @apply bg-primary/20 text-primary border-l-4 border-primary;
+  }
+
+  .menu-title {
+    @apply px-4 pb-2 text-xs font-semibold tracking-wider uppercase text-base-content/50;
+  }
+
+   /* Badge */
+  .badge-soft {
+    &.badge-primary{
+      @apply bg-primary/20 border-primary/30;
+    }
+  }
+}
+
+/* ========================================
+   ADMIN COMPONENTS
+======================================== */
+@layer components {
+  /* Form Inputs */
+  .modal-label {
+    @apply fieldset-legend label w-full text-gray-300 text-sm font-medium;
+  }
+
+  /* Feature Builder */
+  .feature-item {
+    @apply flex items-center gap-3 p-3 mb-2 transition-all border rounded-lg bg-base-300 border-primary/10 hover:border-primary/30;
+  }
+
+  .feature-item-drag {
+    @apply cursor-grab text-base-content/50 hover:text-primary;
+  }
+}
+
+/* ========================================
+   UTILITIES
+======================================== */
+@layer utilities {
+
+  /* Pink Glow Effect */
+  .glow-pink {
+    box-shadow: 0 0 20px oklch(var(--color-primary) / 30%);
+  }
+
+  /* Fade In Animation */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

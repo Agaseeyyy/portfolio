@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Helper Functions
  * 
@@ -17,7 +18,7 @@ if (!function_exists('base_url')) {
     function base_url(string $path = ''): string
     {
         $appPath = Config::get('APP_PATH', '');
-        
+
         // If no app path configured or on production, use root
         if (empty($appPath) || $_SERVER['HTTP_HOST'] !== 'localhost') {
             return '/' . ltrim($path, '/');

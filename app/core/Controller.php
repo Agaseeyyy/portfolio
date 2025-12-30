@@ -1,4 +1,5 @@
 <?php
+
 namespace app\core;
 
 use app\core\View;
@@ -11,7 +12,7 @@ use app\core\View;
  */
 abstract class Controller
 {
- 
+
 	/**
 	 * Render a view with optional data
 	 * 
@@ -33,5 +34,4 @@ abstract class Controller
 		header("Location: " . base_url($path));
 		exit;
 	}
-
 }

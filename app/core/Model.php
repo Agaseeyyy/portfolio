@@ -1,10 +1,11 @@
 <?php
+
 namespace app\core;
 
 /**
  * Base Model Class
  * 
- * Provides CI4-like model functionality for vanilla PHP.
+ * Provides model functionality for vanilla PHP.
  * All models should extend this class and define their own
  * $table, $primaryKey, and $allowedFields properties.
  */
@@ -224,7 +225,7 @@ abstract class Model
         $placeholders = array_fill(0, count($fields), '?');
 
         $sql = "INSERT INTO {$this->table} (" . implode(', ', $fields) . ") VALUES (" . implode(', ', $placeholders) . ")";
-        
+
         $stmt = $this->db->prepare($sql);
         $success = $stmt->execute(array_values($data));
 
@@ -257,7 +258,7 @@ abstract class Model
         $params[] = $id;
 
         $sql = "UPDATE {$this->table} SET " . implode(', ', $setClauses) . " WHERE {$this->primaryKey} = ?";
-        
+
         $stmt = $this->db->prepare($sql);
         return $stmt->execute($params);
     }

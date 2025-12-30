@@ -1,4 +1,5 @@
 <?php
+
 namespace app\controllers\Admin;
 
 use app\core\Controller;
@@ -32,7 +33,7 @@ class ServiceController extends Controller
     {
         $data = $_POST;
         $isUpdate = !empty($data['service_id']);
-        
+
         if (!$isUpdate) {
             unset($data['service_id']);
         }
@@ -59,7 +60,7 @@ class ServiceController extends Controller
             unset($data['icon']);
         }
 
-        if(!$this->model->save($data)) {
+        if (!$this->model->save($data)) {
             set_flash('error', 'Failed to save service. Please try again.');
             $this->redirect('admin/services');
             return;

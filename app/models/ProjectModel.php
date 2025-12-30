@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models;
 
 use app\core\Model;
@@ -35,7 +36,7 @@ class ProjectModel extends Model
                     FROM project_technologies_tbl pt 
                     INNER JOIN techstack_tbl t ON t.tech_id = pt.tech_id 
                     WHERE pt.project_id = ?";
-            
+
             $project['technologies'] = $this->query($sql, [$project['project_id']]);
         }
 
@@ -60,7 +61,7 @@ class ProjectModel extends Model
                 FROM project_technologies_tbl pt 
                 INNER JOIN techstack_tbl t ON t.tech_id = pt.tech_id 
                 WHERE pt.project_id = ?";
-        
+
         $project['technologies'] = $this->query($sql, [$project['project_id']]);
 
         // Decode JSON fields

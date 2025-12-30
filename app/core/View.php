@@ -1,4 +1,5 @@
-<?php  
+<?php
+
 namespace app\core;
 
 use Exception;
@@ -29,12 +30,12 @@ class View
         self::$data = $data;
         self::$sections = [];
         self::$layout = null;
-        
+
         $fullPath = self::$viewPath . $viewFile . '.php';
 
         if (!file_exists($fullPath)) {
             require self::$viewPath . '/errors/404.php';
-            throw new \Exception("View file not found! Please check the path carefully: " . $fullPath);	
+            throw new \Exception("View file not found! Please check the path carefully: " . $fullPath);
         }
 
         // Extract data array to individual variables for use in view
@@ -116,7 +117,7 @@ class View
     public static function include(string $view): string
     {
         $fullPath = self::$viewPath . $view . '.php';
-        
+
         if (!file_exists($fullPath)) {
             return '';
         }

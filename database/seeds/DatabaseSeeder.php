@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Database Seeder
  * 
@@ -261,7 +262,7 @@ class DatabaseSeeder extends Seeder
         foreach ($projects as $project) {
             $technologies = $project['technologies'];
             unset($project['technologies']);
-            
+
             $projectId = $this->insert('projects_tbl', $project);
 
             // Link technologies to project

@@ -39,10 +39,10 @@ $contact = $data['contact'] ?? [];
         </svg>
       </label>
       <!-- Navigation Links -->
-      <a href="#home" class="text-lg transition-colors duration-200 nav lg:text-base hover:text-pink-500">Home</a>
-      <a href="#portfolio" class="text-lg transition-colors duration-200 nav lg:text-base hover:text-pink-500">Portfolio</a>
-      <a href="#services" class="text-lg transition-colors duration-200 nav lg:text-base hover:text-pink-500">Services</a>
-      <a href="#contacts" class="text-lg transition-colors duration-200 nav lg:text-base hover:text-pink-500">Contacts</a>
+      <a href="<?= base_url('/') ?>#home" class="text-lg transition-colors duration-200 nav lg:text-base hover:text-pink-500">Home</a>
+      <a href="<?= base_url('/') ?>#portfolio" class="text-lg transition-colors duration-200 nav lg:text-base hover:text-pink-500">Portfolio</a>
+      <a href="<?= base_url('/') ?>#services" class="text-lg transition-colors duration-200 nav lg:text-base hover:text-pink-500">Services</a>
+      <a href="<?= base_url('/') ?>#contacts" class="text-lg transition-colors duration-200 nav lg:text-base hover:text-pink-500">Contacts</a>
       <!-- Single Social Links - Inside mobile menu, beside desktop nav -->
       <div class="flex justify-center gap-6 pt-8 border-t border-gray-700 lg:border-t-0 lg:pt-0 lg:pl-8">
         <!-- Github -->

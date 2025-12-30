@@ -1,8 +1,9 @@
 <?php
+
 /**
  * Web Routes
  * 
- * Defines all application routes using separate admin controllers.
+ * Defines all application routes
  */
 
 use app\controllers\HomeController;

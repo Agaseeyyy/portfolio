@@ -1,4 +1,5 @@
 <?php
+
 namespace app\controllers\Admin;
 
 use app\core\Controller;
@@ -60,7 +61,7 @@ class ProjectController extends Controller
         }
 
         $isUpdate = !empty($data['project_id']);
-        
+
         if (!$isUpdate) {
             unset($data['project_id']);
         }

@@ -1,4 +1,5 @@
 <?php
+
 namespace app\controllers\Admin;
 
 use app\core\Controller;
@@ -32,12 +33,12 @@ class ContactInfoController extends Controller
     {
         $data = $_POST;
         $isUpdate = !empty($data['contact_id']);
-        
+
         if (!$isUpdate) {
             unset($data['contact_id']);
         }
 
-        if(!$this->model->save($data)) {
+        if (!$this->model->save($data)) {
             set_flash('error', 'Failed to save contact information. Please try again.');
             $this->redirect('admin/contacts');
             return;
