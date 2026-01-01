@@ -4,6 +4,8 @@ A custom lightweight PHP MVC framework built from scratch for learning and proje
 
 Built with modern technologies including Tailwind CSS v4 and DaisyUI 5 for a beautiful, responsive UI.
 
+**Live Preview:** [agassibustarga.page.gd](https://agassibustarga.page.gd/)
+
 ![PHP](https://img.shields.io/badge/PHP-8.1+-777BB4?logo=php&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?logo=tailwind-css&logoColor=white)
 ![DaisyUI](https://img.shields.io/badge/DaisyUI-5.0-5A0EF8?logo=daisyui&logoColor=white)
