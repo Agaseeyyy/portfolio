@@ -48,7 +48,7 @@ use app\core\View;
                             <?php endif; ?>
 
                             <!-- Hover Overlay -->
-                            <div class="absolute inset-0 flex items-center justify-center gap-2 transition-opacity duration-300 opacity-0 bg-black/60 group-hover:opacity-100">
+                            <div class="absolute inset-0 flex items-center justify-center gap-2 transition-opacity duration-300 opacity-0 bg-black/60 max-lg:opacity-100 max-lg:bg-none group-hover:opacity-100">
                                 <button onclick="viewImage('<?= base_url($cert['image']) ?>')" class="btn btn-circle btn-sm bg-white/20 hover:bg-white/30 border-none text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

@@ -82,7 +82,7 @@ $colorThemes = [
     <!-- Call to Action: Encourage visitors to start a project -->
     <div class="mt-12 text-center button-animate">
       <a href="#contacts" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 border rounded-lg bg-gradient-to-r from-pink-500/90 to-rose-600/90 border-white/30 hover:from-pink-600 hover:to-rose-700 hover:scale-105 hover:shadow-xl">
-        <img src="icons/chat-message.svg" alt="Chat" class="w-4 h-4 transition-transform duration-300 filter brightness-0 invert">
+        <img src="icons/message-icon.svg" alt="Chat" class="w-4 h-4 transition-transform duration-300 filter brightness-0 invert">
         Start Your Project
       </a>
     </div>

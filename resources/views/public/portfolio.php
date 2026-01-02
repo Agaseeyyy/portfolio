@@ -100,11 +100,11 @@
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <?php foreach ($techCategories as $catKey => $category): ?>
           <?php if (!empty($category['items'])): ?>
-          <div class="relative p-6 border shadow-xl rounded-xl tech-category bg-gray-600/15 border-gray-500/25">
+          <div class="relative p-5 border shadow-xl rounded-xl tech-category bg-gray-600/15 border-gray-500/25">
             <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-40"></div>
             <div class="relative z-10">
               <h3 class="mb-4 text-lg font-semibold text-center text-white"><?= htmlspecialchars($category['label']) ?></h3>
-              <div class="space-y-3 overflow-y-auto max-h-60 scrollbar-themed">
+              <div class="space-y-3 overflow-y-auto max-h-60 scrollbar-themed p-3">
                 <?php foreach ($category['items'] as $tech): ?>
                 <div class="flex items-center gap-3 p-3 border rounded-lg tech-item bg-gray-700/20 border-gray-600/30">
                   <div class="w-5 h-5">

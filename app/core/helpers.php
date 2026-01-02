@@ -20,7 +20,7 @@ if (!function_exists('base_url')) {
         $appPath = Config::get('APP_PATH', '');
 
         // If no app path configured or on production, use root
-        if (empty($appPath) || $_SERVER['HTTP_HOST'] !== 'localhost') {
+        if (empty($appPath) || Config::isProduction()) {
             return '/' . ltrim($path, '/');
         }
 

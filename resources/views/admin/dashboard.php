@@ -27,6 +27,11 @@ View::extend('admin/layout');
 <?php View::endSection() ?>
 
 <?php View::section('content') ?>
+<?php if (has_flash('success')): ?>
+    <div role="alert" class="alert alert-success alert-soft mb-2">
+        <span><?= get_flash('success') ?></span>
+    </div>
+<?php endif; ?>
 <!-- Stats Grid -->
 <div class="grid grid-cols-1 gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
     <!-- Projects Stats -->
