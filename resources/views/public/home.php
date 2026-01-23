@@ -34,7 +34,7 @@ Portfolio - <?= htmlspecialchars($home['name'] ?? 'Agassi Bustarga') ?>
       
       <!-- Action buttons: Primary CTA buttons for CV download and portfolio exploration -->
       <div class="flex flex-row gap-4 mt-6 opacity-0 max-sm:justify-center lg:gap-6 animate-fade-in-up animation-delay-1000">
-        <a href="#projects" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 border rounded-lg shadow-lg bg-gradient-to-r from-pink-500/90 to-rose-600/90 border-white/30 hover:from-pink-600 hover:to-rose-700 hover:scale-105 hover:shadow-xl">
+        <a href="https://bit.ly/agassi-resume" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 border rounded-lg shadow-lg bg-gradient-to-r from-pink-500/90 to-rose-600/90 border-white/30 hover:from-pink-600 hover:to-rose-700 hover:scale-105 hover:shadow-xl">
           <img src="icons/download.svg" alt="Download" class="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-1" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
           Download CV
         </a>
