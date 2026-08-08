@@ -1,0 +1,9 @@
+# Robots.txt for Agassi Bustarga Portfolio
+User-agent: *
+Allow: /
+Allow: /project/
+Disallow: /admin/
+Disallow: /app/
+Disallow: /routes/
+
+Sitemap: http://localhost:8000/sitemap.xml

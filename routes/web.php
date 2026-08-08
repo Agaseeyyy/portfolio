@@ -7,6 +7,7 @@
  */
 
 use app\controllers\HomeController;
+use app\controllers\SitemapController;
 use app\controllers\Admin\AuthController;
 use app\controllers\Admin\DashboardController;
 use app\controllers\Admin\HomeController as AdminHomeController;
@@ -18,6 +19,8 @@ use app\controllers\Admin\CertificationController;
 // Public routes
 $router->get('/', [HomeController::class, 'index']);
 $router->get('/project/{id}', [HomeController::class, 'projectDetail']);
+$router->get('/sitemap.xml', [SitemapController::class, 'index']);
+$router->get('/sitemap', [SitemapController::class, 'index']);
 
 // Admin - Authentication
 $router->get('/admin/login', [AuthController::class, 'login']);
