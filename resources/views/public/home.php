@@ -70,7 +70,7 @@ $expBlocks = max(0, min(10, round($expVal / 10)));
   <!-- RPG Section Header with Enlarged 44px sword.png Icon -->
   <div class="rpg-header items-center gap-4 mb-8">
     <div class="w-11 h-11 flex-shrink-0 flex items-center justify-center">
-      <img src="<?= base_url('icons/sword.png') ?>" alt="About Me" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 2px 6px rgba(240,192,64,0.4))">
+      <img src="<?= base_url('icons/cross-sword.png') ?>" alt="About Me" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 2px 6px rgba(240,192,64,0.4))">
     </div>
     <span class="rpg-title-glow text-lg lg:text-xl">ABOUT ME</span>
     <span class="sub-text text-sm">(CHARACTER STATS)</span>
@@ -123,7 +123,7 @@ $expBlocks = max(0, min(10, round($expVal / 10)));
 
         <!-- Weapon Stat loaded from DB -->
         <div class="stat-row-item flex items-center gap-4">
-          <img src="<?= base_url('icons/sword.png') ?>" alt="Weapon Sword" class="w-12 h-12 lg:w-14 lg:h-14 shrink-0 object-contain image-pixelated">
+          <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Weapon Sword" class="w-12 h-12 lg:w-14 lg:h-14 shrink-0 object-contain image-pixelated">
           <div class="flex flex-col justify-center">
             <span class="text-[#f0c040] text-xs font-bold tracking-wider">WEAPON</span>
             <span class="text-white text-xs lg:text-sm leading-snug mt-0.5"><?= htmlspecialchars($weaponText) ?></span>

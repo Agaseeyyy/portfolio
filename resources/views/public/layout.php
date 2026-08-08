@@ -92,7 +92,7 @@ $version = time();
   <div id="dungeon-loading-overlay">
     <div class="dungeon-card flex flex-col items-center justify-center gap-4">
       <div class="w-16 h-16 flex-shrink-0 mb-1 animate-bounce">
-        <img src="<?= base_url('icons/quest.png') ?>" alt="Loading Dungeon" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.7))">
+        <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Loading Dungeon" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.7))">
       </div>
 
       <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0">
@@ -115,11 +115,13 @@ $version = time();
   <div id="dungeon-entrance-modal" style="display:none;">
     <div class="dungeon-card flex flex-col items-center justify-center gap-6">
       <div class="w-16 h-16 flex-shrink-0 mb-1">
-        <img src="<?= base_url('icons/quest.png') ?>" alt="Dungeon Gate" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.6))">
+        <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Dungeon Gate" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.6))">
       </div>
 
-      <h2 class="text-[#f0c040] text-sm lg:text-base font-bold tracking-widest uppercase rpg-title-glow m-0">
-        ⚔️ WELCOME, ADVENTURER! ⚔️
+      <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0 flex items-center justify-center gap-2">
+        <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-6 h-6 object-contain image-rendering-pixelated inline-block align-middle">
+        <span>WELCOME, ADVENTURER!</span>
+        <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-6 h-6 object-contain image-rendering-pixelated inline-block align-middle">
       </h2>
 
       <div class="flex items-center justify-center gap-3 text-[#c8a951] w-full my-1">
@@ -132,8 +134,9 @@ $version = time();
         YOU ARE ENTERING THE DEVELOPER DUNGEON OF <span class="text-[#f0c040] font-bold"><?= htmlspecialchars(strtoupper($home['name'] ?? 'AGASSI BUSTARGA')) ?></span>.
       </p>
 
-      <button onclick="enterDungeon()" class="golden-btn text-xs lg:text-sm py-4 px-8 mt-3 flex items-center gap-3 cursor-pointer">
-        <span>⚔️ ENTER DUNGEON</span>
+      <button onclick="enterDungeon()" class="golden-btn text-xs lg:text-sm py-4 px-8 mt-3 flex items-center justify-center gap-3 cursor-pointer">
+        <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-5 h-5 object-contain image-rendering-pixelated inline-block">
+        <span>ENTER DUNGEON</span>
         <span class="rpg-cursor-blink">▶</span>
       </button>
     </div>

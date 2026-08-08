@@ -103,13 +103,13 @@ View::extend('public/layout');
       <?php if (!empty($project['challenges'])): ?>
         <div class="nes-container is-dark" style="padding: 1.75rem 2rem;">
           <h2 class="text-[#f0c040] text-xs font-bold tracking-widest uppercase mb-5 flex items-center gap-3 border-b-2 border-[#8b7355] pb-3">
-            <img src="<?= base_url('icons/sword.png') ?>" alt="Sword" class="w-6 h-6 object-contain image-rendering-pixelated">
+            <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-6 h-6 object-contain image-rendering-pixelated">
             <span>CHALLENGES OVERCOME</span>
           </h2>
           <ul class="flex flex-col gap-3.5 pl-0 list-none m-0">
             <?php foreach ($project['challenges'] as $challenge): ?>
               <li class="flex items-start gap-3 text-[#d0d0e0] text-xs lg:text-[12.5px] leading-relaxed font-normal">
-                <span class="text-[#ff5555] text-sm flex-shrink-0 mt-0.5">⚔️</span>
+                <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-4 h-4 object-contain image-rendering-pixelated flex-shrink-0 mt-0.5">
                 <span><?= htmlspecialchars($challenge) ?></span>
               </li>
             <?php endforeach; ?>
