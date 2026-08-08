@@ -31,23 +31,23 @@ $expBlocks = max(0, min(10, round($expVal / 10)));
   <div class="absolute top-0 left-0 right-0 h-[720px] lg:h-[800px] z-0 overflow-hidden pointer-events-none opacity-90">
     <img src="<?= base_url('images/home-sky.png') ?>" alt="Pixel Art Night City" class="w-full h-full object-cover object-top m-0 p-0">
     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0f24]/30 via-60% to-[#0a0f24]"></div>
-  </div>
 
-  <!-- 8-Bit Pixel Tree Silhouette Shadows Horizon Line (Positioned Directly in Initial Hero Viewport) -->
-  <div class="absolute top-[280px] lg:top-[320px] left-0 right-0 h-40 lg:h-56 z-5 pointer-events-none overflow-hidden">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-full fill-white opacity-95">
-      <path d="
-        M 0,120 L 0,80 L 15,50 L 30,80 L 30,65 L 45,35 L 60,65 L 60,50 L 75,20 L 90,50 L 90,65 L 105,40 L 120,65 L 120,80 L 135,55 L 150,80
-        L 150,70 L 165,45 L 180,70 L 180,55 L 195,25 L 210,55 L 210,70 L 225,45 L 240,70 L 240,85 L 255,60 L 270,85 L 270,75 L 285,50
-        L 300,75 L 300,60 L 315,30 L 330,60 L 330,75 L 345,50 L 360,75 L 360,90 L 375,65 L 390,90 L 390,75 L 405,45 L 420,75
-        L 420,60 L 435,28 L 450,60 L 450,75 L 465,45 L 480,75 L 480,90 L 495,65 L 510,90 L 510,75 L 525,48 L 540,75 L 540,62 L 555,32
-        L 570,62 L 570,78 L 585,50 L 600,78 L 600,90 L 615,65 L 630,90 L 630,75 L 645,45 L 660,75 L 660,60 L 675,28 L 690,60
-        L 690,75 L 705,48 L 720,75 L 720,90 L 735,65 L 750,90 L 750,75 L 765,45 L 780,75 L 780,62 L 795,32 L 810,62 L 810,78
-        L 825,50 L 840,78 L 840,90 L 855,65 L 870,90 L 870,75 L 885,45 L 900,75 L 900,60 L 915,28 L 930,60 L 930,75 L 945,48
-        L 960,75 L 960,90 L 975,65 L 990,90 L 990,75 L 1005,45 L 1020,75 L 1020,62 L 1035,32 L 1050,62 L 1050,78 L 1065,50 L 1080,78
-        L 1080,90 L 1110,75 L 1125,45 L 1140,75 L 1140,60 L 1155,28 L 1170,60 L 1170,80 L 1185,55 L 1200,80 L 1200,120 Z
-      " shape-rendering="crispEdges"/>
-    </svg>
+    <!-- 8-Bit Pixel Tree Silhouette Shadows Horizon Line (Original Location at Bottom Horizon, White) -->
+    <div class="absolute bottom-0 left-0 right-0 h-32 lg:h-44 z-2 pointer-events-none overflow-hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-full fill-white opacity-95">
+        <path d="
+          M 0,120 L 0,80 L 15,50 L 30,80 L 30,65 L 45,35 L 60,65 L 60,50 L 75,20 L 90,50 L 90,65 L 105,40 L 120,65 L 120,80 L 135,55 L 150,80
+          L 150,70 L 165,45 L 180,70 L 180,55 L 195,25 L 210,55 L 210,70 L 225,45 L 240,70 L 240,85 L 255,60 L 270,85 L 270,75 L 285,50
+          L 300,75 L 300,60 L 315,30 L 330,60 L 330,75 L 345,50 L 360,75 L 360,90 L 375,65 L 390,90 L 390,75 L 405,45 L 420,75
+          L 420,60 L 435,28 L 450,60 L 450,75 L 465,45 L 480,75 L 480,90 L 495,65 L 510,90 L 510,75 L 525,48 L 540,75 L 540,62 L 555,32
+          L 570,62 L 570,78 L 585,50 L 600,78 L 600,90 L 615,65 L 630,90 L 630,75 L 645,45 L 660,75 L 660,60 L 675,28 L 690,60
+          L 690,75 L 705,48 L 720,75 L 720,90 L 735,65 L 750,90 L 750,75 L 765,45 L 780,75 L 780,62 L 795,32 L 810,62 L 810,78
+          L 825,50 L 840,78 L 840,90 L 855,65 L 870,90 L 870,75 L 885,45 L 900,75 L 900,60 L 915,28 L 930,60 L 930,75 L 945,48
+          L 960,75 L 960,90 L 975,65 L 990,90 L 990,75 L 1005,45 L 1020,75 L 1020,62 L 1035,32 L 1050,62 L 1050,78 L 1065,50 L 1080,78
+          L 1080,90 L 1110,75 L 1125,45 L 1140,75 L 1140,60 L 1155,28 L 1170,60 L 1170,80 L 1185,55 L 1200,80 L 1200,120 Z
+        " shape-rendering="crispEdges"/>
+      </svg>
+    </div>
   </div>
 
   <!-- Hero Content Box (Golden Dialog) - Extra Large Text Hierarchy -->
