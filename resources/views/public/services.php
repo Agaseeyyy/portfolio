@@ -1,87 +1,179 @@
 <?php
 /**
  * Inventory (Skills) Section - 8-bit RPG Style
- * 2-column skills grid with interactive sequential block bar loading
+ * Features custom category header icons and DB skill proficiency blocks (1-10)
  * 
  * @var array $techstack - Tech stack data from database
  */
 
-// Exact skills matching mockup image layout
-$mockupSkillsCol1 = [
-  ['name' => 'JAVASCRIPT', 'level' => 7],
-  ['name' => 'REACT', 'level' => 8],
-  ['name' => 'TYPESCRIPT', 'level' => 7],
-  ['name' => 'NODE.JS', 'level' => 7],
+use app\models\TechstackModel;
+
+// Helper to resolve icon by tech name
+$slugMap = [
+  'JAVASCRIPT' => 'javascript', 'JS' => 'javascript',
+  'REACT' => 'react', 'REACTS' => 'react', 'REACT.JS' => 'react',
+  'TYPESCRIPT' => 'typescript', 'TS' => 'typescript',
+  'NODE.JS' => 'nodejs', 'NODE' => 'nodejs',
+  'PHP' => 'php', 'LARAVEL' => 'laravel',
+  'TAILWIND CSS' => 'tailwind', 'TAILWIND' => 'tailwind', 'CSS' => 'css', 'HTML' => 'html-black',
+  'PYTHON' => 'python', 'SQL' => 'mysql', 'MYSQL' => 'mysql',
+  'GIT & GITHUB' => 'github', 'GIT' => 'git', 'GITHUB' => 'github',
+  'LINUX / TERMINAL' => 'terminal', 'LINUX' => 'linux', 'TERMINAL' => 'terminal',
+  'VS CODE' => 'vscode', 'POSTMAN' => 'postman', 'JAVA' => 'java', 'SPRING BOOT' => 'spring-boot'
 ];
 
-$mockupSkillsCol2 = [
-  ['name' => 'TAILWIND CSS', 'level' => 8],
-  ['name' => 'PYTHON', 'level' => 7],
-  ['name' => 'SQL', 'level' => 6],
-  ['name' => 'GIT & GITHUB', 'level' => 8],
+$publicDir = dirname(__DIR__, 3) . '/public/';
+
+// Default categorized data with custom PNG category icons
+$defaultCategories = [
+  'frontend' => [
+    'title' => 'FRONTEND MAGIC',
+    'icon_img' => 'icons/frontend.png',
+    'items' => [
+      ['name' => 'JAVASCRIPT', 'icon' => 'icons/javascript.svg', 'level' => 8],
+      ['name' => 'REACT', 'icon' => 'icons/react.svg', 'level' => 8],
+      ['name' => 'TYPESCRIPT', 'icon' => 'icons/typescript.svg', 'level' => 7],
+      ['name' => 'TAILWIND CSS', 'icon' => 'icons/tailwind.svg', 'level' => 8],
+    ]
+  ],
+  'backend' => [
+    'title' => 'BACKEND ENGINES',
+    'icon_img' => 'icons/backend.png',
+    'items' => [
+      ['name' => 'PHP', 'icon' => 'icons/php.svg', 'level' => 8],
+      ['name' => 'NODE.JS', 'icon' => 'icons/nodejs.svg', 'level' => 7],
+      ['name' => 'PYTHON', 'icon' => 'icons/python.svg', 'level' => 7],
+      ['name' => 'JAVA', 'icon' => 'icons/java.svg', 'level' => 6],
+    ]
+  ],
+  'database' => [
+    'title' => 'DATA VAULTS',
+    'icon_img' => 'icons/database.png',
+    'items' => [
+      ['name' => 'MYSQL', 'icon' => 'icons/mysql.svg', 'level' => 7],
+      ['name' => 'SQL', 'icon' => 'icons/database.svg', 'level' => 7],
+    ]
+  ],
+  'tools' => [
+    'title' => 'EQUIPMENT & TOOLS',
+    'icon_img' => 'icons/inventory.png',
+    'items' => [
+      ['name' => 'GIT & GITHUB', 'icon' => 'icons/github.svg', 'level' => 8],
+      ['name' => 'VS CODE', 'icon' => 'icons/vscode.svg', 'level' => 9],
+      ['name' => 'LINUX', 'icon' => 'icons/linux.svg', 'level' => 7],
+      ['name' => 'POSTMAN', 'icon' => 'icons/postman.svg', 'level' => 8],
+    ]
+  ]
 ];
 
-// If DB techstack has items, map them into 2 columns
+$categories = $defaultCategories;
+
+// If DB techstack is provided, organize by DB category & proficiency
 if (!empty($techstack)) {
-  $col1 = [];
-  $col2 = [];
+  $groupedDB = [
+    'frontend' => ['title' => 'FRONTEND MAGIC', 'icon_img' => 'icons/frontend.png', 'items' => []],
+    'backend' => ['title' => 'BACKEND ENGINES', 'icon_img' => 'icons/backend.png', 'items' => []],
+    'database' => ['title' => 'DATA VAULTS', 'icon_img' => 'icons/database.png', 'items' => []],
+    'tools' => ['title' => 'EQUIPMENT & TOOLS', 'icon_img' => 'icons/inventory.png', 'items' => []],
+  ];
+
   foreach ($techstack as $index => $tech) {
-    $item = [
-      'name' => strtoupper($tech['tech_name']),
-      'level' => max(5, min(9, 9 - intval($index * 0.4)))
-    ];
-    if ($index % 2 === 0) {
-      $col1[] = $item;
+    $tName = strtoupper($tech['tech_name']);
+    $cat = strtolower($tech['category'] ?? 'tools');
+    if (!isset($groupedDB[$cat])) $cat = 'tools';
+
+    $dbIcon = $tech['icon'] ?? '';
+    $iconPath = '';
+    if (!empty($dbIcon) && file_exists($publicDir . $dbIcon)) {
+      $iconPath = $dbIcon;
     } else {
-      $col2[] = $item;
+      $slug = $slugMap[$tName] ?? strtolower(str_replace([' ', '&', '.', '/'], '', $tName));
+      if (file_exists($publicDir . 'icons/' . $slug . '.svg')) {
+        $iconPath = 'icons/' . $slug . '.svg';
+      }
     }
+
+    $prof = isset($tech['proficiency']) && $tech['proficiency'] !== '' ? intval($tech['proficiency']) : max(5, min(9, 9 - intval($index * 0.3)));
+
+    $groupedDB[$cat]['items'][] = [
+      'name' => $tName,
+      'icon' => $iconPath,
+      'level' => max(1, min(10, $prof))
+    ];
   }
-  if (!empty($col1)) $mockupSkillsCol1 = $col1;
-  if (!empty($col2)) $mockupSkillsCol2 = $col2;
+
+  // Filter empty categories
+  $filtered = array_filter($groupedDB, fn($c) => !empty($c['items']));
+  if (!empty($filtered)) {
+    $categories = $filtered;
+  }
+}
+
+// Function to resolve icon URL
+function resolveSkillIconUrl($skill, $slugMap, $publicDir) {
+  if (!empty($skill['icon']) && file_exists($publicDir . $skill['icon'])) {
+    return base_url($skill['icon']);
+  }
+  $sName = strtoupper($skill['name'] ?? '');
+  $slug = $slugMap[$sName] ?? strtolower(str_replace([' ', '&', '.', '/'], '', $sName));
+  if (file_exists($publicDir . 'icons/' . $slug . '.svg')) {
+    return base_url('icons/' . $slug . '.svg');
+  }
+  return null;
 }
 ?>
 <section id="inventory" class="max-w-7xl mx-auto px-6 py-14">
-  <div class="rpg-header">
-    <span>🧰</span>
-    <span class="rpg-title-glow">INVENTORY</span>
-    <span class="sub-text">(SKILLS)</span>
+  <!-- RPG Section Header with Enlarged inventory.png Icon -->
+  <div class="rpg-header items-center gap-4 mb-8">
+    <div class="w-11 h-11 flex-shrink-0 flex items-center justify-center">
+      <img src="<?= base_url('icons/inventory.png') ?>" alt="Inventory" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 2px 6px rgba(240,192,64,0.4))">
+    </div>
+    <span class="rpg-title-glow text-lg lg:text-xl">INVENTORY</span>
+    <span class="sub-text text-sm">(SKILLS & EQUIPMENT)</span>
   </div>
 
-  <div class="nes-container is-dark" style="padding: 2.25rem;">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-7">
-      
-      <!-- Left Column -->
-      <div class="flex flex-col gap-6">
-        <?php foreach ($mockupSkillsCol1 as $skill): ?>
-          <div class="flex items-center justify-between gap-6 stat-row-item">
-            <span class="text-white text-xs lg:text-[13px] font-bold tracking-wider uppercase min-w-[160px]">
-              <?= htmlspecialchars($skill['name']) ?>
-            </span>
-            <div class="block-bar">
-              <?php for ($i = 0; $i < 10; $i++): ?>
-                <div class="block-unit <?= $i < $skill['level'] ? 'filled-skill animate-fill' : '' ?>"></div>
-              <?php endfor; ?>
-            </div>
+  <!-- Categorized 2x2 Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <?php foreach ($categories as $catKey => $catData): ?>
+      <div class="nes-container is-dark" style="padding: 1.75rem 2rem;">
+        <!-- Category Header with custom PNG icon -->
+        <h3 class="text-[#f0c040] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-3 border-b-2 border-[#8b7355] pb-3">
+          <div class="w-7 h-7 flex-shrink-0 flex items-center justify-center">
+            <img src="<?= base_url($catData['icon_img']) ?>" alt="<?= htmlspecialchars($catData['title']) ?>" class="w-full h-full object-contain image-rendering-pixelated">
           </div>
-        <?php endforeach; ?>
-      </div>
+          <span><?= htmlspecialchars($catData['title']) ?></span>
+        </h3>
 
-      <!-- Right Column -->
-      <div class="flex flex-col gap-6">
-        <?php foreach ($mockupSkillsCol2 as $skill): ?>
-          <div class="flex items-center justify-between gap-6 stat-row-item">
-            <span class="text-white text-xs lg:text-[13px] font-bold tracking-wider uppercase min-w-[160px]">
-              <?= htmlspecialchars($skill['name']) ?>
-            </span>
-            <div class="block-bar">
-              <?php for ($i = 0; $i < 10; $i++): ?>
-                <div class="block-unit <?= $i < $skill['level'] ? 'filled-skill animate-fill' : '' ?>"></div>
-              <?php endfor; ?>
+        <!-- Skills List -->
+        <div class="flex flex-col gap-5">
+          <?php foreach ($catData['items'] as $skill): 
+            $iconUrl = resolveSkillIconUrl($skill, $slugMap, $publicDir);
+          ?>
+            <div class="flex items-center justify-between gap-4 stat-row-item">
+              <!-- 8-Bit Icon Frame Badges -->
+              <div class="flex items-center gap-3.5 min-w-[160px] group cursor-pointer" title="<?= htmlspecialchars($skill['name']) ?>">
+                <div class="w-12 h-12 rpg-pixel-frame flex items-center justify-center bg-[#11162a] text-lg flex-shrink-0 p-2 group-hover:border-[#f0c040] transition-colors shadow-md">
+                  <?php if ($iconUrl): ?>
+                    <img src="<?= $iconUrl ?>" alt="<?= htmlspecialchars($skill['name']) ?>" class="w-full h-full object-contain filter drop-shadow(0 2px 4px rgba(0,0,0,0.5))">
+                  <?php else: ?>
+                    <span class="text-white text-[10px] font-bold"><?= substr($skill['name'], 0, 3) ?></span>
+                  <?php endif; ?>
+                </div>
+                <span class="text-white text-[11px] font-bold tracking-wider uppercase group-hover:text-[#f0c040] transition-colors">
+                  <?= htmlspecialchars($skill['name']) ?>
+                </span>
+              </div>
+
+              <!-- Progress Block Bar (1-10 units) -->
+              <div class="block-bar">
+                <?php for ($i = 0; $i < 10; $i++): ?>
+                  <div class="block-unit <?= $i < $skill['level'] ? 'filled-skill animate-fill' : '' ?>"></div>
+                <?php endfor; ?>
+              </div>
             </div>
-          </div>
-        <?php endforeach; ?>
+          <?php endforeach; ?>
+        </div>
       </div>
-
-    </div>
+    <?php endforeach; ?>
   </div>
 </section>

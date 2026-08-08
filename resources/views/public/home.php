@@ -1,57 +1,64 @@
 <?php
-    /**
- * Home Page - 8-bit RPG Portfolio
- * Hero section + About Me character stats
- *
- * @var array $home - Home section data
- * @var array $contact - Contact info data
- * @var string $profilePhoto - Profile photo path
- * @var array $techstack - Tech stack data
+/**
+ * Single-Page RPG Portfolio Layout View
+ * Integrates Hero, About Me (Character Stats), Quest Log (Projects), and Inventory (Skills)
  */
-    use app\core\View;
-    View::extend('public/layout');
+use app\core\View;
 
-    $fullName = strtoupper(($home['name'] ?? 'CODEWIZARD'));
-    $roleName = strtoupper(($home['role'] ?? 'TECH DEVELOPER'));
-    $bioText  = $home['short_bio'] ?? 'I build modern, scalable, and user-friendly web applications with clean code and pixel-perfect precision.';
-    $location = $contact['address'] ?? 'Earth (Remote)';
+View::extend('public/layout');
+View::section('content');
+
+$home = View::getData()['home'] ?? [];
+$firstName = View::getData()['firstName'] ?? 'Agassi';
+$lastName = View::getData()['lastName'] ?? 'Bustarga';
+$location = View::getData()['location'] ?? 'Earth (Remote)';
+
+$fullName = strtoupper(($home['name'] ?? ($firstName . ' ' . $lastName)));
+$roleName = strtoupper(($home['role'] ?? 'DEVELOPER'));
+$bioText = $home['bio'] ?? ($home['short_bio'] ?? 'I build modern, scalable, and user-friendly web applications with clean code and pixel-perfect precision.');
+
+$levelText = $home['level_text'] ?? '5 Years Experience';
+$weaponText = $home['weapon_text'] ?? 'Code & Creativity';
+$hpVal = intval($home['hp_percentage'] ?? 100);
+$hpBlocks = max(1, min(10, round($hpVal / 10)));
+$expVal = intval($home['exp_percentage'] ?? 85);
+$expBlocks = max(0, min(10, round($expVal / 10)));
 ?>
 
-<?php View::section('title')?>
-<?= htmlspecialchars($fullName) ?> - LVL 5 Developer
-<?php View::endSection()?>
-
-<?php View::section('content')?>
-
-<!-- ====== HERO SECTION ====== -->
-<header id="home" class="relative min-h-[680px] lg:min-h-[780px] flex flex-col justify-end items-center pt-28 pb-10 px-4 overflow-hidden mt-0">
-  <!-- Background Image (home-sky.png) - Fills top to bottom -->
-  <div class="absolute inset-0 z-0">
+<!-- Hero Header & Background Image -->
+<header id="home" class="relative pt-24 pb-12 overflow-hidden flex flex-col items-center justify-center min-h-[85vh]">
+  <!-- Hero Sky Pixel Banner - Full height with smooth gradient fade into #0a0f24 -->
+  <div class="absolute top-0 left-0 right-0 h-[720px] lg:h-[800px] z-0 overflow-hidden pointer-events-none opacity-90">
     <img src="<?= base_url('images/home-sky.png') ?>" alt="Pixel Art Night City" class="w-full h-full object-cover object-top m-0 p-0">
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0a0f24]"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0f24]/30 via-60% to-[#0a0f24]"></div>
   </div>
 
-  <!-- Hero Content Box (Golden Dialog) - Scaled up, floating & lowered down -->
-  <div class="golden-hero-box max-w-[780px] w-full mx-auto relative z-10 mb-4">
-    <h2 class="text-white text-xs lg:text-sm tracking-widest mb-4 font-normal">
+  <!-- Hero Content Box (Golden Dialog) - Extra Large Text Hierarchy -->
+  <div class="golden-hero-box max-w-[860px] w-full mx-auto relative z-10 mb-4">
+    <!-- Extra Large WELCOME BACK! Heading -->
+    <h2 class="text-[#f0c040] text-base lg:text-xl font-bold tracking-widest mb-5 uppercase rpg-title-glow">
       WELCOME BACK!
     </h2>
-    <h1 class="text-white text-base lg:text-lg leading-relaxed mb-5">
+    
+    <!-- Extra Large Main Title (I AM ...) -->
+    <h1 class="text-white text-xl lg:text-3xl font-bold leading-relaxed mb-6">
       I AM <span class="text-[#f0c040] font-bold"><?= htmlspecialchars($fullName) ?></span>,<br>
       A <?= htmlspecialchars($roleName) ?>.
     </h1>
 
-    <div class="flex items-center justify-center gap-4 my-5 text-[#c8a951]">
-      <span class="h-[2px] w-24 bg-[#c8a951]"></span>
-      <span class="text-sm">◆</span>
-      <span class="h-[2px] w-24 bg-[#c8a951]"></span>
+    <div class="flex items-center justify-center gap-4 my-6 text-[#c8a951]">
+      <span class="h-[2px] w-32 bg-[#c8a951]"></span>
+      <span class="text-base">◆</span>
+      <span class="h-[2px] w-32 bg-[#c8a951]"></span>
     </div>
 
-    <p class="text-[#d0d0e0] text-[11px] lg:text-[13px] leading-loose max-w-[640px] mx-auto mb-9 font-normal">
+    <!-- Extra Large Bio Description -->
+    <p class="text-[#d0d0e0] text-xs lg:text-sm leading-loose max-w-[720px] mx-auto mb-10 font-normal">
       <?= htmlspecialchars($bioText) ?>
     </p>
 
-    <a href="#quest-log" class="golden-btn flex items-center justify-center gap-2">
+    <!-- Large Golden Hero CTA Button -->
+    <a href="#quest-log" class="golden-btn flex items-center justify-center gap-3 text-xs lg:text-sm py-4 px-10">
       <span>&gt; START QUEST</span>
       <span class="rpg-cursor-blink">▶</span>
     </a>
@@ -60,10 +67,13 @@
 
 <!-- ====== ABOUT ME / CHARACTER STATS ====== -->
 <section id="about" class="max-w-7xl mx-auto px-6 py-14">
-  <div class="rpg-header">
-    <img src="<?= base_url('icons/sword.png') ?>" alt="Sword Icon" class="w-6 h-6 object-contain image-pixelated inline-block">
-    <span class="rpg-title-glow">ABOUT ME</span>
-    <span class="sub-text">(CHARACTER STATS)</span>
+  <!-- RPG Section Header with Enlarged 44px sword.png Icon -->
+  <div class="rpg-header items-center gap-4 mb-8">
+    <div class="w-11 h-11 flex-shrink-0 flex items-center justify-center">
+      <img src="<?= base_url('icons/sword.png') ?>" alt="About Me" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 2px 6px rgba(240,192,64,0.4))">
+    </div>
+    <span class="rpg-title-glow text-lg lg:text-xl">ABOUT ME</span>
+    <span class="sub-text text-sm">(CHARACTER STATS)</span>
   </div>
 
   <div class="nes-container is-dark with-title" style="padding: 2.25rem;">
@@ -102,26 +112,26 @@
 
       <!-- Stat Col 2: Extra Large Borderless Inline Icons with Hover Bounce -->
       <div class="flex flex-col gap-6">
-        <!-- Level Stat -->
+        <!-- Level Stat loaded from DB -->
         <div class="stat-row-item flex items-center gap-4">
           <img src="<?= base_url('icons/star.png') ?>" alt="Level Star" class="w-12 h-12 lg:w-14 lg:h-14 shrink-0 object-contain image-pixelated">
           <div class="flex flex-col justify-center">
             <span class="text-[#f0c040] text-xs font-bold tracking-wider">LEVEL</span>
-            <span class="text-white text-xs lg:text-sm leading-snug mt-0.5">5 Years Experience</span>
+            <span class="text-white text-xs lg:text-sm leading-snug mt-0.5"><?= htmlspecialchars($levelText) ?></span>
           </div>
         </div>
 
-        <!-- Weapon Stat -->
+        <!-- Weapon Stat loaded from DB -->
         <div class="stat-row-item flex items-center gap-4">
           <img src="<?= base_url('icons/sword.png') ?>" alt="Weapon Sword" class="w-12 h-12 lg:w-14 lg:h-14 shrink-0 object-contain image-pixelated">
           <div class="flex flex-col justify-center">
             <span class="text-[#f0c040] text-xs font-bold tracking-wider">WEAPON</span>
-            <span class="text-white text-xs lg:text-sm leading-snug mt-0.5">Code &amp; Creativity</span>
+            <span class="text-white text-xs lg:text-sm leading-snug mt-0.5"><?= htmlspecialchars($weaponText) ?></span>
           </div>
         </div>
       </div>
 
-      <!-- Stat Col 3: Animated Sequential HP & EXP Bars with Pulsing Heart -->
+      <!-- Stat Col 3: Animated HP & EXP Bars loaded directly from DB -->
       <div class="flex flex-col gap-7 md:border-l-2 border-[#2b334e] md:pl-8 justify-center">
         <!-- HP Bar -->
         <div class="flex flex-col gap-2.5">
@@ -129,11 +139,11 @@
             <span class="text-[#e74c3c] font-bold flex items-center gap-2">
               <img src="<?= base_url('icons/heart.png') ?>" alt="Heart Icon" class="w-6 h-6 object-contain image-pixelated heart-pulse"> HP
             </span>
-            <span class="text-white font-bold">100%</span>
+            <span class="text-white font-bold"><?= $hpVal ?>%</span>
           </div>
           <div class="block-bar">
             <?php for ($i = 0; $i < 10; $i++): ?>
-              <div class="block-unit filled-hp animate-fill"></div>
+              <div class="block-unit <?= $i < $hpBlocks ? 'filled-hp animate-fill' : '' ?>"></div>
             <?php endfor; ?>
           </div>
         </div>
@@ -144,11 +154,11 @@
             <span class="text-[#2ecc71] font-bold flex items-center gap-2">
               <img src="<?= base_url('icons/star.png') ?>" alt="Exp Star" class="w-6 h-6 object-contain image-pixelated"> EXP
             </span>
-            <span class="text-white font-bold">85%</span>
+            <span class="text-white font-bold"><?= $expVal ?>%</span>
           </div>
           <div class="block-bar">
             <?php for ($i = 0; $i < 10; $i++): ?>
-              <div class="block-unit <?= $i < 8 ? 'filled-exp animate-fill' : '' ?>"></div>
+              <div class="block-unit <?= $i < $expBlocks ? 'filled-exp animate-fill' : '' ?>"></div>
             <?php endfor; ?>
           </div>
         </div>
