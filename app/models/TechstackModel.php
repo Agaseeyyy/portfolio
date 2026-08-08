@@ -8,13 +8,13 @@ use app\core\Model;
  * Techstack Model
  * 
  * Manages technology stack items including
- * tech name, icon, and category (frontend/backend/database/tools).
+ * tech name, icon, category, and proficiency score (1-10).
  */
 class TechstackModel extends Model
 {
     protected string $table = 'techstack_tbl';
     protected string $primaryKey = 'tech_id';
-    protected array $allowedFields = ['tech_name', 'icon', 'category'];
+    protected array $allowedFields = ['tech_name', 'icon', 'category', 'proficiency'];
     protected bool $useTimestamps = true;
 
     /**

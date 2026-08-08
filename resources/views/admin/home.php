@@ -26,7 +26,7 @@ View::extend('admin/layout');
     <div class="card">
         <div class="card-body">
             <div class="card-actions justify-between">
-                <h3 class="card-title">Update Home Content</h3>
+                <h3 class="card-title">Update Home &amp; Character Stats</h3>
                 <span class="badge badge-primary badge-soft">Single Entry</span>
             </div>
 
@@ -58,18 +58,53 @@ View::extend('admin/layout');
                     <p class="label text-gray-500">Your display name shown on the hero section</p>
 
                     <!-- Role Field -->
-                    <label class="modal-label">Role / Title <span class="text-pink-400 text-xs right-0">Required</span></label>
+                    <label class="modal-label">Role / Character Class <span class="text-pink-400 text-xs right-0">Required</span></label>
                     <input type="text" name="role" value="<?= htmlspecialchars($data['role'] ?? '') ?>"
                         placeholder="e.g., Full-stack Developer"
                         class="input w-full bg-base-300" required>
-                    <p class="label text-gray-500">Your professional title (will appear with typing animation)</p>
+                    <p class="label text-gray-500">Your professional title &amp; RPG class</p>
 
                     <!-- Short Bio Field -->
                     <label class="modal-label">Short Bio <span class="text-pink-400 text-xs right-0">Required</span></label>
                     <textarea name="short_bio" rows="4"
                         placeholder="A brief description about yourself..."
                         class="textarea w-full bg-base-300" required><?= htmlspecialchars($data['short_bio'] ?? '') ?></textarea>
-                    <p class="label text-gray-500">A compelling introduction (2-3 sentences recommended)</p>
+                    <p class="label text-gray-500">A compelling hero introduction</p>
+
+                    <!-- Character RPG Stats Section -->
+                    <div class="p-4 my-4 rounded-lg bg-base-300/50 border border-gray-700">
+                        <h4 class="text-sm font-bold text-yellow-400 mb-3 uppercase tracking-wider">🎮 Character Stats (RPG Header)</h4>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- HP Percentage -->
+                            <div>
+                                <label class="modal-label">HP Percentage (%)</label>
+                                <input type="number" name="hp_percentage" min="1" max="100" value="<?= htmlspecialchars($data['hp_percentage'] ?? '100') ?>" class="input w-full">
+                                <p class="label text-gray-500">Health bar fill (1-100)</p>
+                            </div>
+
+                            <!-- EXP Percentage -->
+                            <div>
+                                <label class="modal-label">EXP Percentage (%)</label>
+                                <input type="number" name="exp_percentage" min="0" max="100" value="<?= htmlspecialchars($data['exp_percentage'] ?? '85') ?>" class="input w-full">
+                                <p class="label text-gray-500">Experience bar fill (0-100)</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mt-3">
+                            <!-- Level Text -->
+                            <div>
+                                <label class="modal-label">Level Subtext</label>
+                                <input type="text" name="level_text" value="<?= htmlspecialchars($data['level_text'] ?? '5 Years Experience') ?>" placeholder="e.g. 5 Years Experience" class="input w-full">
+                            </div>
+
+                            <!-- Weapon Text -->
+                            <div>
+                                <label class="modal-label">Weapon Subtext</label>
+                                <input type="text" name="weapon_text" value="<?= htmlspecialchars($data['weapon_text'] ?? 'Code & Creativity') ?>" placeholder="e.g. Code &amp; Creativity" class="input w-full">
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Profile Photo -->
                     <label class="modal-label">Profile Photo <span class="text-gray-500 text-xs">Optional</span></label>

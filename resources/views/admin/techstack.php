@@ -8,7 +8,7 @@ use app\core\View;
 <?php View::section('title') ?>Tech Stack<?php View::endSection() ?>
 
 <?php View::section('page-title') ?>Tech Stack<?php View::endSection() ?>
-<?php View::section('page-description') ?>Manage your technology skills and tools<?php View::endSection() ?>
+<?php View::section('page-description') ?>Manage your technology skills, categories, and block levels (1-10)<?php View::endSection() ?>
 
 <?php View::section('content') ?>
 <?php if (has_flash('success')): ?>
@@ -50,7 +50,10 @@ use app\core\View;
                                                     </svg>
                                                 <?php endif; ?>
                                             </div>
-                                            <span class="font-medium text-gray-300"><?= htmlspecialchars($tech['tech_name']) ?></span>
+                                            <div class="flex flex-col">
+                                                <span class="font-medium text-gray-300"><?= htmlspecialchars($tech['tech_name']) ?></span>
+                                                <span class="text-xs text-yellow-400 font-bold"><?= intval($tech['proficiency'] ?? 8) ?>/10 Blocks</span>
+                                            </div>
                                         </div>
                                         <div class="flex gap-1 opacity-0 group-hover:opacity-100 max-lg:opacity-100 transition-opacity">
                                             <button onclick="openEditModal(<?= htmlspecialchars(json_encode($tech), ENT_QUOTES, 'UTF-8') ?>)" class="btn btn-ghost btn-xs text-gray-400 hover:text-pink-400">
@@ -111,6 +114,14 @@ use app\core\View;
                     <option value="tools">Tools &amp; Others</option>
                 </select>
 
+                <!-- Proficiency Level (1-10 Blocks) -->
+                <label class="modal-label">Proficiency Level (1 to 10 Blocks) <span class="text-pink-400 text-xs">Required</span></label>
+                <select name="proficiency" id="techProficiency" class="select" required>
+                    <?php for ($p = 1; $p <= 10; $p++): ?>
+                        <option value="<?= $p ?>"><?= $p ?> / 10 Blocks (<?= $p * 10 ?>%)</option>
+                    <?php endfor; ?>
+                </select>
+
                 <!-- Tech Icon -->
                 <label class="modal-label">Icon <span class="text-gray-500 text-xs">SVG or PNG recommended</span></label>
                 <div id="currentIconPreview" class="hidden mb-3 flex items-center gap-3 p-3 rounded-lg bg-base-300">
@@ -167,6 +178,7 @@ use app\core\View;
         document.getElementById('formMethod').value = 'POST';
         form.action = '<?= base_url('admin/techstack/store') ?>';
         form.reset();
+        document.getElementById('techProficiency').value = '8';
         document.getElementById('currentIconPreview').classList.add('hidden');
         modal.showModal();
     }
@@ -180,6 +192,7 @@ use app\core\View;
         document.getElementById('techId').value = tech.tech_id;
         document.getElementById('techName').value = tech.tech_name;
         document.getElementById('techCategory').value = tech.category || 'tools';
+        document.getElementById('techProficiency').value = tech.proficiency || 8;
 
         if (tech.icon) {
             document.getElementById('currentIconPreview').classList.remove('hidden');
