@@ -1,7 +1,7 @@
 <?php
 /**
  * Main Layout Template - 8-Bit NES RPG Style
- * Unified 8-Bit Dungeon Loading Bar & Enter Dungeon Gate Screen
+ * Enhanced with Manual Scroll Restoration (Always Top on Refresh & Enter), 2-Phase Loading/Enter Gate Screen, SEO Meta Tags, and JSON-LD Schema
  */
 use app\core\View;
 
@@ -29,6 +29,14 @@ $version = time();
   <meta name="keywords" content="Agassi Bustarga, Full-stack Developer, PHP MVC, React, Web Developer Portfolio, NES RPG Portfolio, Tailwind CSS, Software Engineer">
   
   <title><?= $pageTitle ?></title>
+
+  <!-- Force Manual Scroll Restoration so Page Always Loads at the Top -->
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  </script>
 
   <!-- Canonical URL -->
   <link rel="canonical" href="<?= $currentUrl ?>" />
@@ -139,9 +147,14 @@ $version = time();
     </div>
   </div>
 
-  <!-- Unified Fast Inline Loading & Enter Script -->
+  <!-- Unified Fast Inline Loading & Enter Script with Scroll to Top Lock -->
   <script>
     (function() {
+      // Force scroll position to the top
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+
       var loadingOverlay = document.getElementById('dungeon-loading-overlay');
       var loadingPhase = document.getElementById('loading-phase');
       var entrancePhase = document.getElementById('entrance-phase');
@@ -180,6 +193,10 @@ $version = time();
     function enterDungeon() {
       var overlay = document.getElementById('dungeon-loading-overlay');
       if (overlay) {
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+
         try {
           if (window.rpgAudio) window.rpgAudio.playQuestFanfare();
         } catch (e) {}
@@ -193,9 +210,16 @@ $version = time();
         overlay.style.pointerEvents = 'none';
         setTimeout(function() {
           overlay.style.display = 'none';
+          window.scrollTo(0, 0);
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
         }, 350);
       }
     }
+
+    window.addEventListener('load', function() {
+      window.scrollTo(0, 0);
+    });
   </script>
 
   <!-- Retro CRT Monitor Arcade Scanline Overlay -->
