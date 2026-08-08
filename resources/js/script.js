@@ -1,34 +1,32 @@
 /**
- * Main application initialization
- * Entry point for the portfolio website
- * @fileoverview Application bootstrap and initialization
- */
-
-/**
- * Initialize the entire portfolio application
- * Sets up all sections and their respective functionalities
- * @event DOMContentLoaded
+ * 8-bit Portfolio Utility Script
+ * Handles mobile nav toggle and smooth scrolling
  */
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize global scroll animations
-  if (window.AnimationUtils) {
-    window.AnimationUtils.initializeScrollAnimations();
-  }
-  
-  // Initialize portfolio section
-  if (window.Portfolio) {
-    window.Portfolio.initializePortfolio();
-  }
-  
-  // Initialize services section
-  if (window.Services) {
-    window.Services.initializeServices();
-  }
-  
-  // Initialize contacts section
-  if (window.Contacts) {
-    window.Contacts.initializeContacts();
-  }
-  
-  console.log('Portfolio application initialized successfully!');
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Close mobile menu if open
+        const navMenu = document.getElementById('nav-menu');
+        if (navMenu) navMenu.classList.remove('active');
+      }
+    });
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', function(e) {
+    const navMenu = document.getElementById('nav-menu');
+    const hamburger = document.getElementById('hamburger-toggle');
+    if (navMenu && navMenu.classList.contains('active')) {
+      if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        navMenu.classList.remove('active');
+      }
+    }
+  });
 });

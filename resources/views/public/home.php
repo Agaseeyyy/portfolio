@@ -1,159 +1,166 @@
 <?php
 /**
- * Home/Hero Section Template
- * Main landing page with introduction, avatar, and call-to-action buttons
+ * Home Page - 8-bit RPG Portfolio
+ * Hero section + About Me character stats
  * 
  * @var array $home - Home section data
- * @var array $contact - Contact info data
- * @var string $firstName - First name (processed in controller)
- * @var string $lastName - Last name (processed in controller)
- * @var string $profilePhoto - Profile photo path with default fallback
+ * @var array $contact - Contact info data  
+ * @var string $profilePhoto - Profile photo path
+ * @var array $techstack - Tech stack data
  */
-
 use app\core\View;
-
-// Extend the public layout
 View::extend('public/layout');
+
+$fullName = strtoupper(($home['name'] ?? 'CODEWIZARD'));
+$roleName = strtoupper(($home['role'] ?? 'TECH DEVELOPER'));
+$bioText = $home['short_bio'] ?? 'I build modern, scalable, and user-friendly web applications with clean code and pixel-perfect precision.';
+$location = $contact['address'] ?? 'Earth (Remote)';
 ?>
 
 <?php View::section('title') ?>
-Portfolio - <?= htmlspecialchars($home['name'] ?? 'Agassi Bustarga') ?>
+<?= htmlspecialchars($fullName) ?> - LVL 5 Developer
 <?php View::endSection() ?>
 
 <?php View::section('content') ?>
-<header id="home" class="flex flex-col items-center justify-center min-h-screen gap-8 px-6 max-w-8xl lg:flex-row lg:gap-16 xl:gap-20">
-  
-  <!-- Text Content Section: Introduction and call-to-action buttons -->
-  <div class="relative w-full max-w-xl p-6 border shadow-md opacity-0 lg:w-auto lg:max-w-2xl xl:max-w-3xl rounded-xl bg-pink-500/10 border-pink-500/30 animate-slide-in-left">
-    <div class="relative z-10 space-y-5">
-      <h3 class="text-xl font-semibold text-pink-500">Hi, I'm <?= htmlspecialchars($home['name'] ?? 'Agassi Bustarga') ?></h3>
-      <h1 class="text-2xl font-bold text-white lg:text-3xl xl:text-4xl drop-shadow-lg">Full-stack Web
-        <span class="text-pink-500"><br><span class="typing-container" data-text="<?= htmlspecialchars($home['role'] ?? 'Student Developer') ?>"><span class="typing-text"><?= htmlspecialchars($home['role'] ?? 'Student Developer') ?></span></span></span>
-      </h1>
-      <p class="max-w-2xl text-base text-gray-100 drop-shadow-md"><?= htmlspecialchars($home['short_bio'] ?? '') ?></p>
-      
-      <!-- Action buttons: Primary CTA buttons for CV download and portfolio exploration -->
-      <div class="flex flex-row gap-4 mt-6 opacity-0 max-sm:justify-center lg:gap-6 animate-fade-in-up animation-delay-1000">
-        <a href="https://bit.ly/agassi-resume" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 border rounded-lg shadow-lg bg-gradient-to-r from-pink-500/90 to-rose-600/90 border-white/30 hover:from-pink-600 hover:to-rose-700 hover:scale-105 hover:shadow-xl">
-          <img src="icons/download.svg" alt="Download" class="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-1" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
-          Download CV
-        </a>
 
-        <a href="#portfolio" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 border rounded-lg shadow-lg border-pink-500/50 hover:from-pink-600/30 hover:to-rose-700/30 hover:scale-105 hover:shadow-xl bg-gradient-to-r from-pink-500/20 to-rose-600/20">
-          <img src="icons/arrow-right.svg" alt="Arrow Right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
-          Explore More
-        </a>
-      </div>
-
-      <!-- Social Media Icons: External profile links with hover animations -->
-      <div class="flex gap-6 pt-8 mt-8 border-t opacity-0 border-white/30 animate-scale-in animation-delay-1500">
-        <!-- Github -->
-        <?php if (!empty($contact['github_link'])): ?>
-        <a href="<?= htmlspecialchars($contact['github_link']) ?>" target="_blank" 
-           class="p-3 transition-all duration-200 border rounded-full border-white/30 bg-white/20 hover:bg-pink-500/20 hover:border-pink-500/50 hover:scale-110 hover:rotate-12">
-          <img src="icons/github.svg" alt="GitHub" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
-        </a>
-        <?php endif; ?>
-        
-        <!-- Linkedin -->
-        <?php if (!empty($contact['linkedin_link'])): ?>
-        <a href="<?= htmlspecialchars($contact['linkedin_link']) ?>" target="_blank" 
-           class="p-3 transition-all duration-200 border rounded-full border-white/30 bg-white/20 hover:bg-pink-500/20 hover:border-pink-500/50 hover:scale-110 hover:-rotate-12">
-          <img src="icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
-        </a>
-        <?php endif; ?>
-        
-        <!-- Instagram -->
-        <?php if (!empty($contact['instagram_link'])): ?>
-        <a href="<?= htmlspecialchars($contact['instagram_link']) ?>" target="_blank" 
-           class="p-3 transition-all duration-200 border rounded-full border-white/30 bg-white/20 hover:bg-pink-500/20 hover:border-pink-500/50 hover:scale-110 hover:rotate-12">
-          <img src="icons/instagram.svg" alt="Instagram" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
-        </a>
-        <?php endif; ?>
-        
-        <!-- Gmail -->
-        <?php if (!empty($contact['email'])): ?>
-        <a href="mailto:<?= htmlspecialchars($contact['email']) ?>" target="_blank" 
-           class="p-3 transition-all duration-200 border rounded-full border-white/30 bg-white/20 hover:bg-pink-500/20 hover:border-pink-500/50 hover:scale-110 hover:-rotate-12">
-          <img src="icons/gmail.svg" alt="Gmail" class="w-6 h-6 text-white lg:w-5 lg:h-5" style="filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
-        </a>
-        <?php endif; ?>
-      </div>
-    </div>
+<!-- ====== HERO SECTION ====== -->
+<header id="home" class="relative min-h-[680px] lg:min-h-[780px] flex flex-col justify-end items-center pt-28 pb-10 px-4 overflow-hidden mt-0">
+  <!-- Background Image (home-sky.png) - Fills top to bottom -->
+  <div class="absolute inset-0 z-0">
+    <img src="<?= base_url('images/home-sky.png') ?>" alt="Pixel Art Night City" class="w-full h-full object-cover object-top m-0 p-0">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0a0f24]"></div>
   </div>
 
-  <!-- Avatar Section: Large profile image with animated tech stack orbits -->
-  <div class="relative flex items-center justify-center opacity-0 animate-slide-in-right animation-delay-500">
-    <!-- Orbit Container: Animated tech stack icons rotating around avatar -->
-    <div class="absolute inset-0 flex items-center justify-center" style="width: 200%; height: 200%; left: -50%; top: -50%;">
-      <!-- Outer Orbit: First ring of technology icons -->
-      <div class="absolute w-[32rem] h-[32rem] lg:w-[40rem] lg:h-[40rem] xl:w-[48rem] xl:h-[48rem] border rounded-full border-pink-500/20 animate-spin" style="animation-duration: 20s;">
-        <?php 
-        // Display first 4 tech icons in outer orbit
-        $orbitPositions = [
-          '-top-3 left-1/2 -translate-x-1/2',
-          'top-1/2 -right-3 -translate-y-1/2',
-          '-bottom-3 left-1/2 -translate-x-1/2',
-          'top-1/2 -left-3 -translate-y-1/2'
-        ];
-        $outerTech = array_slice($techstack ?? [], 0, 4);
-        foreach ($outerTech as $i => $tech):
-          $pos = $orbitPositions[$i] ?? $orbitPositions[0];
-        ?>
-        <div class="absolute z-30 w-6 h-6 opacity-30 <?= $pos ?> lg:w-8 lg:h-8 xl:w-10 xl:h-10">
-          <?php if (!empty($tech['icon'])): ?>
-          <img src="<?= htmlspecialchars($tech['icon']) ?>" alt="<?= htmlspecialchars($tech['tech_name']) ?>" class="w-full h-full">
-          <?php endif; ?>
-        </div>
-        <?php endforeach; ?>
-      </div>
+  <!-- Hero Content Box (Golden Dialog) - Scaled up, floating & lowered down -->
+  <div class="golden-hero-box max-w-[780px] w-full mx-auto relative z-10 mb-4">
+    <h2 class="text-white text-xs lg:text-sm tracking-widest mb-4 font-normal">
+      WELCOME BACK!
+    </h2>
+    <h1 class="text-white text-base lg:text-lg leading-relaxed mb-5">
+      I AM <span class="text-[#f0c040] font-bold"><?= htmlspecialchars($fullName) ?></span>,<br>
+      A <?= htmlspecialchars($roleName) ?>.
+    </h1>
     
-      <!-- Inner Orbit: Second ring of technology icons (reverse rotation) -->
-      <div class="absolute border overscroll-none rounded-full w-[26rem] h-[26rem] lg:w-[32rem] lg:h-[32rem] xl:w-[38rem] xl:h-[38rem] border-rose-400/20 animate-spin" style="animation-duration: 15s; animation-direction: reverse;">
-        <?php 
-        // Display next 4 tech icons in inner orbit
-        $innerTech = array_slice($techstack ?? [], 4, 4);
-        foreach ($innerTech as $i => $tech):
-          $pos = $orbitPositions[$i] ?? $orbitPositions[0];
-        ?>
-        <div class="absolute z-30 w-6 h-6 opacity-40 <?= $pos ?> lg:w-8 lg:h-8 xl:w-10 xl:h-10">
-          <?php if (!empty($tech['icon'])): ?>
-          <img src="<?= htmlspecialchars($tech['icon']) ?>" alt="<?= htmlspecialchars($tech['tech_name']) ?>" class="w-full h-full">
-          <?php endif; ?>
-        </div>
-        <?php endforeach; ?>
-      </div>
+    <div class="flex items-center justify-center gap-4 my-5 text-[#c8a951]">
+      <span class="h-[2px] w-24 bg-[#c8a951]"></span>
+      <span class="text-sm">◆</span>
+      <span class="h-[2px] w-24 bg-[#c8a951]"></span>
     </div>
-    
-    <!-- Avatar Container: Main profile image with glow effects -->
-    <div class="relative z-10 flex items-center justify-center">
-      <!-- Glow Effect: Animated background glow for avatar -->
-      <div class="absolute inset-0 rounded-full w-[20rem] h-[20rem] lg:w-[24rem] lg:h-[24rem] xl:w-[28rem] xl:h-[28rem] bg-gradient-to-r from-pink-500/30 via-rose-500/30 to-pink-500/30 blur-xl animate-pulse"></div>
-      
-      <!-- Main Avatar Frame: Bordered container for profile image -->
-      <div class="relative flex items-center justify-center rounded-full shadow-2xl border-pink-500/20 border-2 w-[18rem] h-[18rem] lg:w-[22rem] lg:h-[22rem] xl:w-[26rem] xl:h-[26rem] bg-white/20">
-        <!-- Inner glow -->
-        <div class="absolute rounded-full inset-4 bg-gradient-to-r from-pink-500/20 via-transparent to-pink-500/20"></div>
-        
-        <!-- Avatar Image: Interactive profile photo with hover state -->
-        <div class="relative z-20 flex items-center justify-center w-[16rem] h-[16rem] lg:w-[20rem] lg:h-[20rem] xl:w-[24rem] xl:h-[24rem] overflow-hidden rounded-full cursor-pointer">
-          <img
-            src="<?= htmlspecialchars($profilePhoto) ?>"
-            onmouseover="this.src='<?= htmlspecialchars($hoverPhoto) ?>'"
-            onmouseout="this.src='<?= htmlspecialchars($profilePhoto) ?>'"
-            alt="avatar"
-            class="object-cover w-full h-full"
-          />
-        </div>
-      </div>
-    </div>
+
+    <p class="text-[#d0d0e0] text-[11px] lg:text-[13px] leading-loose max-w-[640px] mx-auto mb-9 font-normal">
+      <?= htmlspecialchars($bioText) ?>
+    </p>
+
+    <a href="#quest-log" class="golden-btn flex items-center justify-center gap-2">
+      <span>&gt; START QUEST</span>
+      <span class="rpg-cursor-blink">▶</span>
+    </a>
   </div>
 </header>
 
+<!-- ====== ABOUT ME / CHARACTER STATS ====== -->
+<section id="about" class="max-w-7xl mx-auto px-6 py-14">
+  <div class="rpg-header">
+    <img src="<?= base_url('icons/sword.png') ?>" alt="Sword Icon" class="w-6 h-6 object-contain image-pixelated inline-block">
+    <span class="rpg-title-glow">ABOUT ME</span>
+    <span class="sub-text">(CHARACTER STATS)</span>
+  </div>
+  
+  <div class="nes-container is-dark with-title" style="padding: 2.25rem;">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
+      
+      <!-- Character Avatar Sprite - Large Borderless me.gif (240px x 240px) with Ground Shadow -->
+      <div class="flex flex-col items-center justify-center md:border-r-2 border-[#2b334e] md:pr-8">
+        <div class="relative w-52 h-52 lg:w-60 lg:h-60 flex items-center justify-center">
+          <!-- Pixel Ground Shadow Ellipse under character -->
+          <div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-4/5 h-6 bg-black/80 rounded-[50%] blur-sm pointer-events-none"></div>
+          <!-- Animated me.gif sprite with drop shadow -->
+          <img src="<?= base_url('images/me.gif') ?>" alt="Animated Character Sprite" class="relative z-10 w-full h-full object-contain filter drop-shadow-[0_16px_12px_rgba(0,0,0,0.95)] image-pixelated">
+        </div>
+      </div>
+
+      <!-- Stat Col 1: Extra Large Borderless Inline Icons with Hover Bounce -->
+      <div class="flex flex-col gap-6">
+        <!-- Class Stat -->
+        <div class="stat-row-item flex items-center gap-4">
+          <span class="text-3xl lg:text-4xl shrink-0">🛡️</span>
+          <div class="flex flex-col justify-center">
+            <span class="text-[#f0c040] text-xs font-bold tracking-wider">CLASS</span>
+            <span class="text-white text-xs lg:text-sm leading-snug mt-0.5"><?= htmlspecialchars($home['role'] ?? 'Full Stack Developer') ?></span>
+          </div>
+        </div>
+
+        <!-- Location Stat -->
+        <div class="stat-row-item flex items-center gap-4">
+          <img src="<?= base_url('icons/location.png') ?>" alt="Location" class="w-12 h-12 lg:w-14 lg:h-14 shrink-0 object-contain image-pixelated">
+          <div class="flex flex-col justify-center">
+            <span class="text-[#f0c040] text-xs font-bold tracking-wider">LOCATION</span>
+            <span class="text-white text-xs lg:text-sm leading-snug mt-0.5"><?= htmlspecialchars($location) ?></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat Col 2: Extra Large Borderless Inline Icons with Hover Bounce -->
+      <div class="flex flex-col gap-6">
+        <!-- Level Stat -->
+        <div class="stat-row-item flex items-center gap-4">
+          <img src="<?= base_url('icons/star.png') ?>" alt="Level Star" class="w-12 h-12 lg:w-14 lg:h-14 shrink-0 object-contain image-pixelated">
+          <div class="flex flex-col justify-center">
+            <span class="text-[#f0c040] text-xs font-bold tracking-wider">LEVEL</span>
+            <span class="text-white text-xs lg:text-sm leading-snug mt-0.5">5 Years Experience</span>
+          </div>
+        </div>
+
+        <!-- Weapon Stat -->
+        <div class="stat-row-item flex items-center gap-4">
+          <img src="<?= base_url('icons/sword.png') ?>" alt="Weapon Sword" class="w-12 h-12 lg:w-14 lg:h-14 shrink-0 object-contain image-pixelated">
+          <div class="flex flex-col justify-center">
+            <span class="text-[#f0c040] text-xs font-bold tracking-wider">WEAPON</span>
+            <span class="text-white text-xs lg:text-sm leading-snug mt-0.5">Code &amp; Creativity</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat Col 3: Animated Sequential HP & EXP Bars with Pulsing Heart -->
+      <div class="flex flex-col gap-7 md:border-l-2 border-[#2b334e] md:pl-8 justify-center">
+        <!-- HP Bar -->
+        <div class="flex flex-col gap-2.5">
+          <div class="flex justify-between items-center text-xs lg:text-[13px]">
+            <span class="text-[#e74c3c] font-bold flex items-center gap-2">
+              <img src="<?= base_url('icons/heart.png') ?>" alt="Heart Icon" class="w-6 h-6 object-contain image-pixelated heart-pulse"> HP
+            </span>
+            <span class="text-white font-bold">100%</span>
+          </div>
+          <div class="block-bar">
+            <?php for ($i = 0; $i < 10; $i++): ?>
+              <div class="block-unit filled-hp animate-fill"></div>
+            <?php endfor; ?>
+          </div>
+        </div>
+
+        <!-- EXP Bar -->
+        <div class="flex flex-col gap-2.5">
+          <div class="flex justify-between items-center text-xs lg:text-[13px]">
+            <span class="text-[#2ecc71] font-bold flex items-center gap-2">
+              <img src="<?= base_url('icons/star.png') ?>" alt="Exp Star" class="w-6 h-6 object-contain image-pixelated"> EXP
+            </span>
+            <span class="text-white font-bold">85%</span>
+          </div>
+          <div class="block-bar">
+            <?php for ($i = 0; $i < 10; $i++): ?>
+              <div class="block-unit <?= $i < 8 ? 'filled-exp animate-fill' : '' ?>"></div>
+            <?php endfor; ?>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <?php 
-// Include other page sections
+// Include remaining sections (Quest Log & Inventory)
 include __DIR__ . '/portfolio.php'; 
 include __DIR__ . '/services.php'; 
-include __DIR__ . '/contacts.php'; 
 ?>
 <?php View::endSection() ?>
