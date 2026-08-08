@@ -92,7 +92,7 @@ $version = time();
   <div id="dungeon-loading-overlay">
     <div class="dungeon-card flex flex-col items-center justify-center gap-4">
       <div class="w-16 h-16 flex-shrink-0 mb-1 animate-bounce">
-        <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Loading Dungeon" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.7))">
+        <img src="<?= base_url('images/favicon.ico') ?>" alt="Favicon" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.7))">
       </div>
 
       <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0">
@@ -115,7 +115,7 @@ $version = time();
   <div id="dungeon-entrance-modal" style="display:none;">
     <div class="dungeon-card flex flex-col items-center justify-center gap-6">
       <div class="w-16 h-16 flex-shrink-0 mb-1">
-        <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Dungeon Gate" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.6))">
+        <img src="<?= base_url('images/favicon.ico') ?>" alt="Favicon" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.6))">
       </div>
 
       <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0 flex items-center justify-center gap-2">
