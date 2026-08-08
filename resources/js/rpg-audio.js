@@ -1,6 +1,7 @@
 /**
  * 8-Bit Web Audio Synthesizer & RPG FX System with Custom Speaker PNG Toggle
  * Pure browser Web Audio API - Zero external audio assets required.
+ * Fully compatible with Brave Shields, Firefox, Chrome, and Safari.
  */
 
 class RPGAudioSystem {
@@ -11,8 +12,12 @@ class RPGAudioSystem {
   }
 
   init() {
-    const savedMute = localStorage.getItem('rpg_audio_muted');
-    this.muted = savedMute === 'true';
+    try {
+      const savedMute = localStorage.getItem('rpg_audio_muted');
+      this.muted = savedMute === 'true';
+    } catch (e) {
+      this.muted = false;
+    }
   }
 
   getAudioContext() {
@@ -30,7 +35,9 @@ class RPGAudioSystem {
 
   toggleMute() {
     this.muted = !this.muted;
-    localStorage.setItem('rpg_audio_muted', this.muted);
+    try {
+      localStorage.setItem('rpg_audio_muted', this.muted);
+    } catch (e) {}
     return this.muted;
   }
 
@@ -98,9 +105,6 @@ window.rpgAudio = new RPGAudioSystem();
 function initializeRPGFX() {
   const audio = window.rpgAudio;
 
-  // Run 8-Bit Loading Progress Sequence
-  runDungeonLoadingAnimation();
-
   // Sync speaker icon mute state on load
   const img = document.getElementById('speaker-icon-img');
   if (img && audio.muted) {
@@ -148,80 +152,6 @@ function initializeRPGFX() {
       showRPGToast(`[ 📜 QUEST ACCEPTED: ${title} ]`);
     });
   });
-}
-
-// Run 8-Bit Dungeon Loading Progress Bar Animation with Safety Fallback
-function runDungeonLoadingAnimation() {
-  const loadingOverlay = document.getElementById('dungeon-loading-overlay');
-  const entranceModal = document.getElementById('dungeon-entrance-modal');
-  const fillBar = document.getElementById('dungeon-loading-bar-fill');
-  const subtext = document.getElementById('dungeon-loading-subtext');
-
-  if (!loadingOverlay) return;
-
-  const entered = sessionStorage.getItem('dungeon_entered');
-  if (entered === 'true') {
-    loadingOverlay.style.display = 'none';
-    if (entranceModal) entranceModal.style.display = 'none';
-    return;
-  }
-
-  // Safety fallback: Force hide loading overlay after max 1.4s no matter what
-  const safetyTimeout = setTimeout(() => {
-    if (loadingOverlay && loadingOverlay.style.display !== 'none') {
-      loadingOverlay.classList.add('fade-out');
-      setTimeout(() => {
-        loadingOverlay.style.display = 'none';
-        if (entranceModal) entranceModal.style.display = 'flex';
-      }, 300);
-    }
-  }, 1400);
-
-  const steps = [
-    { pct: 30, text: 'INITIALIZING 8-BIT SYNTHESIZERS...' },
-    { pct: 65, text: 'EQUIPPING WEAPONS & MAGIC...' },
-    { pct: 90, text: 'SUMMONING PIXEL SKYLINE...' },
-    { pct: 100, text: 'DUNGEON READY!' }
-  ];
-
-  let currentStep = 0;
-  const interval = setInterval(() => {
-    if (currentStep < steps.length) {
-      const step = steps[currentStep];
-      if (fillBar) fillBar.style.width = `${step.pct}%`;
-      if (subtext) subtext.textContent = step.text;
-      if (window.rpgAudio) window.rpgAudio.playHoverBlip();
-      currentStep++;
-    } else {
-      clearInterval(interval);
-      clearTimeout(safetyTimeout);
-      setTimeout(() => {
-        loadingOverlay.classList.add('fade-out');
-        setTimeout(() => {
-          loadingOverlay.style.display = 'none';
-          if (entranceModal) {
-            entranceModal.style.display = 'flex';
-          }
-        }, 400);
-      }, 200);
-    }
-  }, 220);
-}
-
-// Enter Dungeon Trigger Function
-function enterDungeon() {
-  const overlay = document.getElementById('dungeon-entrance-modal');
-  if (overlay) {
-    if (window.rpgAudio) {
-      window.rpgAudio.playQuestFanfare();
-    }
-    spawnRPGFloatingText(window.innerWidth / 2, window.innerHeight / 2, '+100 EXP! DUNGEON ENTERED!');
-    overlay.classList.add('fade-out');
-    sessionStorage.setItem('dungeon_entered', 'true');
-    setTimeout(() => {
-      overlay.style.display = 'none';
-    }, 600);
-  }
 }
 
 // Spawn floating RPG text popup (+100 EXP!)
