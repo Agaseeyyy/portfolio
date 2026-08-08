@@ -377,30 +377,33 @@ button {
   background-color: #e74c3c !important;
   border-color: #c0392b !important;
   box-shadow: inset -2px -2px 0px #962d22;
+  opacity: 1 !important;
 }
 
 .block-unit.filled-exp {
   background-color: #2ecc71 !important;
   border-color: #27ae60 !important;
   box-shadow: inset -2px -2px 0px #1e8449;
+  opacity: 1 !important;
 }
 
 .block-unit.filled-skill {
   background-color: #f0c040 !important;
   border-color: #d4ac0d !important;
   box-shadow: inset -2px -2px 0px #b8860b;
+  opacity: 1 !important;
 }
 
 /* Sequential Fill Animation Class for JS */
 .block-unit.animate-fill {
-  opacity: 0.15;
-  transform: scale(0.7);
+  opacity: 0.25;
+  transform: scale(0.8);
   transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
 .block-unit.animate-fill.filled {
-  opacity: 1;
-  transform: scale(1);
+  opacity: 1 !important;
+  transform: scale(1) !important;
 }
 
 /* Quest Log Project Card with RPG Double Border Frame */
