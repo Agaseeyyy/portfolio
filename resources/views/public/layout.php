@@ -1,7 +1,7 @@
 <?php
 /**
  * Main Layout Template - 8-Bit NES RPG Style
- * Fast & Clean 8-Bit Dungeon Loading Bar on Every Page Load
+ * Unified 8-Bit Dungeon Loading Bar & Enter Dungeon Gate Screen
  */
 use app\core\View;
 
@@ -89,33 +89,62 @@ $version = time();
 </head>
 <body class="bg-[#0a0f24] text-white font-['Press_Start_2P'] antialiased selection:bg-[#f0c040] selection:text-black" hx-boost="true" hx-select="#main-content" hx-target="#main-content" hx-swap="innerHTML transition:true">
   
-  <!-- 8-Bit Retro Dungeon Loading Progress Overlay with home-sky.png Background -->
+  <!-- 8-Bit Retro Dungeon Entrance & Loading Screen -->
   <div id="dungeon-loading-overlay" style="background: radial-gradient(circle at center, rgba(10, 15, 36, 0.45) 0%, rgba(6, 9, 24, 0.88) 100%), url('<?= $homeSkyBg ?>') center top / cover no-repeat !important;">
-    <div class="dungeon-card flex flex-col items-center justify-center gap-4">
+    <div class="dungeon-card flex flex-col items-center justify-center gap-5">
+      
+      <!-- Favicon Icon -->
       <div class="w-16 h-16 flex-shrink-0 mb-1 animate-bounce">
         <img src="<?= base_url('images/favicon.ico') ?>" alt="Favicon" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.7))">
       </div>
 
-      <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0">
-        LOADING DUNGEON ASSETS...
-      </h2>
-
-      <!-- 8-Bit Filling Progress Bar -->
-      <div class="dungeon-loading-bar-wrapper">
-        <div id="dungeon-loading-bar-fill" class="dungeon-loading-bar-fill" style="width: 0%;"></div>
+      <!-- Phase 1: Filling Loading Progress Bar -->
+      <div id="loading-phase" class="w-full flex flex-col items-center gap-3">
+        <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0">
+          LOADING DUNGEON ASSETS...
+        </h2>
+        <div class="dungeon-loading-bar-wrapper">
+          <div id="dungeon-loading-bar-fill" class="dungeon-loading-bar-fill" style="width: 0%;"></div>
+        </div>
+        <p id="dungeon-loading-subtext" class="text-[#8a8aa8] text-[10px] uppercase tracking-wider font-normal m-0 min-h-[18px]">
+          INITIALIZING 8-BIT SYNTHESIZERS...
+        </p>
       </div>
 
-      <!-- Animated Progress Subtext -->
-      <p id="dungeon-loading-subtext" class="text-[#8a8aa8] text-[10px] uppercase tracking-wider font-normal m-0 min-h-[18px]">
-        INITIALIZING 8-BIT SYNTHESIZERS...
-      </p>
+      <!-- Phase 2: Enter Dungeon Gate (Revealed when loading hits 100%) -->
+      <div id="entrance-phase" class="w-full flex flex-col items-center gap-4" style="display: none;">
+        <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0 flex items-center justify-center gap-2">
+          <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-6 h-6 object-contain image-rendering-pixelated inline-block align-middle">
+          <span>WELCOME, ADVENTURER!</span>
+          <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-6 h-6 object-contain image-rendering-pixelated inline-block align-middle">
+        </h2>
+
+        <div class="flex items-center justify-center gap-3 text-[#c8a951] w-full my-1">
+          <span class="h-[2px] w-16 bg-[#8b7355]"></span>
+          <span class="text-xs">◆</span>
+          <span class="h-[2px] w-16 bg-[#8b7355]"></span>
+        </div>
+
+        <p class="text-[#d0d0e0] text-xs lg:text-[13px] leading-relaxed font-normal max-w-[480px] m-0">
+          YOU ARE ENTERING THE DEVELOPER DUNGEON OF <span class="text-[#f0c040] font-bold"><?= htmlspecialchars(strtoupper($home['name'] ?? 'AGASSI BUSTARGA')) ?></span>.
+        </p>
+
+        <button onclick="enterDungeon()" class="golden-btn text-xs lg:text-sm py-4 px-8 mt-2 flex items-center justify-center gap-3 cursor-pointer">
+          <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-5 h-5 object-contain image-rendering-pixelated inline-block">
+          <span>ENTER DUNGEON</span>
+          <span class="rpg-cursor-blink">▶</span>
+        </button>
+      </div>
+
     </div>
   </div>
 
-  <!-- Fast & Clean Inline Loading Script (Plays on Every Page Load) -->
+  <!-- Unified Fast Inline Loading & Enter Script -->
   <script>
     (function() {
       var loadingOverlay = document.getElementById('dungeon-loading-overlay');
+      var loadingPhase = document.getElementById('loading-phase');
+      var entrancePhase = document.getElementById('entrance-phase');
       var fillBar = document.getElementById('dungeon-loading-bar-fill');
       var subtext = document.getElementById('dungeon-loading-subtext');
 
@@ -135,22 +164,38 @@ $version = time();
           stepIdx++;
         } else {
           clearInterval(interval);
-          dismiss();
+          revealEntrance();
         }
-      }, 100);
+      }, 120);
 
-      function dismiss() {
-        if (!loadingOverlay || loadingOverlay.style.display === 'none') return;
-        loadingOverlay.style.opacity = '0';
-        loadingOverlay.style.pointerEvents = 'none';
-        setTimeout(function() {
-          loadingOverlay.style.display = 'none';
-        }, 220);
+      function revealEntrance() {
+        if (loadingPhase) loadingPhase.style.display = 'none';
+        if (entrancePhase) entrancePhase.style.display = 'flex';
       }
 
-      // Hard safety timer: Force dismiss after max 450ms
-      setTimeout(dismiss, 450);
+      // Safety fallback: Ensure entrance button reveals after 500ms max
+      setTimeout(revealEntrance, 500);
     })();
+
+    function enterDungeon() {
+      var overlay = document.getElementById('dungeon-loading-overlay');
+      if (overlay) {
+        try {
+          if (window.rpgAudio) window.rpgAudio.playQuestFanfare();
+        } catch (e) {}
+        try {
+          if (typeof spawnRPGFloatingText === 'function') {
+            spawnRPGFloatingText(window.innerWidth / 2, window.innerHeight / 2, '+100 EXP! DUNGEON ENTERED!');
+          }
+        } catch (e) {}
+        
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+        setTimeout(function() {
+          overlay.style.display = 'none';
+        }, 350);
+      }
+    }
   </script>
 
   <!-- Retro CRT Monitor Arcade Scanline Overlay -->
