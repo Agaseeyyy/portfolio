@@ -19,6 +19,47 @@
   }
 }
 
+/* 8-Bit Retro Dungeon Loading Screen */
+#dungeon-loading-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: #060918 !important;
+  z-index: 100000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 1.5rem !important;
+  transition: opacity 0.5s steps(5), transform 0.5s steps(5) !important;
+}
+
+#dungeon-loading-overlay.fade-out {
+  opacity: 0 !important;
+  transform: scale(1.05) !important;
+  pointer-events: none !important;
+}
+
+.dungeon-loading-bar-wrapper {
+  width: 100% !important;
+  max-width: 440px !important;
+  height: 26px !important;
+  background-color: #11162a !important;
+  border: 3px solid #8b7355 !important;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.8) !important;
+  padding: 3px !important;
+  margin: 1rem 0;
+}
+
+.dungeon-loading-bar-fill {
+  height: 100% !important;
+  width: 0% !important;
+  background-color: #f0c040 !important;
+  box-shadow: inset -2px -2px 0px #b8860b !important;
+  transition: width 0.08s linear !important;
+}
+
 /* 8-Bit Dungeon Entrance Screen Overlay */
 #dungeon-entrance-modal {
   position: fixed !important;

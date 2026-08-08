@@ -1,7 +1,7 @@
 <?php
 /**
  * Main Layout Template - 8-Bit NES RPG Style
- * Enhanced with 8-Bit "ENTER DUNGEON" Entrance Overlay, SEO Meta Tags, Open Graph, and JSON-LD Schema
+ * Enhanced with 8-Bit Loading Progress Animation, Dungeon Gate Screen, SEO Meta Tags, and JSON-LD Schema
  */
 use app\core\View;
 
@@ -88,8 +88,31 @@ $version = time();
 </head>
 <body class="bg-[#0a0f24] text-white font-['Press_Start_2P'] antialiased selection:bg-[#f0c040] selection:text-black" hx-boost="true" hx-select="#main-content" hx-target="#main-content" hx-swap="innerHTML transition:true">
   
+  <!-- 8-Bit Retro Dungeon Loading Progress Overlay -->
+  <div id="dungeon-loading-overlay">
+    <div class="dungeon-card flex flex-col items-center justify-center gap-4">
+      <div class="w-16 h-16 flex-shrink-0 mb-1 animate-bounce">
+        <img src="<?= base_url('icons/quest.png') ?>" alt="Loading Dungeon" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.7))">
+      </div>
+
+      <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0">
+        LOADING DUNGEON ASSETS...
+      </h2>
+
+      <!-- 8-Bit Filling Progress Bar -->
+      <div class="dungeon-loading-bar-wrapper">
+        <div id="dungeon-loading-bar-fill" class="dungeon-loading-bar-fill"></div>
+      </div>
+
+      <!-- Animated Progress Subtext -->
+      <p id="dungeon-loading-subtext" class="text-[#8a8aa8] text-[10px] uppercase tracking-wider font-normal m-0 min-h-[18px]">
+        INITIALIZING 8-BIT SYNTHESIZERS...
+      </p>
+    </div>
+  </div>
+
   <!-- 8-Bit Dungeon Entrance Screen Modal Overlay -->
-  <div id="dungeon-entrance-modal">
+  <div id="dungeon-entrance-modal" style="display:none;">
     <div class="dungeon-card flex flex-col items-center justify-center gap-6">
       <div class="w-16 h-16 flex-shrink-0 mb-1">
         <img src="<?= base_url('icons/quest.png') ?>" alt="Dungeon Gate" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.6))">

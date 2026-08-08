@@ -98,12 +98,8 @@ window.rpgAudio = new RPGAudioSystem();
 function initializeRPGFX() {
   const audio = window.rpgAudio;
 
-  // Dungeon Entrance Screen State Check
-  const entered = sessionStorage.getItem('dungeon_entered');
-  const overlay = document.getElementById('dungeon-entrance-modal');
-  if (entered === 'true' && overlay) {
-    overlay.style.display = 'none';
-  }
+  // Run 8-Bit Loading Progress Sequence
+  runDungeonLoadingAnimation();
 
   // Sync speaker icon mute state on load
   const img = document.getElementById('speaker-icon-img');
@@ -152,6 +148,52 @@ function initializeRPGFX() {
       showRPGToast(`[ 📜 QUEST ACCEPTED: ${title} ]`);
     });
   });
+}
+
+// Run 8-Bit Dungeon Loading Progress Bar Animation
+function runDungeonLoadingAnimation() {
+  const loadingOverlay = document.getElementById('dungeon-loading-overlay');
+  const entranceModal = document.getElementById('dungeon-entrance-modal');
+  const fillBar = document.getElementById('dungeon-loading-bar-fill');
+  const subtext = document.getElementById('dungeon-loading-subtext');
+
+  if (!loadingOverlay) return;
+
+  const entered = sessionStorage.getItem('dungeon_entered');
+  if (entered === 'true') {
+    loadingOverlay.style.display = 'none';
+    if (entranceModal) entranceModal.style.display = 'none';
+    return;
+  }
+
+  const steps = [
+    { pct: 25, text: 'INITIALIZING 8-BIT SYNTHESIZERS...' },
+    { pct: 50, text: 'EQUIPPING WEAPONS & MAGIC...' },
+    { pct: 80, text: 'SUMMONING PIXEL SKYLINE...' },
+    { pct: 100, text: 'DUNGEON READY!' }
+  ];
+
+  let currentStep = 0;
+  const interval = setInterval(() => {
+    if (currentStep < steps.length) {
+      const step = steps[currentStep];
+      if (fillBar) fillBar.style.width = `${step.pct}%`;
+      if (subtext) subtext.textContent = step.text;
+      if (window.rpgAudio) window.rpgAudio.playHoverBlip();
+      currentStep++;
+    } else {
+      clearInterval(interval);
+      setTimeout(() => {
+        loadingOverlay.classList.add('fade-out');
+        setTimeout(() => {
+          loadingOverlay.style.display = 'none';
+          if (entranceModal) {
+            entranceModal.style.display = 'flex';
+          }
+        }, 450);
+      }, 250);
+    }
+  }, 300);
 }
 
 // Enter Dungeon Trigger Function
