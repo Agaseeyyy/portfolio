@@ -59,7 +59,7 @@ $activeProjects = !empty($validDBProjects) ? array_values(array_slice($validDBPr
     <?php foreach ($activeProjects as $index => $project): 
       $pName = strtoupper($project['project_name'] ?? 'QUEST');
       $pDesc = $project['description'] ?? $defaultProjects[$index % 4]['description'];
-      $pImg = !empty($project['image']) ? base_url($project['image']) : base_url('images/home.png');
+      $pImg = !empty($project['image']) ? base_url($project['image']) : base_url('images/home-sky.png');
       $pTech = !empty($project['technologies']) ? $project['technologies'] : $defaultProjects[$index % 4]['technologies'];
     ?>
       <a href="<?= base_url('project/' . ($project['project_id'] ?? 1)) ?>" class="quest-card-item no-underline group">
