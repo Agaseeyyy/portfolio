@@ -1,7 +1,7 @@
 <?php
 /**
  * Main Layout Template - 8-Bit NES RPG Style
- * Enhanced with 8-Bit Loading Progress Animation, Dungeon Gate Screen, SEO Meta Tags, and JSON-LD Schema
+ * Enhanced with Pixel Home Sky Background, Instant Inline 8-Bit Loading Progress, Dungeon Gate Screen, SEO Meta Tags, and JSON-LD Schema
  */
 use app\core\View;
 
@@ -15,6 +15,7 @@ $metaDesc = htmlspecialchars(substr(strip_tags($rawBio), 0, 160));
 
 $currentUrl = base_url(ltrim($_SERVER['REQUEST_URI'] ?? '', '/'));
 $ogImage = !empty($project['image']) ? base_url($project['image']) : base_url('images/me.png');
+$homeSkyBg = base_url('images/home-sky.png');
 $version = time();
 ?>
 <!DOCTYPE html>
@@ -88,8 +89,8 @@ $version = time();
 </head>
 <body class="bg-[#0a0f24] text-white font-['Press_Start_2P'] antialiased selection:bg-[#f0c040] selection:text-black" hx-boost="true" hx-select="#main-content" hx-target="#main-content" hx-swap="innerHTML transition:true">
   
-  <!-- 8-Bit Retro Dungeon Loading Progress Overlay -->
-  <div id="dungeon-loading-overlay">
+  <!-- 8-Bit Retro Dungeon Loading Progress Overlay with home-sky.png Background -->
+  <div id="dungeon-loading-overlay" style="background: radial-gradient(circle at center, rgba(10, 15, 36, 0.45) 0%, rgba(6, 9, 24, 0.88) 100%), url('<?= $homeSkyBg ?>') center top / cover no-repeat !important;">
     <div class="dungeon-card flex flex-col items-center justify-center gap-4">
       <div class="w-16 h-16 flex-shrink-0 mb-1 animate-bounce">
         <img src="<?= base_url('images/favicon.ico') ?>" alt="Favicon" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.7))">
@@ -101,7 +102,7 @@ $version = time();
 
       <!-- 8-Bit Filling Progress Bar -->
       <div class="dungeon-loading-bar-wrapper">
-        <div id="dungeon-loading-bar-fill" class="dungeon-loading-bar-fill"></div>
+        <div id="dungeon-loading-bar-fill" class="dungeon-loading-bar-fill" style="width: 0%;"></div>
       </div>
 
       <!-- Animated Progress Subtext -->
@@ -111,8 +112,8 @@ $version = time();
     </div>
   </div>
 
-  <!-- 8-Bit Dungeon Entrance Screen Modal Overlay -->
-  <div id="dungeon-entrance-modal" style="display:none;">
+  <!-- 8-Bit Dungeon Entrance Screen Modal Overlay with home-sky.png Background -->
+  <div id="dungeon-entrance-modal" style="display:none; background: radial-gradient(circle at center, rgba(10, 15, 36, 0.45) 0%, rgba(6, 9, 24, 0.88) 100%), url('<?= $homeSkyBg ?>') center top / cover no-repeat !important;">
     <div class="dungeon-card flex flex-col items-center justify-center gap-6">
       <div class="w-16 h-16 flex-shrink-0 mb-1">
         <img src="<?= base_url('images/favicon.ico') ?>" alt="Favicon" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.6))">
@@ -142,15 +143,91 @@ $version = time();
     </div>
   </div>
 
+  <!-- Instant Inline Execution Script with Brave Shields try/catch compatibility -->
   <script>
     (function() {
-      if (sessionStorage.getItem('dungeon_entered') === 'true') {
-        var l = document.getElementById('dungeon-loading-overlay');
-        var e = document.getElementById('dungeon-entrance-modal');
-        if (l) l.style.display = 'none';
-        if (e) e.style.display = 'none';
+      var loadingOverlay = document.getElementById('dungeon-loading-overlay');
+      var entranceModal = document.getElementById('dungeon-entrance-modal');
+      var fillBar = document.getElementById('dungeon-loading-bar-fill');
+      var subtext = document.getElementById('dungeon-loading-subtext');
+
+      if (!loadingOverlay) return;
+
+      var isEntered = false;
+      try {
+        isEntered = (sessionStorage.getItem('dungeon_entered') === 'true');
+      } catch (e) {
+        isEntered = false;
       }
+
+      if (isEntered) {
+        loadingOverlay.style.display = 'none';
+        if (entranceModal) entranceModal.style.display = 'none';
+        return;
+      }
+
+      var steps = [
+        { pct: 30, text: 'INITIALIZING 8-BIT SYNTHESIZERS...' },
+        { pct: 65, text: 'EQUIPPING WEAPONS & MAGIC...' },
+        { pct: 90, text: 'SUMMONING PIXEL SKYLINE...' },
+        { pct: 100, text: 'DUNGEON READY!' }
+      ];
+
+      var stepIdx = 0;
+      var interval = setInterval(function() {
+        try {
+          if (stepIdx < steps.length) {
+            if (fillBar) fillBar.style.width = steps[stepIdx].pct + '%';
+            if (subtext) subtext.textContent = steps[stepIdx].text;
+            stepIdx++;
+          } else {
+            clearInterval(interval);
+            dismissLoadingOverlay();
+          }
+        } catch (err) {
+          clearInterval(interval);
+          dismissLoadingOverlay();
+        }
+      }, 150);
+
+      function dismissLoadingOverlay() {
+        if (!loadingOverlay || loadingOverlay.style.display === 'none') return;
+        loadingOverlay.style.opacity = '0';
+        loadingOverlay.style.pointerEvents = 'none';
+        setTimeout(function() {
+          loadingOverlay.style.display = 'none';
+          if (entranceModal) entranceModal.style.display = 'flex';
+        }, 300);
+      }
+
+      // Hard safety timer for Brave & all privacy browsers: Force dismiss after max 1.0s
+      setTimeout(dismissLoadingOverlay, 1000);
     })();
+
+    function enterDungeon() {
+      var overlay = document.getElementById('dungeon-entrance-modal');
+      if (overlay) {
+        try {
+          if (window.rpgAudio) window.rpgAudio.playQuestFanfare();
+        } catch (e) {}
+        try {
+          if (typeof spawnRPGFloatingText === 'function') {
+            spawnRPGFloatingText(window.innerWidth / 2, window.innerHeight / 2, '+100 EXP! DUNGEON ENTERED!');
+          }
+        } catch (e) {}
+        
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+        
+        try {
+          sessionStorage.setItem('dungeon_entered', 'true');
+        } catch (e) {}
+        
+        setTimeout(function() {
+          overlay.style.display = 'none';
+        }, 400);
+      }
+    }
   </script>
 
   <!-- Retro CRT Monitor Arcade Scanline Overlay -->
