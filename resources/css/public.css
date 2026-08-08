@@ -51,22 +51,76 @@ input,
 textarea,
 select,
 button {
-  background-color: #11162a !important;
-  color: #ffffff !important;
   font-family: 'Press Start 2P', monospace !important;
 }
 
-/* Standard Clean NES.css Dark Container Styling */
+/* Authentic 8-Bit Retro RPG Double Border Frame Matching Mockup Exactly */
+.rpg-pixel-frame {
+  position: relative !important;
+  background-color: rgba(11, 16, 32, 0.95) !important;
+  border: 2px solid #8b7355 !important;
+  outline: 2px solid #3c3022 !important;
+  outline-offset: -6px !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7) !important;
+  clip-path: polygon(
+    0 6px, 6px 6px, 6px 0,
+    calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px,
+    100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px), calc(100% - 6px) 100%,
+    6px 100%, 6px calc(100% - 6px), 0 calc(100% - 6px)
+  ) !important;
+}
+
+.rpg-pixel-frame::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 2px !important;
+  left: 2px !important;
+  right: 2px !important;
+  bottom: 2px !important;
+  border: 1px solid #c8a951 !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+/* Apply RPG Double Border Frame to NES Containers */
 .nes-container.is-dark {
-  background-color: #11162a !important;
+  position: relative !important;
+  background-color: rgba(11, 16, 32, 0.95) !important;
   color: #ffffff !important;
-  border-color: #8b7355 !important;
+  border: 2px solid #8b7355 !important;
+  outline: 2px solid #3c3022 !important;
+  outline-offset: -6px !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7) !important;
+  clip-path: polygon(
+    0 6px, 6px 6px, 6px 0,
+    calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px,
+    100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px), calc(100% - 6px) 100%,
+    6px 100%, 6px calc(100% - 6px), 0 calc(100% - 6px)
+  ) !important;
+}
+
+.nes-container.is-dark::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 2px !important;
+  left: 2px !important;
+  right: 2px !important;
+  bottom: 2px !important;
+  border: 1px solid #c8a951 !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+.nes-container.is-dark::after {
+  display: none !important;
 }
 
 .nes-container.is-dark.with-title > .title {
   background-color: #0a0f24 !important;
   color: #f0c040 !important;
   font-size: 13px !important;
+  border: 2px solid #8b7355 !important;
+  padding: 4px 10px !important;
 }
 
 /* Low FPS 8-Bit Floating Welcome Dialog Box */
@@ -77,12 +131,21 @@ button {
 }
 
 .golden-hero-box {
-  background: rgba(16, 22, 42, 0.95) !important;
-  border: 4px solid #c8a951;
+  position: relative !important;
+  background: rgba(11, 16, 32, 0.96) !important;
+  border: 2px solid #8b7355 !important;
+  outline: 2px solid #3c3022 !important;
+  outline-offset: -6px !important;
   box-shadow: 
     inset -5px -5px 0px #6d541a,
     inset 5px 5px 0px #ffe4a0,
-    0 16px 40px rgba(0,0,0,0.9);
+    0 16px 40px rgba(0,0,0,0.9) !important;
+  clip-path: polygon(
+    0 6px, 6px 6px, 6px 0,
+    calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px,
+    100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px), calc(100% - 6px) 100%,
+    6px 100%, 6px calc(100% - 6px), 0 calc(100% - 6px)
+  ) !important;
   padding: 3rem 2.5rem;
   max-width: 780px;
   margin-left: auto !important;
@@ -90,12 +153,23 @@ button {
   margin-top: 220px !important;
   margin-bottom: 2.5rem !important;
   text-align: center;
-  position: relative;
   z-index: 10;
   animation: retro-float 3.6s steps(6) infinite !important;
 }
 
-/* Golden Hero CTA Button */
+.golden-hero-box::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 2px !important;
+  left: 2px !important;
+  right: 2px !important;
+  bottom: 2px !important;
+  border: 1px solid #c8a951 !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+/* Golden Hero CTA Button with Double Border */
 @keyframes golden-btn-pulse {
   0% { box-shadow: inset -4px -4px 0px #b8860b, inset 4px 4px 0px #fff4b8, 4px 4px 0px rgba(0,0,0,0.85); }
   50% { box-shadow: inset -4px -4px 0px #b8860b, inset 4px 4px 0px #fff4b8, 0 0 16px rgba(240,192,64,0.85), 4px 4px 0px rgba(0,0,0,0.85); }
@@ -106,8 +180,14 @@ button {
   display: inline-block;
   background-color: #f0c040 !important;
   color: #1a1a1a !important;
-  border: 4px solid #c8a951 !important;
+  border: 3px solid #c8a951 !important;
   box-shadow: inset -4px -4px 0px #b8860b, inset 4px 4px 0px #fff4b8, 4px 4px 0px rgba(0,0,0,0.85);
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0,
+    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  ) !important;
   padding: 14px 34px;
   font-family: 'Press Start 2P', monospace !important;
   font-size: 13.5px;
@@ -189,8 +269,8 @@ button {
 .block-unit {
   width: 20px;
   height: 20px;
-  background-color: #222a45;
-  border: 2px solid #0d1222;
+  background-color: #121724;
+  border: 2px solid #0a0e18;
 }
 
 .block-unit.filled-hp {
@@ -223,16 +303,36 @@ button {
   transform: scale(1);
 }
 
-/* Quest Log Project Card */
+/* Quest Log Project Card with RPG Double Border Frame */
 .quest-card-item {
-  background-color: #11162a !important;
-  border: 3px solid #8b7355;
+  position: relative !important;
+  background-color: rgba(11, 16, 32, 0.95) !important;
+  border: 2px solid #8b7355 !important;
+  outline: 2px solid #3c3022 !important;
+  outline-offset: -6px !important;
   box-shadow: 4px 4px 0px rgba(0,0,0,0.6);
+  clip-path: polygon(
+    0 6px, 6px 6px, 6px 0,
+    calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px,
+    100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px), calc(100% - 6px) 100%,
+    6px 100%, 6px calc(100% - 6px), 0 calc(100% - 6px)
+  ) !important;
   transition: transform 0.2s steps(2), border-color 0.2s, box-shadow 0.2s;
   display: flex;
   flex-direction: column;
   height: 100%;
-  position: relative;
+}
+
+.quest-card-item::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 2px !important;
+  left: 2px !important;
+  right: 2px !important;
+  bottom: 2px !important;
+  border: 1px solid #c8a951 !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
 }
 
 .quest-card-item:hover {
@@ -255,8 +355,8 @@ button {
 
 .quest-tag-badge {
   display: inline-block;
-  background-color: #1a223e !important;
-  border: 1px solid #8b7355;
+  background-color: #11162a !important;
+  border: 1px solid #323d52;
   color: #c0c0d8 !important;
   font-size: 9.5px;
   padding: 5px 8px;
@@ -290,6 +390,14 @@ button {
 
 /* Social Link Square Frames Hover Effect */
 .social-icon-box {
+  position: relative !important;
+  border: 2px solid #8b7355 !important;
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0,
+    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  ) !important;
   transition: transform 0.12s steps(2), border-color 0.15s, background-color 0.15s;
 }
 
@@ -405,7 +513,7 @@ button {
 }
 
 .fire-pillar-wrapper.fire-right .grass-tuft-img {
-  animation-delay: 0.6s !important;
+  animation-delay: 0.8s !important;
 }
 
 /* Low FPS 8-Bit Step Particle Embers (steps(8)) */

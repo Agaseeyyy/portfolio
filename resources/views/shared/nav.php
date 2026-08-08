@@ -1,7 +1,7 @@
 <?php
 /**
  * Retro Gaming Navigation Bar - 8-bit RPG Style
- * Scaled up header matching mockup proportions
+ * Enclosed 8-Bit Header Bar Frame with Top & Bottom Gold-Brown Borders and 4 Corner Brackets
  */
 use app\core\View;
 $data = View::getData();
@@ -13,11 +13,17 @@ $home = $data['home'] ?? [];
 $fullName = strtoupper(($home['name'] ?? ($firstName . ' ' . $lastName)));
 $roleName = strtoupper(($home['role'] ?? 'DEVELOPER'));
 ?>
-<nav class="fixed top-0 left-0 right-0 z-50 bg-[#0a0f24]/90 border-b-4 border-[#8b7355] backdrop-blur-md">
-  <div class="max-w-7xl mx-auto px-6 py-4.5 flex items-center justify-between">
-    <!-- Brand / Player Name & Level with larger me.png icon -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#0a0f24]/92 border-t-2 border-b-2 border-[#8b7355] backdrop-blur-md shadow-lg">
+  <!-- 4 Corner Pixel Accents matching mockup header frame -->
+  <div class="absolute top-1 left-2 text-[#c8a951] text-[10px] pointer-events-none select-none z-10">┌</div>
+  <div class="absolute top-1 right-2 text-[#c8a951] text-[10px] pointer-events-none select-none z-10">┐</div>
+  <div class="absolute bottom-1 left-2 text-[#c8a951] text-[10px] pointer-events-none select-none z-10">└</div>
+  <div class="absolute bottom-1 right-2 text-[#c8a951] text-[10px] pointer-events-none select-none z-10">┘</div>
+  
+  <div class="max-w-7xl mx-auto px-6 py-3.5 flex items-center justify-between">
+    <!-- Brand / Player Name & Level with RPG double border frame -->
     <a href="<?= base_url('/') ?>" class="flex items-center gap-4.5 no-underline group">
-      <div class="w-16 h-16 border-3 border-[#c8a951] bg-[#11162a] overflow-hidden flex-shrink-0 p-1 shadow-lg">
+      <div class="w-16 h-16 rpg-pixel-frame overflow-hidden flex-shrink-0 p-0.5 shadow-lg">
         <img src="<?= base_url('images/me.png') ?>" alt="Avatar" class="w-full h-full object-cover">
       </div>
       <div class="flex flex-col">
@@ -38,14 +44,14 @@ $roleName = strtoupper(($home['role'] ?? 'DEVELOPER'));
       <a href="<?= base_url('/') ?>#contacts" class="text-white hover:text-[#f0c040] text-[12.5px] uppercase tracking-widest no-underline transition-colors font-bold">CONTACT</a>
     </div>
 
-    <!-- Right Side: Moon Icon Box -->
+    <!-- Right Side: Moon Icon Box with RPG double border frame -->
     <div class="flex items-center gap-4">
-      <div class="w-14 h-14 border-3 border-[#c8a951] bg-[#11162a] flex items-center justify-center text-xl shadow-md cursor-pointer hover:border-white transition-colors" title="Night Mode">
+      <div class="w-14 h-14 rpg-pixel-frame flex items-center justify-center text-xl shadow-md cursor-pointer hover:border-white transition-colors" title="Night Mode">
         🌙
       </div>
 
       <!-- Mobile Hamburger Button -->
-      <button class="md:hidden flex flex-col gap-1.5 p-3 border-2 border-[#8b7355] bg-[#11162a] cursor-pointer" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
+      <button class="md:hidden flex flex-col gap-1.5 p-3 rpg-pixel-frame cursor-pointer" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
         <span class="w-6 h-0.5 bg-white"></span>
         <span class="w-6 h-0.5 bg-white"></span>
         <span class="w-6 h-0.5 bg-white"></span>

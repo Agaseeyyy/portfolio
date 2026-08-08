@@ -1,27 +1,27 @@
 <?php
-/**
+    /**
  * Home Page - 8-bit RPG Portfolio
  * Hero section + About Me character stats
- * 
+ *
  * @var array $home - Home section data
- * @var array $contact - Contact info data  
+ * @var array $contact - Contact info data
  * @var string $profilePhoto - Profile photo path
  * @var array $techstack - Tech stack data
  */
-use app\core\View;
-View::extend('public/layout');
+    use app\core\View;
+    View::extend('public/layout');
 
-$fullName = strtoupper(($home['name'] ?? 'CODEWIZARD'));
-$roleName = strtoupper(($home['role'] ?? 'TECH DEVELOPER'));
-$bioText = $home['short_bio'] ?? 'I build modern, scalable, and user-friendly web applications with clean code and pixel-perfect precision.';
-$location = $contact['address'] ?? 'Earth (Remote)';
+    $fullName = strtoupper(($home['name'] ?? 'CODEWIZARD'));
+    $roleName = strtoupper(($home['role'] ?? 'TECH DEVELOPER'));
+    $bioText  = $home['short_bio'] ?? 'I build modern, scalable, and user-friendly web applications with clean code and pixel-perfect precision.';
+    $location = $contact['address'] ?? 'Earth (Remote)';
 ?>
 
-<?php View::section('title') ?>
+<?php View::section('title')?>
 <?= htmlspecialchars($fullName) ?> - LVL 5 Developer
-<?php View::endSection() ?>
+<?php View::endSection()?>
 
-<?php View::section('content') ?>
+<?php View::section('content')?>
 
 <!-- ====== HERO SECTION ====== -->
 <header id="home" class="relative min-h-[680px] lg:min-h-[780px] flex flex-col justify-end items-center pt-28 pb-10 px-4 overflow-hidden mt-0">
@@ -40,7 +40,7 @@ $location = $contact['address'] ?? 'Earth (Remote)';
       I AM <span class="text-[#f0c040] font-bold"><?= htmlspecialchars($fullName) ?></span>,<br>
       A <?= htmlspecialchars($roleName) ?>.
     </h1>
-    
+
     <div class="flex items-center justify-center gap-4 my-5 text-[#c8a951]">
       <span class="h-[2px] w-24 bg-[#c8a951]"></span>
       <span class="text-sm">◆</span>
@@ -65,10 +65,10 @@ $location = $contact['address'] ?? 'Earth (Remote)';
     <span class="rpg-title-glow">ABOUT ME</span>
     <span class="sub-text">(CHARACTER STATS)</span>
   </div>
-  
+
   <div class="nes-container is-dark with-title" style="padding: 2.25rem;">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
-      
+
       <!-- Character Avatar Sprite - Large Borderless me.gif (240px x 240px) with Ground Shadow -->
       <div class="flex flex-col items-center justify-center md:border-r-2 border-[#2b334e] md:pr-8">
         <div class="relative w-52 h-52 lg:w-60 lg:h-60 flex items-center justify-center">
@@ -158,9 +158,9 @@ $location = $contact['address'] ?? 'Earth (Remote)';
   </div>
 </section>
 
-<?php 
-// Include remaining sections (Quest Log & Inventory)
-include __DIR__ . '/portfolio.php'; 
-include __DIR__ . '/services.php'; 
+<?php
+    // Include remaining sections (Quest Log & Inventory)
+    include __DIR__ . '/portfolio.php';
+    include __DIR__ . '/services.php';
 ?>
-<?php View::endSection() ?>
+<?php View::endSection()?>
