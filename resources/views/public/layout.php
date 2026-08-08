@@ -1,7 +1,7 @@
 <?php
 /**
  * Main Layout Template - 8-Bit NES RPG Style
- * Enhanced with Head Session Class Checkers, Pixel Home Sky Background, Instant 8-Bit Loading Progress, Dungeon Gate Screen, SEO Meta Tags, and JSON-LD Schema
+ * Fast & Clean 8-Bit Dungeon Loading Bar on Every Page Load
  */
 use app\core\View;
 
@@ -29,19 +29,6 @@ $version = time();
   <meta name="keywords" content="Agassi Bustarga, Full-stack Developer, PHP MVC, React, Web Developer Portfolio, NES RPG Portfolio, Tailwind CSS, Software Engineer">
   
   <title><?= $pageTitle ?></title>
-
-  <!-- Instant Head Session Checker to prevent refresh loading hangs -->
-  <script>
-    (function() {
-      try {
-        if (sessionStorage.getItem('dungeon_entered') === 'true') {
-          document.documentElement.classList.add('dungeon-already-entered');
-        } else if (sessionStorage.getItem('dungeon_loaded') === 'true') {
-          document.documentElement.classList.add('dungeon-already-loaded');
-        }
-      } catch (e) {}
-    })();
-  </script>
 
   <!-- Canonical URL -->
   <link rel="canonical" href="<?= $currentUrl ?>" />
@@ -125,132 +112,45 @@ $version = time();
     </div>
   </div>
 
-  <!-- 8-Bit Dungeon Entrance Screen Modal Overlay with home-sky.png Background -->
-  <div id="dungeon-entrance-modal" style="display:none; background: radial-gradient(circle at center, rgba(10, 15, 36, 0.45) 0%, rgba(6, 9, 24, 0.88) 100%), url('<?= $homeSkyBg ?>') center top / cover no-repeat !important;">
-    <div class="dungeon-card flex flex-col items-center justify-center gap-6">
-      <div class="w-16 h-16 flex-shrink-0 mb-1">
-        <img src="<?= base_url('images/favicon.ico') ?>" alt="Favicon" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.6))">
-      </div>
-
-      <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0 flex items-center justify-center gap-2">
-        <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-6 h-6 object-contain image-rendering-pixelated inline-block align-middle">
-        <span>WELCOME, ADVENTURER!</span>
-        <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-6 h-6 object-contain image-rendering-pixelated inline-block align-middle">
-      </h2>
-
-      <div class="flex items-center justify-center gap-3 text-[#c8a951] w-full my-1">
-        <span class="h-[2px] w-20 bg-[#8b7355]"></span>
-        <span class="text-xs">◆</span>
-        <span class="h-[2px] w-20 bg-[#8b7355]"></span>
-      </div>
-
-      <p class="text-[#d0d0e0] text-xs lg:text-[13px] leading-relaxed font-normal max-w-[480px]">
-        YOU ARE ENTERING THE DEVELOPER DUNGEON OF <span class="text-[#f0c040] font-bold"><?= htmlspecialchars(strtoupper($home['name'] ?? 'AGASSI BUSTARGA')) ?></span>.
-      </p>
-
-      <button onclick="enterDungeon()" class="golden-btn text-xs lg:text-sm py-4 px-8 mt-3 flex items-center justify-center gap-3 cursor-pointer">
-        <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-5 h-5 object-contain image-rendering-pixelated inline-block">
-        <span>ENTER DUNGEON</span>
-        <span class="rpg-cursor-blink">▶</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Instant Inline Execution Script with Brave Shields try/catch compatibility & dungeon_loaded flag -->
+  <!-- Fast & Clean Inline Loading Script (Plays on Every Page Load) -->
   <script>
     (function() {
       var loadingOverlay = document.getElementById('dungeon-loading-overlay');
-      var entranceModal = document.getElementById('dungeon-entrance-modal');
       var fillBar = document.getElementById('dungeon-loading-bar-fill');
       var subtext = document.getElementById('dungeon-loading-subtext');
 
       if (!loadingOverlay) return;
 
-      var isEntered = false;
-      var isLoaded = false;
-
-      try {
-        isEntered = (sessionStorage.getItem('dungeon_entered') === 'true');
-        isLoaded = (sessionStorage.getItem('dungeon_loaded') === 'true');
-      } catch (e) {}
-
-      if (isEntered) {
-        loadingOverlay.style.display = 'none';
-        if (entranceModal) entranceModal.style.display = 'none';
-        return;
-      }
-
-      if (isLoaded) {
-        loadingOverlay.style.display = 'none';
-        if (entranceModal) entranceModal.style.display = 'flex';
-        return;
-      }
-
       var steps = [
-        { pct: 30, text: 'INITIALIZING 8-BIT SYNTHESIZERS...' },
-        { pct: 65, text: 'EQUIPPING WEAPONS & MAGIC...' },
-        { pct: 90, text: 'SUMMONING PIXEL SKYLINE...' },
+        { pct: 35, text: 'INITIALIZING 8-BIT SYNTHESIZERS...' },
+        { pct: 70, text: 'EQUIPPING WEAPONS & MAGIC...' },
         { pct: 100, text: 'DUNGEON READY!' }
       ];
 
       var stepIdx = 0;
       var interval = setInterval(function() {
-        try {
-          if (stepIdx < steps.length) {
-            if (fillBar) fillBar.style.width = steps[stepIdx].pct + '%';
-            if (subtext) subtext.textContent = steps[stepIdx].text;
-            stepIdx++;
-          } else {
-            clearInterval(interval);
-            dismissLoadingOverlay();
-          }
-        } catch (err) {
+        if (stepIdx < steps.length) {
+          if (fillBar) fillBar.style.width = steps[stepIdx].pct + '%';
+          if (subtext) subtext.textContent = steps[stepIdx].text;
+          stepIdx++;
+        } else {
           clearInterval(interval);
-          dismissLoadingOverlay();
+          dismiss();
         }
-      }, 140);
+      }, 100);
 
-      function dismissLoadingOverlay() {
+      function dismiss() {
         if (!loadingOverlay || loadingOverlay.style.display === 'none') return;
-        try {
-          sessionStorage.setItem('dungeon_loaded', 'true');
-        } catch (e) {}
         loadingOverlay.style.opacity = '0';
         loadingOverlay.style.pointerEvents = 'none';
         setTimeout(function() {
           loadingOverlay.style.display = 'none';
-          if (entranceModal) entranceModal.style.display = 'flex';
-        }, 300);
+        }, 220);
       }
 
-      // Hard safety timer for Brave & all privacy browsers: Force dismiss after max 0.9s
-      setTimeout(dismissLoadingOverlay, 900);
+      // Hard safety timer: Force dismiss after max 450ms
+      setTimeout(dismiss, 450);
     })();
-
-    function enterDungeon() {
-      var overlay = document.getElementById('dungeon-entrance-modal');
-      if (overlay) {
-        try {
-          if (window.rpgAudio) window.rpgAudio.playQuestFanfare();
-        } catch (e) {}
-        try {
-          if (typeof spawnRPGFloatingText === 'function') {
-            spawnRPGFloatingText(window.innerWidth / 2, window.innerHeight / 2, '+100 EXP! DUNGEON ENTERED!');
-          }
-        } catch (e) {}
-        
-        overlay.style.opacity = '0';
-        overlay.style.pointerEvents = 'none';
-        
-        try {
-          sessionStorage.setItem('dungeon_entered', 'true');
-        } catch (e) {}
-        
-        setTimeout(function() {
-          overlay.style.display = 'none';
-        }, 400);
-      }
-    }
   </script>
 
   <!-- Retro CRT Monitor Arcade Scanline Overlay -->
