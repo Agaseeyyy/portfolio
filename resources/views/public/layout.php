@@ -1,7 +1,7 @@
 <?php
 /**
  * Main Layout Template - 8-Bit NES RPG Style
- * Enhanced with Pixel Home Sky Background, Instant Inline 8-Bit Loading Progress, Dungeon Gate Screen, SEO Meta Tags, and JSON-LD Schema
+ * Enhanced with Head Session Class Checkers, Pixel Home Sky Background, Instant 8-Bit Loading Progress, Dungeon Gate Screen, SEO Meta Tags, and JSON-LD Schema
  */
 use app\core\View;
 
@@ -29,6 +29,19 @@ $version = time();
   <meta name="keywords" content="Agassi Bustarga, Full-stack Developer, PHP MVC, React, Web Developer Portfolio, NES RPG Portfolio, Tailwind CSS, Software Engineer">
   
   <title><?= $pageTitle ?></title>
+
+  <!-- Instant Head Session Checker to prevent refresh loading hangs -->
+  <script>
+    (function() {
+      try {
+        if (sessionStorage.getItem('dungeon_entered') === 'true') {
+          document.documentElement.classList.add('dungeon-already-entered');
+        } else if (sessionStorage.getItem('dungeon_loaded') === 'true') {
+          document.documentElement.classList.add('dungeon-already-loaded');
+        }
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- Canonical URL -->
   <link rel="canonical" href="<?= $currentUrl ?>" />
@@ -143,7 +156,7 @@ $version = time();
     </div>
   </div>
 
-  <!-- Instant Inline Execution Script with Brave Shields try/catch compatibility -->
+  <!-- Instant Inline Execution Script with Brave Shields try/catch compatibility & dungeon_loaded flag -->
   <script>
     (function() {
       var loadingOverlay = document.getElementById('dungeon-loading-overlay');
@@ -154,15 +167,22 @@ $version = time();
       if (!loadingOverlay) return;
 
       var isEntered = false;
+      var isLoaded = false;
+
       try {
         isEntered = (sessionStorage.getItem('dungeon_entered') === 'true');
-      } catch (e) {
-        isEntered = false;
-      }
+        isLoaded = (sessionStorage.getItem('dungeon_loaded') === 'true');
+      } catch (e) {}
 
       if (isEntered) {
         loadingOverlay.style.display = 'none';
         if (entranceModal) entranceModal.style.display = 'none';
+        return;
+      }
+
+      if (isLoaded) {
+        loadingOverlay.style.display = 'none';
+        if (entranceModal) entranceModal.style.display = 'flex';
         return;
       }
 
@@ -188,10 +208,13 @@ $version = time();
           clearInterval(interval);
           dismissLoadingOverlay();
         }
-      }, 150);
+      }, 140);
 
       function dismissLoadingOverlay() {
         if (!loadingOverlay || loadingOverlay.style.display === 'none') return;
+        try {
+          sessionStorage.setItem('dungeon_loaded', 'true');
+        } catch (e) {}
         loadingOverlay.style.opacity = '0';
         loadingOverlay.style.pointerEvents = 'none';
         setTimeout(function() {
@@ -200,8 +223,8 @@ $version = time();
         }, 300);
       }
 
-      // Hard safety timer for Brave & all privacy browsers: Force dismiss after max 1.0s
-      setTimeout(dismissLoadingOverlay, 1000);
+      // Hard safety timer for Brave & all privacy browsers: Force dismiss after max 0.9s
+      setTimeout(dismissLoadingOverlay, 900);
     })();
 
     function enterDungeon() {

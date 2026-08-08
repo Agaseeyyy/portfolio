@@ -509,6 +509,9 @@
   .h-full {
     height: 100%;
   }
+  .min-h-\[18px\] {
+    min-height: 18px;
+  }
   .min-h-\[60px\] {
     min-height: 60px;
   }
@@ -632,6 +635,9 @@
   }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+  }
+  .animate-bounce {
+    animation: var(--animate-bounce);
   }
   .cursor-pointer {
     cursor: pointer;
@@ -1101,6 +1107,9 @@
   .text-right {
     text-align: right;
   }
+  .align-middle {
+    vertical-align: middle;
+  }
   .font-\[\'Press_Start_2P\'\] {
     font-family: 'Press Start 2P';
   }
@@ -1211,9 +1220,6 @@
   }
   .text-\[\#f0c040\] {
     color: #f0c040;
-  }
-  .text-\[\#ff5555\] {
-    color: #ff5555;
   }
   .text-blue-400 {
     color: var(--color-blue-400);
@@ -1865,19 +1871,24 @@
     scroll-behavior: smooth;
   }
 }
+html.dungeon-already-entered #dungeon-loading-overlay, html.dungeon-already-entered #dungeon-entrance-modal {
+  display: none !important;
+}
+html.dungeon-already-loaded #dungeon-loading-overlay {
+  display: none !important;
+}
 #dungeon-loading-overlay {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  background-color: #060918 !important;
   z-index: 100000 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   padding: 1.5rem !important;
-  transition: opacity 0.5s steps(5), transform 0.5s steps(5) !important;
+  transition: opacity 0.4s steps(4), transform 0.4s steps(4) !important;
 }
 #dungeon-loading-overlay.fade-out {
   opacity: 0 !important;
@@ -1907,13 +1918,12 @@
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  background-color: #060918 !important;
   z-index: 99999 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   padding: 1.5rem !important;
-  transition: opacity 0.6s steps(6), transform 0.6s steps(6) !important;
+  transition: opacity 0.5s steps(5), transform 0.5s steps(5) !important;
 }
 #dungeon-entrance-modal.fade-out {
   opacity: 0 !important;

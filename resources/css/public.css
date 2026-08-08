@@ -19,6 +19,16 @@
   }
 }
 
+/* Instant CSS Hiding Rules for Session Bypasses */
+html.dungeon-already-entered #dungeon-loading-overlay,
+html.dungeon-already-entered #dungeon-entrance-modal {
+  display: none !important;
+}
+
+html.dungeon-already-loaded #dungeon-loading-overlay {
+  display: none !important;
+}
+
 /* 8-Bit Retro Dungeon Loading Screen */
 #dungeon-loading-overlay {
   position: fixed !important;
@@ -26,13 +36,12 @@
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  background-color: #060918 !important;
   z-index: 100000 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   padding: 1.5rem !important;
-  transition: opacity 0.5s steps(5), transform 0.5s steps(5) !important;
+  transition: opacity 0.4s steps(4), transform 0.4s steps(4) !important;
 }
 
 #dungeon-loading-overlay.fade-out {
@@ -67,13 +76,12 @@
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  background-color: #060918 !important;
   z-index: 99999 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   padding: 1.5rem !important;
-  transition: opacity 0.6s steps(6), transform 0.6s steps(6) !important;
+  transition: opacity 0.5s steps(5), transform 0.5s steps(5) !important;
 }
 
 #dungeon-entrance-modal.fade-out {
