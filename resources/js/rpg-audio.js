@@ -98,6 +98,13 @@ window.rpgAudio = new RPGAudioSystem();
 function initializeRPGFX() {
   const audio = window.rpgAudio;
 
+  // Dungeon Entrance Screen State Check
+  const entered = sessionStorage.getItem('dungeon_entered');
+  const overlay = document.getElementById('dungeon-entrance-modal');
+  if (entered === 'true' && overlay) {
+    overlay.style.display = 'none';
+  }
+
   // Sync speaker icon mute state on load
   const img = document.getElementById('speaker-icon-img');
   if (img && audio.muted) {
@@ -145,6 +152,22 @@ function initializeRPGFX() {
       showRPGToast(`[ 📜 QUEST ACCEPTED: ${title} ]`);
     });
   });
+}
+
+// Enter Dungeon Trigger Function
+function enterDungeon() {
+  const overlay = document.getElementById('dungeon-entrance-modal');
+  if (overlay) {
+    if (window.rpgAudio) {
+      window.rpgAudio.playQuestFanfare();
+    }
+    spawnRPGFloatingText(window.innerWidth / 2, window.innerHeight / 2, '+100 EXP! DUNGEON ENTERED!');
+    overlay.classList.add('fade-out');
+    sessionStorage.setItem('dungeon_entered', 'true');
+    setTimeout(() => {
+      overlay.style.display = 'none';
+    }, 600);
+  }
 }
 
 // Spawn floating RPG text popup (+100 EXP!)

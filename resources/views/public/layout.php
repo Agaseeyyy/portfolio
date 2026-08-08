@@ -1,7 +1,7 @@
 <?php
 /**
  * Main Layout Template - 8-Bit NES RPG Style
- * Enhanced with SEO Meta Tags, Open Graph, Twitter Cards, Canonical Links, and JSON-LD Schema.org Data
+ * Enhanced with 8-Bit "ENTER DUNGEON" Entrance Overlay, SEO Meta Tags, Open Graph, and JSON-LD Schema
  */
 use app\core\View;
 
@@ -87,6 +87,35 @@ $version = time();
   <?= View::renderSection('styles') ?>
 </head>
 <body class="bg-[#0a0f24] text-white font-['Press_Start_2P'] antialiased selection:bg-[#f0c040] selection:text-black" hx-boost="true" hx-select="#main-content" hx-target="#main-content" hx-swap="innerHTML transition:true">
+  
+  <!-- 8-Bit Dungeon Entrance Screen Modal Overlay -->
+  <div id="dungeon-entrance-modal">
+    <div class="dungeon-card flex flex-col items-center justify-center gap-6">
+      <div class="w-16 h-16 flex-shrink-0 mb-1">
+        <img src="<?= base_url('icons/quest.png') ?>" alt="Dungeon Gate" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.6))">
+      </div>
+
+      <h2 class="text-[#f0c040] text-sm lg:text-base font-bold tracking-widest uppercase rpg-title-glow m-0">
+        ⚔️ WELCOME, ADVENTURER! ⚔️
+      </h2>
+
+      <div class="flex items-center justify-center gap-3 text-[#c8a951] w-full my-1">
+        <span class="h-[2px] w-20 bg-[#8b7355]"></span>
+        <span class="text-xs">◆</span>
+        <span class="h-[2px] w-20 bg-[#8b7355]"></span>
+      </div>
+
+      <p class="text-[#d0d0e0] text-xs lg:text-[13px] leading-relaxed font-normal max-w-[480px]">
+        YOU ARE ENTERING THE DEVELOPER DUNGEON OF <span class="text-[#f0c040] font-bold"><?= htmlspecialchars(strtoupper($home['name'] ?? 'AGASSI BUSTARGA')) ?></span>.
+      </p>
+
+      <button onclick="enterDungeon()" class="golden-btn text-xs lg:text-sm py-4 px-8 mt-3 flex items-center gap-3 cursor-pointer">
+        <span>⚔️ ENTER DUNGEON</span>
+        <span class="rpg-cursor-blink">▶</span>
+      </button>
+    </div>
+  </div>
+
   <!-- Retro CRT Monitor Arcade Scanline Overlay -->
   <div id="crt-overlay"></div>
 

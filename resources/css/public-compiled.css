@@ -13,6 +13,7 @@
     --color-red-500: oklch(63.7% 0.237 25.331);
     --color-orange-400: oklch(75% 0.183 55.934);
     --color-yellow-400: oklch(85.2% 0.199 91.936);
+    --color-yellow-500: oklch(79.5% 0.184 86.047);
     --color-green-300: oklch(87.1% 0.15 154.449);
     --color-green-400: oklch(79.2% 0.209 151.711);
     --color-green-500: oklch(72.3% 0.219 149.579);
@@ -319,24 +320,6 @@
   .col-span-full {
     grid-column: 1 / -1;
   }
-  .container {
-    width: 100%;
-    @media (width >= 40rem) {
-      max-width: 40rem;
-    }
-    @media (width >= 48rem) {
-      max-width: 48rem;
-    }
-    @media (width >= 64rem) {
-      max-width: 64rem;
-    }
-    @media (width >= 80rem) {
-      max-width: 80rem;
-    }
-    @media (width >= 96rem) {
-      max-width: 96rem;
-    }
-  }
   .m-0 {
     margin: calc(var(--spacing) * 0);
   }
@@ -351,6 +334,9 @@
   }
   .my-3 {
     margin-block: calc(var(--spacing) * 3);
+  }
+  .my-4 {
+    margin-block: calc(var(--spacing) * 4);
   }
   .my-6 {
     margin-block: calc(var(--spacing) * 6);
@@ -595,9 +581,6 @@
   .w-full {
     width: 100%;
   }
-  .\!max-w-2xl {
-    max-width: var(--container-2xl) !important;
-  }
   .\!max-w-4xl {
     max-width: var(--container-4xl) !important;
   }
@@ -722,13 +705,6 @@
   .gap-10 {
     gap: calc(var(--spacing) * 10);
   }
-  .space-y-1 {
-    :where(& > :not(:last-child)) {
-      --tw-space-y-reverse: 0;
-      margin-block-start: calc(calc(var(--spacing) * 1) * var(--tw-space-y-reverse));
-      margin-block-end: calc(calc(var(--spacing) * 1) * calc(1 - var(--tw-space-y-reverse)));
-    }
-  }
   .space-y-2 {
     :where(& > :not(:last-child)) {
       --tw-space-y-reverse: 0;
@@ -771,9 +747,6 @@
   }
   .scroll-smooth {
     scroll-behavior: smooth;
-  }
-  .rounded {
-    border-radius: 0.25rem;
   }
   .rounded-2xl {
     border-radius: var(--radius-2xl);
@@ -845,6 +818,9 @@
   .border-\[\#232c46\] {
     border-color: #232c46;
   }
+  .border-gray-700 {
+    border-color: var(--color-gray-700);
+  }
   .border-pink-500\/10 {
     border-color: color-mix(in srgb, oklch(65.6% 0.241 354.308) 10%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -873,12 +849,6 @@
     background-color: color-mix(in srgb, oklch(72.3% 0.219 149.579) 20%, transparent) !important;
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-green-500) 20%, transparent) !important;
-    }
-  }
-  .\!bg-purple-500\/20 {
-    background-color: color-mix(in srgb, oklch(62.7% 0.265 303.9) 20%, transparent) !important;
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-purple-500) 20%, transparent) !important;
     }
   }
   .bg-\[\#0a0f24\] {
@@ -923,9 +893,6 @@
       background-color: color-mix(in oklab, var(--color-green-500) 20%, transparent);
     }
   }
-  .bg-pink-400 {
-    background-color: var(--color-pink-400);
-  }
   .bg-pink-500\/10 {
     background-color: color-mix(in srgb, oklch(65.6% 0.241 354.308) 10%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -944,20 +911,11 @@
       background-color: color-mix(in oklab, var(--color-pink-500) 80%, transparent);
     }
   }
-  .bg-purple-500\/20 {
-    background-color: color-mix(in srgb, oklch(62.7% 0.265 303.9) 20%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-purple-500) 20%, transparent);
-    }
-  }
   .bg-red-500\/80 {
     background-color: color-mix(in srgb, oklch(63.7% 0.237 25.331) 80%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-red-500) 80%, transparent);
     }
-  }
-  .bg-transparent {
-    background-color: transparent;
   }
   .bg-white {
     background-color: var(--color-white);
@@ -972,6 +930,12 @@
     background-color: color-mix(in srgb, #fff 20%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-white) 20%, transparent);
+    }
+  }
+  .bg-yellow-500\/20 {
+    background-color: color-mix(in srgb, oklch(79.5% 0.184 86.047) 20%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-yellow-500) 20%, transparent);
     }
   }
   .bg-gradient-to-b {
@@ -1052,9 +1016,6 @@
   }
   .p-4\.5 {
     padding: calc(var(--spacing) * 4.5);
-  }
-  .p-5 {
-    padding: calc(var(--spacing) * 5);
   }
   .p-6 {
     padding: calc(var(--spacing) * 6);
@@ -1266,14 +1227,14 @@
   .text-pink-400 {
     color: var(--color-pink-400);
   }
-  .text-purple-400 {
-    color: var(--color-purple-400);
-  }
   .text-red-400 {
     color: var(--color-red-400);
   }
   .text-white {
     color: var(--color-white);
+  }
+  .text-yellow-400 {
+    color: var(--color-yellow-400);
   }
   .uppercase {
     text-transform: uppercase;
@@ -1420,12 +1381,12 @@
       }
     }
   }
-  .group-hover\:bg-purple-500\/30 {
+  .group-hover\:bg-yellow-500\/30 {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
-        background-color: color-mix(in srgb, oklch(62.7% 0.265 303.9) 30%, transparent);
+        background-color: color-mix(in srgb, oklch(79.5% 0.184 86.047) 30%, transparent);
         @supports (color: color-mix(in lab, red, red)) {
-          background-color: color-mix(in oklab, var(--color-purple-500) 30%, transparent);
+          background-color: color-mix(in oklab, var(--color-yellow-500) 30%, transparent);
         }
       }
     }
@@ -1458,17 +1419,17 @@
       }
     }
   }
-  .group-hover\:text-purple-400 {
-    &:is(:where(.group):hover *) {
-      @media (hover: hover) {
-        color: var(--color-purple-400);
-      }
-    }
-  }
   .group-hover\:text-white {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
         color: var(--color-white);
+      }
+    }
+  }
+  .group-hover\:text-yellow-400 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        color: var(--color-yellow-400);
       }
     }
   }
@@ -1586,16 +1547,6 @@
       }
     }
   }
-  .hover\:bg-pink-500\/30 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: color-mix(in srgb, oklch(65.6% 0.241 354.308) 30%, transparent);
-        @supports (color: color-mix(in lab, red, red)) {
-          background-color: color-mix(in oklab, var(--color-pink-500) 30%, transparent);
-        }
-      }
-    }
-  }
   .hover\:bg-red-500 {
     &:hover {
       @media (hover: hover) {
@@ -1658,20 +1609,6 @@
       }
     }
   }
-  .hover\:text-purple-300 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-purple-300);
-      }
-    }
-  }
-  .hover\:text-red-300 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-red-300);
-      }
-    }
-  }
   .hover\:text-red-400 {
     &:hover {
       @media (hover: hover) {
@@ -1696,12 +1633,6 @@
   .focus\:border-\[\#f0c040\] {
     &:focus {
       border-color: #f0c040;
-    }
-  }
-  .focus\:outline-none {
-    &:focus {
-      --tw-outline-style: none;
-      outline-style: none;
     }
   }
   .max-lg\:bg-none {
@@ -1927,6 +1858,48 @@
     image-rendering: pixelated;
     scroll-behavior: smooth;
   }
+}
+#dungeon-entrance-modal {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: #060918 !important;
+  z-index: 99999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 1.5rem !important;
+  transition: opacity 0.6s steps(6), transform 0.6s steps(6) !important;
+}
+#dungeon-entrance-modal.fade-out {
+  opacity: 0 !important;
+  transform: scale(1.08) !important;
+  pointer-events: none !important;
+}
+.dungeon-card {
+  position: relative !important;
+  background-color: rgba(11, 16, 32, 0.98) !important;
+  border: 4px solid #8b7355 !important;
+  outline: 2px solid #3c3022 !important;
+  outline-offset: -8px !important;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.95), inset 0 0 30px rgba(240, 192, 64, 0.12) !important;
+  clip-path: polygon( 0 8px, 8px 8px, 8px 0, calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px) ) !important;
+  padding: 3.5rem 2.5rem !important;
+  max-width: 640px !important;
+  width: 100% !important;
+  text-align: center !important;
+}
+.dungeon-card::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 3px !important;
+  left: 3px !important;
+  right: 3px !important;
+  bottom: 3px !important;
+  border: 1px solid #c8a951 !important;
+  pointer-events: none !important;
 }
 .htmx-swapping #main-content {
   opacity: 0 !important;
