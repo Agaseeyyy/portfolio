@@ -94,7 +94,7 @@ $version = time();
     <div class="dungeon-card flex flex-col items-center justify-center gap-5">
       
       <!-- Favicon Icon -->
-      <div class="w-16 h-16 flex-shrink-0 mb-1 animate-bounce">
+      <div class="w-16 h-16 flex-shrink-0 mb-1">
         <img src="<?= base_url('images/favicon.ico') ?>" alt="Favicon" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.7))">
       </div>
 
