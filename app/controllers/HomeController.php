@@ -8,7 +8,6 @@ use app\models\HomeModel;
 use app\models\ContactInfoModel;
 use app\models\ProjectModel;
 use app\models\TechstackModel;
-use app\models\ServiceModel;
 use app\models\CertificationModel;
 
 /**
@@ -25,7 +24,6 @@ class HomeController extends Controller
 		$contactModel = new ContactInfoModel();
 		$projectModel = new ProjectModel();
 		$techModel = new TechstackModel();
-		$serviceModel = new ServiceModel();
 		$certModel = new CertificationModel();
 
 		$home = $homeModel->first() ?? [];
@@ -56,7 +54,6 @@ class HomeController extends Controller
 			'projects' => $projectModel->getProjectsWithTech(),
 			'techstack' => $techstack,
 			'techCategories' => $techCategories,
-			'services' => $serviceModel->all(),
 			'certifications' => $certModel->all(),
 			// Processed values for views
 			'firstName' => $nameParts[0] ?? '',

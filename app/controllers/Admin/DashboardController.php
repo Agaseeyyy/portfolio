@@ -7,7 +7,6 @@ use app\models\HomeModel;
 use app\models\ContactInfoModel;
 use app\models\ProjectModel;
 use app\models\TechstackModel;
-use app\models\ServiceModel;
 use app\models\CertificationModel;
 
 /**
@@ -24,7 +23,6 @@ class DashboardController extends Controller
             'activeMenu' => 'dashboard',
             'projectCount' => (new ProjectModel())->countAll(),
             'techCount' => (new TechstackModel())->countAll(),
-            'serviceCount' => (new ServiceModel())->countAll(),
             'certCount' => (new CertificationModel())->countAll(),
         ];
 

@@ -13,7 +13,6 @@ use app\controllers\Admin\HomeController as AdminHomeController;
 use app\controllers\Admin\ContactInfoController;
 use app\controllers\Admin\ProjectController;
 use app\controllers\Admin\TechstackController;
-use app\controllers\Admin\ServiceController;
 use app\controllers\Admin\CertificationController;
 
 // Public routes
@@ -45,11 +44,6 @@ $router->post('/admin/projects/delete/{id}', [ProjectController::class, 'delete'
 $router->get('/admin/techstack', [TechstackController::class, 'index']);
 $router->post('/admin/techstack/store', [TechstackController::class, 'store']);
 $router->post('/admin/techstack/delete/{id}', [TechstackController::class, 'delete']);
-
-// Admin - Services
-$router->get('/admin/services', [ServiceController::class, 'index']);
-$router->post('/admin/services/store', [ServiceController::class, 'store']);
-$router->post('/admin/services/delete/{id}', [ServiceController::class, 'delete']);
 
 // Admin - Certifications
 $router->get('/admin/certifications', [CertificationController::class, 'index']);

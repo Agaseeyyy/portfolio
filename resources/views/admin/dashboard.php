@@ -10,7 +10,6 @@
  * @var array $contactData
  * @var int $projectCount
  * @var int $techCount
- * @var int $serviceCount
  * @var int $certCount
  */
 
@@ -18,8 +17,6 @@ use app\core\View;
 
 // Extend the admin layout
 View::extend('admin/layout');
-
-// Helper function
 ?>
 
 <?php View::section('title') ?>
@@ -33,7 +30,7 @@ View::extend('admin/layout');
     </div>
 <?php endif; ?>
 <!-- Stats Grid -->
-<div class="grid grid-cols-1 gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
+<div class="grid grid-cols-1 gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-3">
     <!-- Projects Stats -->
     <div class="stat">
         <div class="flex items-center justify-between">
@@ -87,24 +84,6 @@ View::extend('admin/layout');
             <a href="<?= base_url('admin/certifications') ?>" class="text-xs text-green-400 hover:text-green-300">Manage Certs →</a>
         </div>
     </div>
-
-    <!-- Services Stats -->
-    <div class="stat">
-        <div class="flex items-center justify-between">
-            <div>
-                <p class="stat-title">Services</p>
-                <p class="stat-value"><?= $serviceCount ?? 0 ?></p>
-            </div>
-            <div class="stat-figure !bg-purple-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-            </div>
-        </div>
-        <div class="mt-4">
-            <a href="<?= base_url('admin/services') ?>" class="text-xs text-purple-400 hover:text-purple-300">Manage Services →</a>
-        </div>
-    </div>
 </div>
 
 <!-- Quick Actions & Recent Activity -->
@@ -135,22 +114,22 @@ View::extend('admin/layout');
                     <span class="text-sm text-gray-300 group-hover:text-blue-400">Add Project</span>
                 </a>
 
-                <a href="<?= base_url('admin/services') ?>" class="flex flex-col items-center gap-3 p-4 transition-all duration-200 rounded-lg bg-base-300 hover:bg-pink-500/10 group">
-                    <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-purple-500/20 group-hover:bg-purple-500/30">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <a href="<?= base_url('admin/certifications') ?>" class="flex flex-col items-center gap-3 p-4 transition-all duration-200 rounded-lg bg-base-300 hover:bg-pink-500/10 group">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-green-500/20 group-hover:bg-green-500/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                         </svg>
                     </div>
-                    <span class="text-sm text-gray-300 group-hover:text-purple-400">Add Service</span>
+                    <span class="text-sm text-gray-300 group-hover:text-green-400">Add Cert</span>
                 </a>
 
                 <a href="<?= base_url('admin/contacts') ?>" class="flex flex-col items-center gap-3 p-4 transition-all duration-200 rounded-lg bg-base-300 hover:bg-pink-500/10 group">
-                    <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-green-500/20 group-hover:bg-green-500/30">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-yellow-500/20 group-hover:bg-yellow-500/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                         </svg>
                     </div>
-                    <span class="text-sm text-gray-300 group-hover:text-green-400">Edit Contact</span>
+                    <span class="text-sm text-gray-300 group-hover:text-yellow-400">Edit Contact</span>
                 </a>
             </div>
         </div>
@@ -191,13 +170,6 @@ View::extend('admin/layout');
                         <span class="text-gray-300">Certifications</span>
                     </div>
                     <span class="text-xs text-gray-500"><?= $certCount ?? 0 ?> items</span>
-                </div>
-                <div class="flex items-center justify-between p-3 rounded-lg bg-base-300">
-                    <div class="flex items-center gap-3">
-                        <div class="w-2 h-2 rounded-full bg-green-400"></div>
-                        <span class="text-gray-300">Services</span>
-                    </div>
-                    <span class="text-xs text-gray-500"><?= $serviceCount ?? 0 ?> items</span>
                 </div>
                 <div class="flex items-center justify-between p-3 rounded-lg bg-base-300">
                     <div class="flex items-center gap-3">
