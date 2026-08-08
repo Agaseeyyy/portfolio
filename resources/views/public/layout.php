@@ -142,6 +142,17 @@ $version = time();
     </div>
   </div>
 
+  <script>
+    (function() {
+      if (sessionStorage.getItem('dungeon_entered') === 'true') {
+        var l = document.getElementById('dungeon-loading-overlay');
+        var e = document.getElementById('dungeon-entrance-modal');
+        if (l) l.style.display = 'none';
+        if (e) e.style.display = 'none';
+      }
+    })();
+  </script>
+
   <!-- Retro CRT Monitor Arcade Scanline Overlay -->
   <div id="crt-overlay"></div>
 

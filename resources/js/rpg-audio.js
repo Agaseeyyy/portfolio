@@ -150,7 +150,7 @@ function initializeRPGFX() {
   });
 }
 
-// Run 8-Bit Dungeon Loading Progress Bar Animation
+// Run 8-Bit Dungeon Loading Progress Bar Animation with Safety Fallback
 function runDungeonLoadingAnimation() {
   const loadingOverlay = document.getElementById('dungeon-loading-overlay');
   const entranceModal = document.getElementById('dungeon-entrance-modal');
@@ -166,10 +166,21 @@ function runDungeonLoadingAnimation() {
     return;
   }
 
+  // Safety fallback: Force hide loading overlay after max 1.4s no matter what
+  const safetyTimeout = setTimeout(() => {
+    if (loadingOverlay && loadingOverlay.style.display !== 'none') {
+      loadingOverlay.classList.add('fade-out');
+      setTimeout(() => {
+        loadingOverlay.style.display = 'none';
+        if (entranceModal) entranceModal.style.display = 'flex';
+      }, 300);
+    }
+  }, 1400);
+
   const steps = [
-    { pct: 25, text: 'INITIALIZING 8-BIT SYNTHESIZERS...' },
-    { pct: 50, text: 'EQUIPPING WEAPONS & MAGIC...' },
-    { pct: 80, text: 'SUMMONING PIXEL SKYLINE...' },
+    { pct: 30, text: 'INITIALIZING 8-BIT SYNTHESIZERS...' },
+    { pct: 65, text: 'EQUIPPING WEAPONS & MAGIC...' },
+    { pct: 90, text: 'SUMMONING PIXEL SKYLINE...' },
     { pct: 100, text: 'DUNGEON READY!' }
   ];
 
@@ -183,6 +194,7 @@ function runDungeonLoadingAnimation() {
       currentStep++;
     } else {
       clearInterval(interval);
+      clearTimeout(safetyTimeout);
       setTimeout(() => {
         loadingOverlay.classList.add('fade-out');
         setTimeout(() => {
@@ -190,10 +202,10 @@ function runDungeonLoadingAnimation() {
           if (entranceModal) {
             entranceModal.style.display = 'flex';
           }
-        }, 450);
-      }, 250);
+        }, 400);
+      }, 200);
     }
-  }, 300);
+  }, 220);
 }
 
 // Enter Dungeon Trigger Function
@@ -288,7 +300,9 @@ document.addEventListener('htmx:afterSwap', function() {
   if (window.rpgAudio) window.rpgAudio.playSelectSound();
 });
 
-// Initialize on DOM ready
-document.addEventListener('DOMContentLoaded', function() {
+// Initialize on DOM ready OR immediate execution if document is already ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeRPGFX);
+} else {
   initializeRPGFX();
-});
+}
