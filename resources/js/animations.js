@@ -4,39 +4,34 @@
  * typewriter effects, and card reveal animations.
  */
 
-// Initialize IntersectionObserver for block bar sequential filling
+// Initialize IntersectionObserver for sequential block bar filling on scroll
 function initializeBlockBarAnimations() {
-  const blockBars = document.querySelectorAll('.block-bar');
+  const blockBars = document.querySelectorAll('.block-bar:not(#dungeon-loading-segmented-bar)');
 
+  // Prepare filled units to be animated on scroll
   blockBars.forEach(bar => {
-    // If elements are already visible in viewport (or swapped via HTMX/back button), fill immediately
     const units = bar.querySelectorAll('.block-unit');
-    units.forEach((unit, index) => {
+    units.forEach(unit => {
       if (unit.classList.contains('filled-hp') || unit.classList.contains('filled-exp') || unit.classList.contains('filled-skill')) {
-        setTimeout(() => {
-          unit.classList.add('filled');
-          unit.style.opacity = '1';
-        }, index * 40);
+        unit.classList.add('animate-fill');
+        unit.classList.remove('filled');
       }
     });
   });
-  
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        const units = entry.target.querySelectorAll('.block-unit');
+        const units = entry.target.querySelectorAll('.block-unit.animate-fill');
         units.forEach((unit, index) => {
-          if (unit.classList.contains('filled-hp') || unit.classList.contains('filled-exp') || unit.classList.contains('filled-skill')) {
-            setTimeout(() => {
-              unit.classList.add('filled');
-              unit.style.opacity = '1';
-            }, index * 40);
-          }
+          setTimeout(() => {
+            unit.classList.add('filled');
+          }, index * 45);
         });
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.15 });
 
   blockBars.forEach(bar => observer.observe(bar));
 }
