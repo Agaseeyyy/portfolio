@@ -250,8 +250,8 @@ button {
   max-width: 780px;
   margin-left: auto !important;
   margin-right: auto !important;
-  margin-top: 2rem !important;
-  margin-bottom: 2rem !important;
+  margin-top: 220px !important;
+  margin-bottom: 2.5rem !important;
   text-align: center;
   z-index: 10;
   animation: retro-float 3.6s steps(6) infinite !important;
@@ -758,10 +758,16 @@ button {
   .fire-pillar-wrapper {
     height: 220px !important;
   }
+  .golden-hero-box {
+    margin-top: 140px !important;
+  }
 }
 
 @media (max-width: 640px) {
   .fire-pillar-wrapper {
     height: 150px !important;
+  }
+  .golden-hero-box {
+    margin-top: 100px !important;
   }
 }
