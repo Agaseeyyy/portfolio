@@ -122,9 +122,9 @@ $version = time();
       <!-- Phase 2: Enter Dungeon Gate (Revealed when loading hits 100%) -->
       <div id="entrance-phase" class="w-full flex flex-col items-center gap-4" style="display: none;">
         <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0 flex items-center justify-center gap-2">
-          <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-6 h-6 object-contain image-rendering-pixelated inline-block align-middle">
+          <img src="<?= base_url('icons/cross-sword.webp') ?>" alt="Cross Swords" class="w-6 h-6 object-contain image-rendering-pixelated inline-block align-middle">
           <span>WELCOME, ADVENTURER!</span>
-          <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-6 h-6 object-contain image-rendering-pixelated inline-block align-middle">
+          <img src="<?= base_url('icons/cross-sword.webp') ?>" alt="Cross Swords" class="w-6 h-6 object-contain image-rendering-pixelated inline-block align-middle">
         </h2>
 
         <div class="flex items-center justify-center gap-3 text-[#c8a951] w-full my-1">
@@ -138,7 +138,7 @@ $version = time();
         </p>
 
         <button onclick="enterDungeon()" class="golden-btn text-xs lg:text-sm py-4 px-8 mt-2 flex items-center justify-center gap-3 cursor-pointer">
-          <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-5 h-5 object-contain image-rendering-pixelated inline-block">
+          <img src="<?= base_url('icons/cross-sword.webp') ?>" alt="Cross Swords" class="w-5 h-5 object-contain image-rendering-pixelated inline-block">
           <span>ENTER DUNGEON</span>
           <span class="rpg-cursor-blink">▶</span>
         </button>
@@ -171,7 +171,7 @@ $version = time();
         '<?= base_url("images/fire-pillar-base.webp") ?>',
         '<?= base_url("images/flame-only.webp") ?>',
         '<?= base_url("images/grass-two.webp") ?>',
-        '<?= base_url("icons/cross-sword.png") ?>'
+        '<?= base_url("icons/cross-sword.webp") ?>'
       ];
 
       var loadedCount = 0;

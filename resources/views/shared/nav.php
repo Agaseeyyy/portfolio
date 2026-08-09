@@ -49,7 +49,7 @@ $roleName = strtoupper(($home['role'] ?? 'DEVELOPER'));
     <div class="flex items-center gap-3">
       <!-- 8-Bit Audio SFX Toggle Button -->
       <div id="audio-toggle-btn" onclick="toggleRPGAudio()" class="w-14 h-14 rpg-pixel-frame flex items-center justify-center shadow-md cursor-pointer hover:border-white transition-colors p-2.5" title="Toggle 8-Bit Audio SFX">
-        <img id="speaker-icon-img" src="<?= base_url('icons/speaker.png') ?>" alt="Audio Toggle" class="w-full h-full object-contain image-rendering-pixelated">
+        <img id="speaker-icon-img" src="<?= base_url('icons/speaker.webp') ?>" alt="Audio Toggle" class="w-full h-full object-contain image-rendering-pixelated">
       </div>
 
       <!-- Mobile Hamburger Button -->

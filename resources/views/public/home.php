@@ -70,7 +70,7 @@ $expBlocks = max(0, min(10, round($expVal / 10)));
   <!-- RPG Section Header with Enlarged 44px sword.png Icon -->
   <div class="rpg-header items-center gap-4 mb-8">
     <div class="w-11 h-11 flex-shrink-0 flex items-center justify-center">
-      <img src="<?= base_url('icons/cross-sword.png') ?>" alt="About Me" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 2px 6px rgba(240,192,64,0.4))">
+      <img src="<?= base_url('icons/cross-sword.webp') ?>" alt="About Me" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 2px 6px rgba(240,192,64,0.4))">
     </div>
     <span class="rpg-title-glow text-lg lg:text-xl">ABOUT ME</span>
     <span class="sub-text text-sm">(CHARACTER STATS)</span>
@@ -102,7 +102,7 @@ $expBlocks = max(0, min(10, round($expVal / 10)));
 
         <!-- Location Stat -->
         <div class="stat-row-item flex items-center gap-4">
-          <img src="<?= base_url('icons/location.png') ?>" alt="Location" class="w-12 h-12 lg:w-14 lg:h-14 shrink-0 object-contain image-pixelated">
+          <img src="<?= base_url('icons/location.webp') ?>" alt="Location" class="w-12 h-12 lg:w-14 lg:h-14 shrink-0 object-contain image-pixelated">
           <div class="flex flex-col justify-center">
             <span class="text-[#f0c040] text-xs font-bold tracking-wider">LOCATION</span>
             <span class="text-white text-xs lg:text-sm leading-snug mt-0.5"><?= htmlspecialchars($location) ?></span>
@@ -114,7 +114,7 @@ $expBlocks = max(0, min(10, round($expVal / 10)));
       <div class="flex flex-col gap-6">
         <!-- Level Stat loaded from DB -->
         <div class="stat-row-item flex items-center gap-4">
-          <img src="<?= base_url('icons/star.png') ?>" alt="Level Star" class="w-12 h-12 lg:w-14 lg:h-14 shrink-0 object-contain image-pixelated">
+          <img src="<?= base_url('icons/star.webp') ?>" alt="Level Star" class="w-12 h-12 lg:w-14 lg:h-14 shrink-0 object-contain image-pixelated">
           <div class="flex flex-col justify-center">
             <span class="text-[#f0c040] text-xs font-bold tracking-wider">LEVEL</span>
             <span class="text-white text-xs lg:text-sm leading-snug mt-0.5"><?= htmlspecialchars($levelText) ?></span>
@@ -123,7 +123,7 @@ $expBlocks = max(0, min(10, round($expVal / 10)));
 
         <!-- Weapon Stat loaded from DB -->
         <div class="stat-row-item flex items-center gap-4">
-          <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Weapon Sword" class="w-12 h-12 lg:w-14 lg:h-14 shrink-0 object-contain image-pixelated">
+          <img src="<?= base_url('icons/cross-sword.webp') ?>" alt="Weapon Sword" class="w-12 h-12 lg:w-14 lg:h-14 shrink-0 object-contain image-pixelated">
           <div class="flex flex-col justify-center">
             <span class="text-[#f0c040] text-xs font-bold tracking-wider">WEAPON</span>
             <span class="text-white text-xs lg:text-sm leading-snug mt-0.5"><?= htmlspecialchars($weaponText) ?></span>
@@ -137,7 +137,7 @@ $expBlocks = max(0, min(10, round($expVal / 10)));
         <div class="flex flex-col gap-2.5">
           <div class="flex justify-between items-center text-xs lg:text-[13px]">
             <span class="text-[#e74c3c] font-bold flex items-center gap-2">
-              <img src="<?= base_url('icons/heart.png') ?>" alt="Heart Icon" class="w-6 h-6 object-contain image-pixelated heart-pulse"> HP
+              <img src="<?= base_url('icons/heart.webp') ?>" alt="Heart Icon" class="w-6 h-6 object-contain image-pixelated heart-pulse"> HP
             </span>
             <span class="text-white font-bold"><?= $hpVal ?>%</span>
           </div>
@@ -152,7 +152,7 @@ $expBlocks = max(0, min(10, round($expVal / 10)));
         <div class="flex flex-col gap-2.5">
           <div class="flex justify-between items-center text-xs lg:text-[13px]">
             <span class="text-[#2ecc71] font-bold flex items-center gap-2">
-              <img src="<?= base_url('icons/star.png') ?>" alt="Exp Star" class="w-6 h-6 object-contain image-pixelated"> EXP
+              <img src="<?= base_url('icons/star.webp') ?>" alt="Exp Star" class="w-6 h-6 object-contain image-pixelated"> EXP
             </span>
             <span class="text-white font-bold"><?= $expVal ?>%</span>
           </div>

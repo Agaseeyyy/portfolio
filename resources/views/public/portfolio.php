@@ -49,7 +49,7 @@ $activeProjects = !empty($validDBProjects) ? array_values(array_slice($validDBPr
   <!-- RPG Section Header with Enlarged quest.png Icon -->
   <div class="rpg-header items-center gap-4 mb-8">
     <div class="w-11 h-11 flex-shrink-0 flex items-center justify-center">
-      <img src="<?= base_url('icons/quest.png') ?>" alt="Quest Log" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 2px 6px rgba(240,192,64,0.4))">
+      <img src="<?= base_url('icons/quest.webp') ?>" alt="Quest Log" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 2px 6px rgba(240,192,64,0.4))">
     </div>
     <span class="rpg-title-glow text-lg lg:text-xl">QUEST LOG</span>
     <span class="sub-text text-sm">(PROJECTS)</span>

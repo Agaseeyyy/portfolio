@@ -70,7 +70,7 @@ View::extend('public/layout');
       <!-- Quest Overview & Description -->
       <div class="nes-container is-dark" style="padding: 1.75rem 2rem;">
         <h2 class="text-[#f0c040] text-xs font-bold tracking-widest uppercase mb-5 flex items-center gap-3 border-b-2 border-[#8b7355] pb-3">
-          <img src="<?= base_url('icons/quest.png') ?>" alt="Quest" class="w-6 h-6 object-contain image-rendering-pixelated">
+          <img src="<?= base_url('icons/quest.webp') ?>" alt="Quest" class="w-6 h-6 object-contain image-rendering-pixelated">
           <span>QUEST OVERVIEW</span>
         </h2>
         <div class="text-[#d0d0e0] text-xs lg:text-[13px] leading-relaxed flex flex-col gap-4 font-normal">
@@ -103,13 +103,13 @@ View::extend('public/layout');
       <?php if (!empty($project['challenges'])): ?>
         <div class="nes-container is-dark" style="padding: 1.75rem 2rem;">
           <h2 class="text-[#f0c040] text-xs font-bold tracking-widest uppercase mb-5 flex items-center gap-3 border-b-2 border-[#8b7355] pb-3">
-            <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-6 h-6 object-contain image-rendering-pixelated">
+            <img src="<?= base_url('icons/cross-sword.webp') ?>" alt="Cross Swords" class="w-6 h-6 object-contain image-rendering-pixelated">
             <span>CHALLENGES OVERCOME</span>
           </h2>
           <ul class="flex flex-col gap-3.5 pl-0 list-none m-0">
             <?php foreach ($project['challenges'] as $challenge): ?>
               <li class="flex items-start gap-3 text-[#d0d0e0] text-xs lg:text-[12.5px] leading-relaxed font-normal">
-                <img src="<?= base_url('icons/cross-sword.png') ?>" alt="Cross Swords" class="w-4 h-4 object-contain image-rendering-pixelated flex-shrink-0 mt-0.5">
+                <img src="<?= base_url('icons/cross-sword.webp') ?>" alt="Cross Swords" class="w-4 h-4 object-contain image-rendering-pixelated flex-shrink-0 mt-0.5">
                 <span><?= htmlspecialchars($challenge) ?></span>
               </li>
             <?php endforeach; ?>
@@ -126,7 +126,7 @@ View::extend('public/layout');
       <?php if (!empty($project['technologies'])): ?>
         <div class="nes-container is-dark" style="padding: 1.75rem 2rem;">
           <h2 class="text-[#f0c040] text-xs font-bold tracking-widest uppercase mb-5 flex items-center gap-3 border-b-2 border-[#8b7355] pb-3">
-            <img src="<?= base_url('icons/inventory.png') ?>" alt="Tech" class="w-6 h-6 object-contain image-rendering-pixelated">
+            <img src="<?= base_url('icons/inventory.webp') ?>" alt="Tech" class="w-6 h-6 object-contain image-rendering-pixelated">
             <span>TECH STACK</span>
           </h2>
           <div class="flex flex-wrap gap-2.5">
@@ -147,7 +147,7 @@ View::extend('public/layout');
       <!-- Quest Links with Custom link.png Icon -->
       <div class="nes-container is-dark" style="padding: 1.75rem 2rem;">
         <h2 class="text-[#f0c040] text-xs font-bold tracking-widest uppercase mb-5 flex items-center gap-3 border-b-2 border-[#8b7355] pb-3">
-          <img src="<?= base_url('icons/link.png') ?>" alt="Link" class="w-6 h-6 object-contain image-rendering-pixelated">
+          <img src="<?= base_url('icons/link.webp') ?>" alt="Link" class="w-6 h-6 object-contain image-rendering-pixelated">
           <span>QUEST LINKS</span>
         </h2>
         <div class="flex flex-col gap-3.5">
@@ -170,7 +170,7 @@ View::extend('public/layout');
       <!-- Share Quest with Custom share.png Icon -->
       <div class="nes-container is-dark" style="padding: 1.75rem 2rem;">
         <h2 class="text-[#f0c040] text-xs font-bold tracking-widest uppercase mb-5 flex items-center gap-3 border-b-2 border-[#8b7355] pb-3">
-          <img src="<?= base_url('icons/share.png') ?>" alt="Share" class="w-6 h-6 object-contain image-rendering-pixelated">
+          <img src="<?= base_url('icons/share.webp') ?>" alt="Share" class="w-6 h-6 object-contain image-rendering-pixelated">
           <span>SHARE QUEST</span>
         </h2>
         <button onclick="navigator.clipboard.writeText(window.location.href); this.textContent='COPIED!'; setTimeout(() => this.textContent='> COPY LINK', 2000);" class="w-full px-4 py-3 bg-[#11162a] border-2 border-[#8b7355] text-white hover:border-[#f0c040] hover:text-[#f0c040] text-center text-xs font-bold uppercase tracking-wider cursor-pointer transition-colors shadow-md">
