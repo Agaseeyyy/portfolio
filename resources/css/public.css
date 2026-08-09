@@ -53,10 +53,17 @@
 
 .dungeon-loading-bar-fill {
   height: 100% !important;
-  width: 0% !important;
-  background-color: #f0c040 !important;
+  width: 0%;
+  background: linear-gradient(90deg, #f0c040 0%, #ffe490 50%, #f0c040 100%) !important;
+  background-size: 200% 100% !important;
   box-shadow: inset -2px -2px 0px #b8860b !important;
-  transition: width 0.08s linear !important;
+  transition: width 0.15s ease-out !important;
+  animation: loading-shimmer 1s infinite linear !important;
+}
+
+@keyframes loading-shimmer {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
 }
 
 .dungeon-card {
