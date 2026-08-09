@@ -28,7 +28,7 @@ $publicDir = dirname(__DIR__, 3) . '/public/';
 $defaultCategories = [
   'frontend' => [
     'title' => 'FRONTEND MAGIC',
-    'icon_img' => 'icons/frontend.png',
+    'icon_img' => 'icons/frontend.webp',
     'items' => [
       ['name' => 'JAVASCRIPT', 'icon' => 'icons/javascript.svg', 'level' => 8],
       ['name' => 'REACT', 'icon' => 'icons/react.svg', 'level' => 8],
@@ -38,7 +38,7 @@ $defaultCategories = [
   ],
   'backend' => [
     'title' => 'BACKEND ENGINES',
-    'icon_img' => 'icons/backend.png',
+    'icon_img' => 'icons/backend.webp',
     'items' => [
       ['name' => 'PHP', 'icon' => 'icons/php.svg', 'level' => 8],
       ['name' => 'NODE.JS', 'icon' => 'icons/nodejs.svg', 'level' => 7],
@@ -48,7 +48,7 @@ $defaultCategories = [
   ],
   'database' => [
     'title' => 'DATA VAULTS',
-    'icon_img' => 'icons/database.png',
+    'icon_img' => 'icons/database.webp',
     'items' => [
       ['name' => 'MYSQL', 'icon' => 'icons/mysql.svg', 'level' => 7],
       ['name' => 'SQL', 'icon' => 'icons/database.svg', 'level' => 7],
@@ -56,7 +56,7 @@ $defaultCategories = [
   ],
   'tools' => [
     'title' => 'EQUIPMENT & TOOLS',
-    'icon_img' => 'icons/inventory.png',
+    'icon_img' => 'icons/inventory.webp',
     'items' => [
       ['name' => 'GIT & GITHUB', 'icon' => 'icons/github.svg', 'level' => 8],
       ['name' => 'VS CODE', 'icon' => 'icons/vscode.svg', 'level' => 9],
@@ -71,10 +71,10 @@ $categories = $defaultCategories;
 // If DB techstack is provided, organize by DB category & proficiency
 if (!empty($techstack)) {
   $groupedDB = [
-    'frontend' => ['title' => 'FRONTEND MAGIC', 'icon_img' => 'icons/frontend.png', 'items' => []],
-    'backend' => ['title' => 'BACKEND ENGINES', 'icon_img' => 'icons/backend.png', 'items' => []],
-    'database' => ['title' => 'DATA VAULTS', 'icon_img' => 'icons/database.png', 'items' => []],
-    'tools' => ['title' => 'EQUIPMENT & TOOLS', 'icon_img' => 'icons/inventory.png', 'items' => []],
+    'frontend' => ['title' => 'FRONTEND MAGIC', 'icon_img' => 'icons/frontend.webp', 'items' => []],
+    'backend' => ['title' => 'BACKEND ENGINES', 'icon_img' => 'icons/backend.webp', 'items' => []],
+    'database' => ['title' => 'DATA VAULTS', 'icon_img' => 'icons/database.webp', 'items' => []],
+    'tools' => ['title' => 'EQUIPMENT & TOOLS', 'icon_img' => 'icons/inventory.webp', 'items' => []],
   ];
 
   foreach ($techstack as $index => $tech) {
@@ -126,7 +126,7 @@ function resolveSkillIconUrl($skill, $slugMap, $publicDir) {
   <!-- RPG Section Header with Enlarged inventory.png Icon -->
   <div class="rpg-header items-center gap-4 mb-8">
     <div class="w-11 h-11 flex-shrink-0 flex items-center justify-center">
-      <img src="<?= base_url('icons/inventory.png') ?>" alt="Inventory" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 2px 6px rgba(240,192,64,0.4))">
+      <img src="<?= base_url('icons/inventory.webp') ?>" alt="Inventory" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 2px 6px rgba(240,192,64,0.4))">
     </div>
     <span class="rpg-title-glow text-lg lg:text-xl">INVENTORY</span>
     <span class="sub-text text-sm">(SKILLS & EQUIPMENT)</span>

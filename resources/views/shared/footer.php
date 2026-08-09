@@ -69,7 +69,7 @@ $email = $contact['email'] ?? 'bustargaagassi1018@gmail.com';
 
       <?php if (!empty($email)): ?>
         <a href="mailto:<?= htmlspecialchars($email) ?>" class="social-icon-box w-[76px] h-[76px] bg-[#11162a] border-4 border-[#8b7355] flex items-center justify-center text-white no-underline shadow-lg" title="Email">
-          <img src="<?= base_url('icons/mail.png') ?>" alt="Mail Icon" class="w-10 h-10 object-contain image-pixelated">
+          <img src="<?= base_url('icons/mail.webp') ?>" alt="Mail Icon" class="w-10 h-10 object-contain image-pixelated">
         </a>
       <?php endif; ?>
     </div>
