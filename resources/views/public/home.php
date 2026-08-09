@@ -26,11 +26,11 @@ $expBlocks = max(0, min(10, round($expVal / 10)));
 ?>
 
 <!-- Hero Header & Background Image -->
-<header id="home" class="relative pt-24 pb-12 overflow-hidden flex flex-col items-center justify-center min-h-[85vh]">
+<header id="home" class="relative pt-24 pb-8 overflow-hidden flex flex-col items-center justify-center">
   <!-- Hero Sky Pixel Banner - Full height with smooth gradient fade into #0a0f24 -->
-  <div class="absolute top-0 left-0 right-0 h-[720px] lg:h-[800px] z-0 overflow-hidden pointer-events-none opacity-90">
+  <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-90">
     <img src="<?= base_url('images/home-sky.png') ?>" alt="Pixel Art Night City" class="w-full h-full object-cover object-top m-0 p-0">
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0f24]/30 via-60% to-[#0a0f24]"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0f24]/30 via-70% to-[#0a0f24]"></div>
   </div>
 
   <!-- Hero Content Box (Golden Dialog) - Extra Large Text Hierarchy -->
