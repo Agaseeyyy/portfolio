@@ -93,7 +93,7 @@ $expBlocks = max(0, min(10, round($expVal / 10)));
       <div class="flex flex-col gap-6">
         <!-- Class Stat -->
         <div class="stat-row-item flex items-center gap-4">
-          <span class="text-3xl lg:text-4xl shrink-0">🛡️</span>
+          <img src="<?= base_url('icons/shield.webp') ?>" alt="Class Shield" class="w-12 h-12 lg:w-14 lg:h-14 shrink-0 object-contain image-pixelated">
           <div class="flex flex-col justify-center">
             <span class="text-[#f0c040] text-xs font-bold tracking-wider">CLASS</span>
             <span class="text-white text-xs lg:text-sm leading-snug mt-0.5"><?= htmlspecialchars($home['role'] ?? 'Full Stack Developer') ?></span>
