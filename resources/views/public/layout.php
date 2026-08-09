@@ -98,7 +98,7 @@ $version = time();
 <body class="bg-[#0a0f24] text-white font-['Press_Start_2P'] antialiased selection:bg-[#f0c040] selection:text-black" hx-boost="true" hx-select="#main-content" hx-target="#main-content" hx-swap="innerHTML transition:true">
   
   <!-- 8-Bit Retro Dungeon Entrance & Loading Screen (100% Solid Opaque Backdrop) -->
-  <div id="dungeon-loading-overlay" style="background-color: #0a0f24 !important; background: radial-gradient(circle at center, #0e1635 0%, #060918 100%), url('<?= $homeSkyBg ?>') center top / cover no-repeat !important;">
+  <div id="dungeon-loading-overlay" style="background-color: #0a0f24 !important; background-image: radial-gradient(circle at center, rgba(10, 15, 36, 0.35) 0%, rgba(6, 9, 24, 0.85) 100%), url('<?= $homeSkyBg ?>') !important; background-position: center top !important; background-size: cover !important; background-repeat: no-repeat !important;">
     <div class="dungeon-card flex flex-col items-center justify-center gap-5">
       
       <!-- Favicon Icon -->
