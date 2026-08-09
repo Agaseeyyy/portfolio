@@ -44,6 +44,16 @@ $validDBProjects = array_filter($projects ?? [], function($p) {
 });
 
 $activeProjects = !empty($validDBProjects) ? array_values(array_slice($validDBProjects, 0, 4)) : $defaultProjects;
+
+$publicDir = dirname(__DIR__, 3) . '/public/';
+$slugMap = [
+  'REACT' => 'react', 'NEXT.JS' => 'react', 'TYPESCRIPT' => 'javascript',
+  'TS' => 'javascript', 'TAILWIND' => 'tailwind', 'TAILWIND CSS' => 'tailwind',
+  'STRIPE' => 'api-network', 'API' => 'api-network', 'FIREBASE' => 'database',
+  'CSS' => 'css', 'VITE' => 'code-brackets', 'CHART.JS' => 'graphics-design',
+  'PHP' => 'php', 'MYSQL' => 'mysql', 'GIT' => 'git', 'GITHUB' => 'github',
+  'NODE.JS' => 'nodejs', 'PYTHON' => 'python', 'JAVA' => 'java', 'HTML' => 'html-tag'
+];
 ?>
 <section id="quest-log" class="max-w-7xl mx-auto px-6 py-14">
   <!-- RPG Section Header with Enlarged quest.png Icon -->
