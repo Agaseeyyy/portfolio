@@ -1,7 +1,7 @@
 <?php
 /**
  * Main Layout Template - 8-Bit NES RPG Style
- * Enhanced with Solid Backdrop, True Network-Synced Loading Progress, Manual Scroll Restoration, SEO Meta Tags, and JSON-LD Schema
+ * Enhanced with 10-Block Segmented HP/EXP Style Loading Bar, Solid Backdrop, Manual Scroll Restoration, SEO Meta Tags, and JSON-LD Schema
  */
 use app\core\View;
 
@@ -106,14 +106,27 @@ $version = time();
         <img src="<?= base_url('images/favicon.ico') ?>" alt="Favicon" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.7))">
       </div>
 
-      <!-- Phase 1: Filling Loading Progress Bar -->
+      <!-- Phase 1: 10-Block Segmented HP/EXP Style Loading Progress Bar -->
       <div id="loading-phase" class="w-full flex flex-col items-center gap-3">
-        <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0">
-          LOADING DUNGEON ASSETS...
+        <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0 flex items-center justify-center gap-3">
+          <span>LOADING DUNGEON ASSETS...</span>
+          <span id="dungeon-loading-pct" class="text-white font-bold">0%</span>
         </h2>
-        <div class="dungeon-loading-bar-wrapper">
-          <div id="dungeon-loading-bar-fill" class="dungeon-loading-bar-fill" style="width: 0%;"></div>
+        
+        <!-- 10-Segment Block Bar (HP & EXP Style) -->
+        <div id="dungeon-loading-segmented-bar" class="block-bar w-full max-w-[440px] my-2">
+          <div class="block-unit"></div>
+          <div class="block-unit"></div>
+          <div class="block-unit"></div>
+          <div class="block-unit"></div>
+          <div class="block-unit"></div>
+          <div class="block-unit"></div>
+          <div class="block-unit"></div>
+          <div class="block-unit"></div>
+          <div class="block-unit"></div>
+          <div class="block-unit"></div>
         </div>
+
         <p id="dungeon-loading-subtext" class="text-[#8a8aa8] text-[10px] uppercase tracking-wider font-normal m-0 min-h-[18px]">
           INITIALIZING 8-BIT SYNTHESIZERS...
         </p>
@@ -147,7 +160,7 @@ $version = time();
     </div>
   </div>
 
-  <!-- True Network-Synced Loading Progress & Gate Script -->
+  <!-- Segmented HP/EXP Style Loading Progress Bar Script -->
   <script>
     (function() {
       // Force scroll position to top
@@ -158,8 +171,8 @@ $version = time();
       var loadingOverlay = document.getElementById('dungeon-loading-overlay');
       var loadingPhase = document.getElementById('loading-phase');
       var entrancePhase = document.getElementById('entrance-phase');
-      var fillBar = document.getElementById('dungeon-loading-bar-fill');
       var subtext = document.getElementById('dungeon-loading-subtext');
+      var pctText = document.getElementById('dungeon-loading-pct');
 
       if (!loadingOverlay) return;
 
@@ -170,12 +183,25 @@ $version = time();
       var steps = [
         { threshold: 30, text: 'INITIALIZING 8-BIT SYNTHESIZERS...' },
         { threshold: 60, text: 'EQUIPPING WEAPONS & MAGIC...' },
-        { threshold: 88, text: 'DOWNLOADING GRAPHICS & ASSETS...' },
+        { threshold: 90, text: 'DOWNLOADING GRAPHICS & ASSETS...' },
         { threshold: 100, text: 'DUNGEON READY!' }
       ];
 
-      function updateUI(pct) {
-        if (fillBar) fillBar.style.width = pct + '%';
+      function updateSegmentedUI(pct) {
+        var blocks = document.querySelectorAll('#dungeon-loading-segmented-bar .block-unit');
+        var filledCount = Math.floor(pct / 10);
+        
+        for (var b = 0; b < blocks.length; b++) {
+          if (b < filledCount) {
+            blocks[b].classList.add('filled-skill');
+            blocks[b].style.opacity = '1';
+          } else {
+            blocks[b].classList.remove('filled-skill');
+          }
+        }
+
+        if (pctText) pctText.textContent = pct + '%';
+
         for (var i = 0; i < steps.length; i++) {
           if (pct <= steps[i].threshold) {
             if (subtext) subtext.textContent = steps[i].text;
@@ -184,31 +210,31 @@ $version = time();
         }
       }
 
-      // Interval: Gradually progress to 88% max until window.onload fires
+      // Fill blocks progressively up to 90% max while waiting for network load
       var animInterval = setInterval(function() {
         if (isCompleted) return;
 
         if (!isWindowLoaded) {
-          if (currentPct < 88) {
-            currentPct += Math.floor(Math.random() * 5) + 2;
-            if (currentPct > 88) currentPct = 88;
-            updateUI(currentPct);
+          if (currentPct < 90) {
+            currentPct += 10; // Fill 1 block (10%) per tick
+            if (currentPct > 90) currentPct = 90;
+            updateSegmentedUI(currentPct);
           }
         } else {
-          // Network asset loading 100% complete -> finish progress bar to 100%
-          currentPct += 6;
+          // Window/Network finished loading -> light up remaining blocks to 100%
+          currentPct += 10;
           if (currentPct >= 100) {
             currentPct = 100;
             isCompleted = true;
             clearInterval(animInterval);
-            updateUI(100);
+            updateSegmentedUI(100);
             if (subtext) subtext.textContent = 'DUNGEON READY!';
             setTimeout(revealEntrance, 220);
           } else {
-            updateUI(currentPct);
+            updateSegmentedUI(currentPct);
           }
         }
-      }, 50);
+      }, 100);
 
       function markWindowLoaded() {
         isWindowLoaded = true;
