@@ -35,19 +35,22 @@ View::extend('public/layout');
       <div class="flex flex-wrap items-center gap-3 pt-3 border-t border-[#232c46]">
         <?php if (!empty($project['role'])): ?>
           <span class="quest-tag-badge flex items-center gap-2">
-            <span>🛡️ ROLE:</span>
+            <img src="<?= base_url('icons/shield.webp') ?>" alt="Role" class="w-4 h-4 object-contain image-rendering-pixelated inline-block">
+            <span>ROLE:</span>
             <span class="text-white"><?= htmlspecialchars($project['role']) ?></span>
           </span>
         <?php endif; ?>
         <?php if ($duration): ?>
           <span class="quest-tag-badge flex items-center gap-2">
-            <span>⏱️ DURATION:</span>
+            <img src="<?= base_url('icons/clock.webp') ?>" alt="Duration" class="w-4 h-4 object-contain image-rendering-pixelated inline-block">
+            <span>DURATION:</span>
             <span class="text-white"><?= htmlspecialchars($duration) ?></span>
           </span>
         <?php endif; ?>
         <?php if ($dateRange): ?>
           <span class="quest-tag-badge flex items-center gap-2">
-            <span>📅 TIMELINE:</span>
+            <img src="<?= base_url('icons/calendar.webp') ?>" alt="Timeline" class="w-4 h-4 object-contain image-rendering-pixelated inline-block">
+            <span>TIMELINE:</span>
             <span class="text-white"><?= htmlspecialchars($dateRange) ?></span>
           </span>
         <?php endif; ?>
@@ -85,7 +88,7 @@ View::extend('public/layout');
       <?php if (!empty($project['key_features'])): ?>
         <div class="nes-container is-dark" style="padding: 1.75rem 2rem;">
           <h2 class="text-[#f0c040] text-xs font-bold tracking-widest uppercase mb-5 flex items-center gap-3 border-b-2 border-[#8b7355] pb-3">
-            <span class="text-base">⚡</span>
+            <img src="<?= base_url('icons/star.webp') ?>" alt="Star" class="w-6 h-6 object-contain image-rendering-pixelated">
             <span>KEY FEATURES & ABILITIES</span>
           </h2>
           <ul class="flex flex-col gap-3.5 pl-0 list-none m-0">
