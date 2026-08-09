@@ -99,22 +99,22 @@ $version = time();
   
   <!-- 8-Bit Retro Dungeon Entrance & Loading Screen -->
   <div id="dungeon-loading-overlay" style="background-color: #0a0f24 !important; background-image: radial-gradient(circle at center, rgba(10, 15, 36, 0.35) 0%, rgba(6, 9, 24, 0.85) 100%), url('<?= $homeSkyBg ?>') !important; background-position: center top !important; background-size: cover !important; background-repeat: no-repeat !important;">
-    <div class="dungeon-card flex flex-col items-center justify-center gap-5">
+    <div class="dungeon-card flex flex-col items-center justify-center text-center gap-5 mx-auto">
       
       <!-- Favicon Icon -->
-      <div class="w-16 h-16 flex-shrink-0 mb-1">
+      <div class="w-16 h-16 flex-shrink-0 mx-auto mb-1">
         <img src="<?= base_url('images/favicon.ico') ?>" alt="Favicon" class="w-full h-full object-contain image-rendering-pixelated filter drop-shadow(0 0 12px rgba(240,192,64,0.7))">
       </div>
 
       <!-- Phase 1: 10-Block Segmented HP/EXP Style Loading Progress Bar -->
-      <div id="loading-phase" class="w-full flex flex-col items-center gap-3">
-        <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0 flex items-center justify-center gap-3">
+      <div id="loading-phase" class="w-full flex flex-col items-center justify-center text-center gap-3 mx-auto">
+        <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0 flex items-center justify-center gap-3 w-full text-center">
           <span>LOADING DUNGEON ASSETS...</span>
-          <span id="dungeon-loading-pct" class="text-white font-bold">0%</span>
+          <span id="dungeon-loading-pct" class="text-white font-bold inline-block min-w-[50px] text-left">0%</span>
         </h2>
         
         <!-- 10-Segment Block Bar (HP & EXP Style) -->
-        <div id="dungeon-loading-segmented-bar" class="block-bar w-full max-w-[440px] my-2">
+        <div id="dungeon-loading-segmented-bar" class="block-bar w-full max-w-[440px] mx-auto my-2">
           <div class="block-unit"></div>
           <div class="block-unit"></div>
           <div class="block-unit"></div>
@@ -127,7 +127,7 @@ $version = time();
           <div class="block-unit"></div>
         </div>
 
-        <p id="dungeon-loading-subtext" class="text-[#8a8aa8] text-[10px] uppercase tracking-wider font-normal m-0 min-h-[18px]">
+        <p id="dungeon-loading-subtext" class="text-[#8a8aa8] text-[10px] uppercase tracking-wider font-normal m-0 min-h-[18px] text-center w-full">
           INITIALIZING 8-BIT SYNTHESIZERS...
         </p>
       </div>
