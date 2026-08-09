@@ -464,14 +464,26 @@ button {
 }
 
 .quest-tag-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background-color: #11162a !important;
   border: 1px solid #323d52;
   color: #c0c0d8 !important;
   font-size: 9.5px;
-  padding: 5px 8px;
+  padding: 4px 7px;
   text-transform: uppercase;
   transition: border-color 0.2s, color 0.2s;
+}
+
+.quest-tag-badge img {
+  width: 14px !important;
+  height: 14px !important;
+  max-width: 14px !important;
+  max-height: 14px !important;
+  object-fit: contain !important;
+  display: inline-block !important;
+  flex-shrink: 0 !important;
 }
 
 .quest-card-item:hover .quest-tag-badge {

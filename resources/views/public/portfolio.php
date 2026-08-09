@@ -85,9 +85,9 @@ $publicDir = dirname(__DIR__, 3) . '/public/';
             </p>
           </div>
 
-          <!-- Tech Badges with Icons loaded dynamically from DB -->
-          <div class="flex flex-wrap gap-2 mt-auto pt-3 border-t border-[#1d243c]">
-            <?php foreach (array_slice($pTech, 0, 4) as $tech): 
+          <!-- Tech Badges (Icons Only) loaded dynamically from DB -->
+          <div class="flex flex-wrap items-center gap-2 mt-auto pt-3 border-t border-[#1d243c]">
+            <?php foreach (array_slice($pTech, 0, 5) as $tech): 
               $tName = strtoupper($tech['tech_name'] ?? '');
               $dbIcon = $tech['icon'] ?? '';
               $iconUrl = null;
@@ -102,12 +102,13 @@ $publicDir = dirname(__DIR__, 3) . '/public/';
                 }
               }
             ?>
-              <span class="quest-tag-badge flex items-center gap-1.5 px-2 py-1">
-                <?php if ($iconUrl): ?>
-                  <img src="<?= $iconUrl ?>" alt="" class="w-3.5 h-3.5 object-contain flex-shrink-0">
-                <?php endif; ?>
-                <span><?= htmlspecialchars($tName) ?></span>
-              </span>
+              <?php if ($iconUrl): ?>
+                <div class="w-7 h-7 p-1.5 bg-[#11162a] border border-[#2b354d] hover:border-[#f0c040] flex items-center justify-center transition-colors shadow-sm" title="<?= htmlspecialchars($tName) ?>">
+                  <img src="<?= $iconUrl ?>" alt="<?= htmlspecialchars($tName) ?>" class="w-full h-full object-contain filter drop-shadow(0 1px 2px rgba(0,0,0,0.5))">
+                </div>
+              <?php else: ?>
+                <span class="quest-tag-badge" title="<?= htmlspecialchars($tName) ?>"><?= htmlspecialchars(substr($tName, 0, 4)) ?></span>
+              <?php endif; ?>
             <?php endforeach; ?>
           </div>
         </div>
