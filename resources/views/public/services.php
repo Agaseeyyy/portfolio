@@ -8,20 +8,6 @@
 
 use app\models\TechstackModel;
 
-// Helper to resolve icon by tech name
-$slugMap = [
-  'JAVASCRIPT' => 'javascript', 'JS' => 'javascript',
-  'REACT' => 'react', 'REACTS' => 'react', 'REACT.JS' => 'react',
-  'TYPESCRIPT' => 'typescript', 'TS' => 'typescript',
-  'NODE.JS' => 'nodejs', 'NODE' => 'nodejs',
-  'PHP' => 'php', 'LARAVEL' => 'laravel',
-  'TAILWIND CSS' => 'tailwind', 'TAILWIND' => 'tailwind', 'CSS' => 'css', 'HTML' => 'html-black',
-  'PYTHON' => 'python', 'SQL' => 'mysql', 'MYSQL' => 'mysql',
-  'GIT & GITHUB' => 'github', 'GIT' => 'git', 'GITHUB' => 'github',
-  'LINUX / TERMINAL' => 'terminal', 'LINUX' => 'linux', 'TERMINAL' => 'terminal',
-  'VS CODE' => 'vscode', 'POSTMAN' => 'postman', 'JAVA' => 'java', 'SPRING BOOT' => 'spring-boot'
-];
-
 $publicDir = dirname(__DIR__, 3) . '/public/';
 
 // Default categorized data with custom PNG category icons
@@ -87,9 +73,11 @@ if (!empty($techstack)) {
     if (!empty($dbIcon) && file_exists($publicDir . $dbIcon)) {
       $iconPath = $dbIcon;
     } else {
-      $slug = $slugMap[$tName] ?? strtolower(str_replace([' ', '&', '.', '/'], '', $tName));
-      if (file_exists($publicDir . 'icons/' . $slug . '.svg')) {
-        $iconPath = 'icons/' . $slug . '.svg';
+      $cleanName = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $tName));
+      if (!empty($cleanName) && file_exists($publicDir . 'icons/' . $cleanName . '.svg')) {
+        $iconPath = 'icons/' . $cleanName . '.svg';
+      } elseif (!empty($cleanName) && file_exists($publicDir . 'icons/' . $cleanName . '.webp')) {
+        $iconPath = 'icons/' . $cleanName . '.webp';
       }
     }
 
@@ -109,17 +97,21 @@ if (!empty($techstack)) {
   }
 }
 
-// Function to resolve icon URL
-function resolveSkillIconUrl($skill, $slugMap, $publicDir) {
-  if (!empty($skill['icon']) && file_exists($publicDir . $skill['icon'])) {
-    return base_url($skill['icon']);
+// Function to resolve icon URL dynamically
+if (!function_exists('resolveSkillIconUrl')) {
+  function resolveSkillIconUrl($skill, $publicDir) {
+    if (!empty($skill['icon']) && file_exists($publicDir . $skill['icon'])) {
+      return base_url($skill['icon']);
+    }
+    $sName = strtoupper($skill['name'] ?? '');
+    $cleanName = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $sName));
+    if (!empty($cleanName) && file_exists($publicDir . 'icons/' . $cleanName . '.svg')) {
+      return base_url('icons/' . $cleanName . '.svg');
+    } elseif (!empty($cleanName) && file_exists($publicDir . 'icons/' . $cleanName . '.webp')) {
+      return base_url('icons/' . $cleanName . '.webp');
+    }
+    return null;
   }
-  $sName = strtoupper($skill['name'] ?? '');
-  $slug = $slugMap[$sName] ?? strtolower(str_replace([' ', '&', '.', '/'], '', $sName));
-  if (file_exists($publicDir . 'icons/' . $slug . '.svg')) {
-    return base_url('icons/' . $slug . '.svg');
-  }
-  return null;
 }
 ?>
 <section id="inventory" class="max-w-7xl mx-auto px-6 py-14">
@@ -147,7 +139,7 @@ function resolveSkillIconUrl($skill, $slugMap, $publicDir) {
         <!-- Skills List -->
         <div class="flex flex-col gap-5">
           <?php foreach ($catData['items'] as $skill): 
-            $iconUrl = resolveSkillIconUrl($skill, $slugMap, $publicDir);
+            $iconUrl = resolveSkillIconUrl($skill, $publicDir);
           ?>
             <div class="flex items-center justify-between gap-4 stat-row-item">
               <!-- 8-Bit Icon Frame Badges -->

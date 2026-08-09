@@ -46,14 +46,6 @@ $validDBProjects = array_filter($projects ?? [], function($p) {
 $activeProjects = !empty($validDBProjects) ? array_values(array_slice($validDBProjects, 0, 4)) : $defaultProjects;
 
 $publicDir = dirname(__DIR__, 3) . '/public/';
-$slugMap = [
-  'REACT' => 'react', 'NEXT.JS' => 'react', 'TYPESCRIPT' => 'javascript',
-  'TS' => 'javascript', 'TAILWIND' => 'tailwind', 'TAILWIND CSS' => 'tailwind',
-  'STRIPE' => 'api-network', 'API' => 'api-network', 'FIREBASE' => 'database',
-  'CSS' => 'css', 'VITE' => 'code-brackets', 'CHART.JS' => 'graphics-design',
-  'PHP' => 'php', 'MYSQL' => 'mysql', 'GIT' => 'git', 'GITHUB' => 'github',
-  'NODE.JS' => 'nodejs', 'PYTHON' => 'python', 'JAVA' => 'java', 'HTML' => 'html-tag'
-];
 ?>
 <section id="quest-log" class="max-w-7xl mx-auto px-6 py-14">
   <!-- RPG Section Header with Enlarged quest.png Icon -->
@@ -93,7 +85,7 @@ $slugMap = [
             </p>
           </div>
 
-          <!-- Tech Badges with Icons loaded from DB -->
+          <!-- Tech Badges with Icons loaded dynamically from DB -->
           <div class="flex flex-wrap gap-2 mt-auto pt-3 border-t border-[#1d243c]">
             <?php foreach (array_slice($pTech, 0, 4) as $tech): 
               $tName = strtoupper($tech['tech_name'] ?? '');
@@ -102,9 +94,11 @@ $slugMap = [
               if (!empty($dbIcon) && file_exists($publicDir . $dbIcon)) {
                 $iconUrl = base_url($dbIcon);
               } else {
-                $slug = $slugMap[$tName] ?? strtolower(str_replace([' ', '&', '.', '/', '-'], '', $tName));
-                if (file_exists($publicDir . 'icons/' . $slug . '.svg')) {
-                  $iconUrl = base_url('icons/' . $slug . '.svg');
+                $cleanName = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $tName));
+                if (!empty($cleanName) && file_exists($publicDir . 'icons/' . $cleanName . '.svg')) {
+                  $iconUrl = base_url('icons/' . $cleanName . '.svg');
+                } elseif (!empty($cleanName) && file_exists($publicDir . 'icons/' . $cleanName . '.webp')) {
+                  $iconUrl = base_url('icons/' . $cleanName . '.webp');
                 }
               }
             ?>
