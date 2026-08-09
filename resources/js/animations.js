@@ -4,29 +4,19 @@
  * typewriter effects, and card reveal animations.
  */
 
-// Initialize IntersectionObserver for sequential block bar filling on scroll
+// Initialize IntersectionObserver for sequential 0% -> target block bar filling on scroll
 function initializeBlockBarAnimations() {
   const blockBars = document.querySelectorAll('.block-bar:not(#dungeon-loading-segmented-bar)');
-
-  // Prepare filled units to be animated on scroll
-  blockBars.forEach(bar => {
-    const units = bar.querySelectorAll('.block-unit');
-    units.forEach(unit => {
-      if (unit.classList.contains('filled-hp') || unit.classList.contains('filled-exp') || unit.classList.contains('filled-skill')) {
-        unit.classList.add('animate-fill');
-        unit.classList.remove('filled');
-      }
-    });
-  });
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        const units = entry.target.querySelectorAll('.block-unit.animate-fill');
+        const units = entry.target.querySelectorAll('.block-unit[data-target="true"]');
         units.forEach((unit, index) => {
+          const fillClass = unit.getAttribute('data-fill-class') || 'filled-skill';
           setTimeout(() => {
-            unit.classList.add('filled');
-          }, index * 45);
+            unit.classList.add(fillClass);
+          }, index * 55);
         });
         observer.unobserve(entry.target);
       }

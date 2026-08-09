@@ -143,7 +143,7 @@ $expBlocks = max(0, min(10, round($expVal / 10)));
           </div>
           <div class="block-bar">
             <?php for ($i = 0; $i < 10; $i++): ?>
-              <div class="block-unit <?= $i < $hpBlocks ? 'filled-hp animate-fill' : '' ?>"></div>
+              <div class="block-unit" data-fill-class="filled-hp" data-target="<?= $i < $hpBlocks ? 'true' : 'false' ?>"></div>
             <?php endfor; ?>
           </div>
         </div>
@@ -158,7 +158,7 @@ $expBlocks = max(0, min(10, round($expVal / 10)));
           </div>
           <div class="block-bar">
             <?php for ($i = 0; $i < 10; $i++): ?>
-              <div class="block-unit <?= $i < $expBlocks ? 'filled-exp animate-fill' : '' ?>"></div>
+              <div class="block-unit" data-fill-class="filled-exp" data-target="<?= $i < $expBlocks ? 'true' : 'false' ?>"></div>
             <?php endfor; ?>
           </div>
         </div>

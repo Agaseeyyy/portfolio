@@ -167,7 +167,7 @@ function resolveSkillIconUrl($skill, $slugMap, $publicDir) {
               <!-- Progress Block Bar (1-10 units) -->
               <div class="block-bar">
                 <?php for ($i = 0; $i < 10; $i++): ?>
-                  <div class="block-unit <?= $i < $skill['level'] ? 'filled-skill animate-fill' : '' ?>"></div>
+                  <div class="block-unit" data-fill-class="filled-skill" data-target="<?= $i < $skill['level'] ? 'true' : 'false' ?>"></div>
                 <?php endfor; ?>
               </div>
             </div>
