@@ -1,7 +1,7 @@
 <?php
 /**
  * Main Layout Template - 8-Bit NES RPG Style
- * Enhanced with Solid Backdrop, Real-World Network Asset Preloader, Manual Scroll Restoration, SEO Meta Tags, and JSON-LD Schema
+ * Enhanced with Solid Backdrop, Smooth 8-Bit Loading Animation, Manual Scroll Restoration, SEO Meta Tags, and JSON-LD Schema
  */
 use app\core\View;
 
@@ -97,7 +97,7 @@ $version = time();
 </head>
 <body class="bg-[#0a0f24] text-white font-['Press_Start_2P'] antialiased selection:bg-[#f0c040] selection:text-black" hx-boost="true" hx-select="#main-content" hx-target="#main-content" hx-swap="innerHTML transition:true">
   
-  <!-- 8-Bit Retro Dungeon Entrance & Loading Screen (100% Solid Opaque Backdrop) -->
+  <!-- 8-Bit Retro Dungeon Entrance & Loading Screen -->
   <div id="dungeon-loading-overlay" style="background-color: #0a0f24 !important; background-image: radial-gradient(circle at center, rgba(10, 15, 36, 0.35) 0%, rgba(6, 9, 24, 0.85) 100%), url('<?= $homeSkyBg ?>') !important; background-position: center top !important; background-size: cover !important; background-repeat: no-repeat !important;">
     <div class="dungeon-card flex flex-col items-center justify-center gap-5">
       
@@ -147,7 +147,7 @@ $version = time();
     </div>
   </div>
 
-  <!-- Real-World Network Resource Preloader & Progress Tracker Script -->
+  <!-- Smooth 8-Bit Progress Bar Fill Animation & Gate Script -->
   <script>
     (function() {
       // Force scroll position to top
@@ -163,70 +163,38 @@ $version = time();
 
       if (!loadingOverlay) return;
 
-      // Real network preloader assets
-      var assetsToPreload = [
-        '<?= $homeSkyBg ?>',
-        '<?= base_url("images/me.webp") ?>',
-        '<?= base_url("images/me.gif") ?>',
-        '<?= base_url("images/fire-pillar-base.webp") ?>',
-        '<?= base_url("images/flame-only.webp") ?>',
-        '<?= base_url("images/grass-two.webp") ?>',
-        '<?= base_url("icons/cross-sword.webp") ?>'
+      var currentPct = 0;
+      var steps = [
+        { threshold: 30, text: 'INITIALIZING 8-BIT SYNTHESIZERS...' },
+        { threshold: 65, text: 'EQUIPPING WEAPONS & MAGIC...' },
+        { threshold: 95, text: 'PREPARING DUNGEON GRAPHICS...' },
+        { threshold: 100, text: 'DUNGEON READY!' }
       ];
 
-      var loadedCount = 0;
-      var totalAssets = assetsToPreload.length;
-      var isFinished = false;
+      var animInterval = setInterval(function() {
+        if (currentPct < 100) {
+          currentPct += Math.floor(Math.random() * 8) + 4;
+          if (currentPct > 100) currentPct = 100;
 
-      function updateProgress(pct, message) {
-        if (fillBar) fillBar.style.width = Math.min(100, Math.max(0, pct)) + '%';
-        if (subtext && message) subtext.textContent = message;
-      }
+          if (fillBar) fillBar.style.width = currentPct + '%';
 
-      function onAssetLoaded() {
-        if (isFinished) return;
-        loadedCount++;
-        var calculatedPct = Math.round((loadedCount / totalAssets) * 85); // 0% to 85% based on real image downloads
-        
-        var message = 'LOADING DUNGEON ASSETS (' + loadedCount + '/' + totalAssets + ')...';
-        if (calculatedPct > 40) message = 'EQUIPPING WEAPONS & MAGIC...';
-        if (calculatedPct > 70) message = 'PREPARING DUNGEON GRAPHICS...';
-        
-        updateProgress(calculatedPct, message);
-
-        if (loadedCount >= totalAssets) {
-          finishLoading();
+          for (var i = 0; i < steps.length; i++) {
+            if (currentPct <= steps[i].threshold) {
+              if (subtext) subtext.textContent = steps[i].text;
+              break;
+            }
+          }
+        } else {
+          clearInterval(animInterval);
+          if (subtext) subtext.textContent = 'DUNGEON READY!';
+          setTimeout(revealEntrance, 200);
         }
-      }
-
-      // Preload images via HTML5 Image API
-      assetsToPreload.forEach(function(src) {
-        var img = new Image();
-        img.onload = onAssetLoaded;
-        img.onerror = onAssetLoaded; // Ensure progress continues even if 1 image fails
-        img.src = src;
-      });
-
-      function finishLoading() {
-        if (isFinished) return;
-        isFinished = true;
-        updateProgress(100, 'DUNGEON READY!');
-        setTimeout(revealEntrance, 180);
-      }
-
-      if (document.readyState === 'complete') {
-        onAssetLoaded();
-      } else {
-        window.addEventListener('load', finishLoading);
-      }
+      }, 40);
 
       function revealEntrance() {
         if (loadingPhase) loadingPhase.style.display = 'none';
         if (entrancePhase) entrancePhase.style.display = 'flex';
       }
-
-      // Safety timeout: Maximum 3.5 seconds on slow 2G network connections
-      setTimeout(finishLoading, 3500);
     })();
 
     function enterDungeon() {
