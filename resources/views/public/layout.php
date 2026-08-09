@@ -1,7 +1,7 @@
 <?php
 /**
  * Main Layout Template - 8-Bit NES RPG Style
- * Enhanced with Solid Backdrop, Smooth 8-Bit Loading Animation, Manual Scroll Restoration, SEO Meta Tags, and JSON-LD Schema
+ * Enhanced with Solid Backdrop, True Network-Synced Loading Progress, Manual Scroll Restoration, SEO Meta Tags, and JSON-LD Schema
  */
 use app\core\View;
 
@@ -147,7 +147,7 @@ $version = time();
     </div>
   </div>
 
-  <!-- Smooth 8-Bit Progress Bar Fill Animation & Gate Script -->
+  <!-- True Network-Synced Loading Progress & Gate Script -->
   <script>
     (function() {
       // Force scroll position to top
@@ -164,32 +164,61 @@ $version = time();
       if (!loadingOverlay) return;
 
       var currentPct = 0;
+      var isWindowLoaded = false;
+      var isCompleted = false;
+
       var steps = [
         { threshold: 30, text: 'INITIALIZING 8-BIT SYNTHESIZERS...' },
-        { threshold: 65, text: 'EQUIPPING WEAPONS & MAGIC...' },
-        { threshold: 95, text: 'PREPARING DUNGEON GRAPHICS...' },
+        { threshold: 60, text: 'EQUIPPING WEAPONS & MAGIC...' },
+        { threshold: 88, text: 'DOWNLOADING GRAPHICS & ASSETS...' },
         { threshold: 100, text: 'DUNGEON READY!' }
       ];
 
+      function updateUI(pct) {
+        if (fillBar) fillBar.style.width = pct + '%';
+        for (var i = 0; i < steps.length; i++) {
+          if (pct <= steps[i].threshold) {
+            if (subtext) subtext.textContent = steps[i].text;
+            break;
+          }
+        }
+      }
+
+      // Interval: Gradually progress to 88% max until window.onload fires
       var animInterval = setInterval(function() {
-        if (currentPct < 100) {
-          currentPct += Math.floor(Math.random() * 8) + 4;
-          if (currentPct > 100) currentPct = 100;
+        if (isCompleted) return;
 
-          if (fillBar) fillBar.style.width = currentPct + '%';
-
-          for (var i = 0; i < steps.length; i++) {
-            if (currentPct <= steps[i].threshold) {
-              if (subtext) subtext.textContent = steps[i].text;
-              break;
-            }
+        if (!isWindowLoaded) {
+          if (currentPct < 88) {
+            currentPct += Math.floor(Math.random() * 5) + 2;
+            if (currentPct > 88) currentPct = 88;
+            updateUI(currentPct);
           }
         } else {
-          clearInterval(animInterval);
-          if (subtext) subtext.textContent = 'DUNGEON READY!';
-          setTimeout(revealEntrance, 200);
+          // Network asset loading 100% complete -> finish progress bar to 100%
+          currentPct += 6;
+          if (currentPct >= 100) {
+            currentPct = 100;
+            isCompleted = true;
+            clearInterval(animInterval);
+            updateUI(100);
+            if (subtext) subtext.textContent = 'DUNGEON READY!';
+            setTimeout(revealEntrance, 220);
+          } else {
+            updateUI(currentPct);
+          }
         }
-      }, 40);
+      }, 50);
+
+      function markWindowLoaded() {
+        isWindowLoaded = true;
+      }
+
+      if (document.readyState === 'complete') {
+        markWindowLoaded();
+      } else {
+        window.addEventListener('load', markWindowLoaded);
+      }
 
       function revealEntrance() {
         if (loadingPhase) loadingPhase.style.display = 'none';
