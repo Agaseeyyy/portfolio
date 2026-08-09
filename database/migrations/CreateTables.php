@@ -69,17 +69,6 @@ class CreateTables extends Migration
             PRIMARY KEY (`tech_id`)
         ");
 
-        // Services Table
-        $this->createTable('services_tbl', "
-            `service_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `icon` VARCHAR(255) DEFAULT NULL,
-            `title` VARCHAR(150) NOT NULL,
-            `description_json` TEXT DEFAULT NULL,
-            `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-            `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            PRIMARY KEY (`service_id`)
-        ");
-
         // Certifications Table
         $this->createTable('certifications_tbl', "
             `certification_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -111,7 +100,6 @@ class CreateTables extends Migration
     {
         $this->dropTable('project_technologies_tbl');
         $this->dropTable('certifications_tbl');
-        $this->dropTable('services_tbl');
         $this->dropTable('techstack_tbl');
         $this->dropTable('projects_tbl');
         $this->dropTable('contact_info_tbl');
