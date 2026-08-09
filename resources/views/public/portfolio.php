@@ -67,7 +67,7 @@ $publicDir = dirname(__DIR__, 3) . '/public/';
       $pTech = !empty($project['technologies']) ? $project['technologies'] : $defaultProjects[$index % count($defaultProjects)]['technologies'];
       $isExtra = $index >= $initialLimit;
     ?>
-      <a href="<?= base_url('project/' . ($project['project_id'] ?? 1)) ?>" class="quest-card-item no-underline group <?= $isExtra ? 'hidden extra-quest-card' : '' ?>">
+      <a href="<?= base_url('project/' . ($project['project_id'] ?? 1)) ?>" class="quest-card-item no-underline group <?= $isExtra ? 'hidden extra-quest-card' : '' ?>" <?= $isExtra ? 'style="display: none !important;"' : '' ?>>
         <!-- Thumbnail -->
         <div class="relative w-full h-44 bg-[#080b18] overflow-hidden border-b-3 border-[#8b7355]">
           <img src="<?= $pImg ?>" alt="<?= htmlspecialchars($pName) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200">
@@ -138,12 +138,14 @@ function toggleExtraQuests() {
   
   if (!extraCards.length) return;
   
-  const isCurrentlyHidden = extraCards[0].classList.contains('hidden');
+  const isCurrentlyHidden = extraCards[0].style.display === 'none' || extraCards[0].classList.contains('hidden');
   
   extraCards.forEach(card => {
     if (isCurrentlyHidden) {
+      card.style.setProperty('display', 'flex', 'important');
       card.classList.remove('hidden');
     } else {
+      card.style.setProperty('display', 'none', 'important');
       card.classList.add('hidden');
     }
   });

@@ -433,6 +433,10 @@ button {
   height: 100%;
 }
 
+.quest-card-item.hidden {
+  display: none !important;
+}
+
 .quest-card-item::before {
   content: "" !important;
   position: absolute !important;
