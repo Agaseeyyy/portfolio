@@ -107,14 +107,17 @@ $version = time();
       </div>
 
       <!-- Phase 1: 10-Block Segmented HP/EXP Style Loading Progress Bar -->
-      <div id="loading-phase" class="w-full flex flex-col items-center justify-center text-center gap-3 mx-auto">
-        <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0 flex items-center justify-center gap-3 w-full text-center">
-          <span>LOADING DUNGEON ASSETS...</span>
-          <span id="dungeon-loading-pct" class="text-white font-bold inline-block min-w-[50px] text-left">0%</span>
+      <div id="loading-phase" class="w-full flex flex-col items-center justify-center text-center gap-2 mx-auto">
+        <h2 class="text-[#f0c040] text-xs lg:text-sm font-bold tracking-widest uppercase rpg-title-glow m-0 text-center w-full">
+          LOADING DUNGEON ASSETS
         </h2>
+
+        <div id="dungeon-loading-pct" class="text-white text-xs lg:text-sm font-bold text-center w-full my-0.5">
+          0%
+        </div>
         
         <!-- 10-Segment Block Bar (HP & EXP Style) -->
-        <div id="dungeon-loading-segmented-bar" class="block-bar w-full max-w-[440px] mx-auto my-2">
+        <div id="dungeon-loading-segmented-bar" class="block-bar w-full max-w-[420px] mx-auto my-2 flex items-center justify-center">
           <div class="block-unit"></div>
           <div class="block-unit"></div>
           <div class="block-unit"></div>
