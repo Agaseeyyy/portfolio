@@ -83,10 +83,27 @@ $activeProjects = !empty($validDBProjects) ? array_values(array_slice($validDBPr
             </p>
           </div>
 
-          <!-- Tech Badges loaded from DB -->
+          <!-- Tech Badges with Icons loaded from DB -->
           <div class="flex flex-wrap gap-2 mt-auto pt-3 border-t border-[#1d243c]">
-            <?php foreach (array_slice($pTech, 0, 3) as $tech): ?>
-              <span class="quest-tag-badge"><?= htmlspecialchars(strtoupper($tech['tech_name'])) ?></span>
+            <?php foreach (array_slice($pTech, 0, 4) as $tech): 
+              $tName = strtoupper($tech['tech_name'] ?? '');
+              $dbIcon = $tech['icon'] ?? '';
+              $iconUrl = null;
+              if (!empty($dbIcon) && file_exists($publicDir . $dbIcon)) {
+                $iconUrl = base_url($dbIcon);
+              } else {
+                $slug = $slugMap[$tName] ?? strtolower(str_replace([' ', '&', '.', '/', '-'], '', $tName));
+                if (file_exists($publicDir . 'icons/' . $slug . '.svg')) {
+                  $iconUrl = base_url('icons/' . $slug . '.svg');
+                }
+              }
+            ?>
+              <span class="quest-tag-badge flex items-center gap-1.5 px-2 py-1">
+                <?php if ($iconUrl): ?>
+                  <img src="<?= $iconUrl ?>" alt="" class="w-3.5 h-3.5 object-contain flex-shrink-0">
+                <?php endif; ?>
+                <span><?= htmlspecialchars($tName) ?></span>
+              </span>
             <?php endforeach; ?>
           </div>
         </div>
