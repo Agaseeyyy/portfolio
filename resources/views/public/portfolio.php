@@ -43,7 +43,9 @@ $validDBProjects = array_filter($projects ?? [], function($p) {
   return !empty($p['project_name']) && !empty($p['description']) && strtolower($p['project_name']) !== 'test';
 });
 
-$activeProjects = !empty($validDBProjects) ? array_values(array_slice($validDBProjects, 0, 4)) : $defaultProjects;
+$allProjects = !empty($validDBProjects) ? array_values($validDBProjects) : $defaultProjects;
+$initialLimit = 4;
+$extraCount = max(0, count($allProjects) - $initialLimit);
 
 $publicDir = dirname(__DIR__, 3) . '/public/';
 ?>
@@ -57,14 +59,15 @@ $publicDir = dirname(__DIR__, 3) . '/public/';
     <span class="sub-text text-sm">(PROJECTS)</span>
   </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-    <?php foreach ($activeProjects as $index => $project): 
+  <div id="quest-log-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <?php foreach ($allProjects as $index => $project): 
       $pName = strtoupper($project['project_name'] ?? 'QUEST');
-      $pDesc = $project['description'] ?? $defaultProjects[$index % 4]['description'];
+      $pDesc = $project['description'] ?? $defaultProjects[$index % count($defaultProjects)]['description'];
       $pImg = !empty($project['image']) ? base_url($project['image']) : base_url('images/home-sky.webp');
-      $pTech = !empty($project['technologies']) ? $project['technologies'] : $defaultProjects[$index % 4]['technologies'];
+      $pTech = !empty($project['technologies']) ? $project['technologies'] : $defaultProjects[$index % count($defaultProjects)]['technologies'];
+      $isExtra = $index >= $initialLimit;
     ?>
-      <a href="<?= base_url('project/' . ($project['project_id'] ?? 1)) ?>" class="quest-card-item no-underline group">
+      <a href="<?= base_url('project/' . ($project['project_id'] ?? 1)) ?>" class="quest-card-item no-underline group <?= $isExtra ? 'hidden extra-quest-card' : '' ?>">
         <!-- Thumbnail -->
         <div class="relative w-full h-44 bg-[#080b18] overflow-hidden border-b-3 border-[#8b7355]">
           <img src="<?= $pImg ?>" alt="<?= htmlspecialchars($pName) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200">
@@ -103,7 +106,7 @@ $publicDir = dirname(__DIR__, 3) . '/public/';
               }
             ?>
               <?php if ($iconUrl): ?>
-                <div class="w-7 h-7 p-1.5 bg-[#11162a] border border-[#2b354d] hover:border-[#f0c040] flex items-center justify-center transition-colors shadow-sm" title="<?= htmlspecialchars($tName) ?>">
+                <div class="w-7 h-7 p-1 bg-[#11162a] border border-[#2b354d] hover:border-[#f0c040] flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="<?= htmlspecialchars($tName) ?>">
                   <img src="<?= $iconUrl ?>" alt="<?= htmlspecialchars($tName) ?>" class="w-full h-full object-contain filter drop-shadow(0 1px 2px rgba(0,0,0,0.5))">
                 </div>
               <?php else: ?>
@@ -115,4 +118,48 @@ $publicDir = dirname(__DIR__, 3) . '/public/';
       </a>
     <?php endforeach; ?>
   </div>
+
+  <?php if ($extraCount > 0): ?>
+    <!-- 8-Bit Retro Expand/Collapse Quests Button -->
+    <div class="flex justify-center mt-10">
+      <button id="toggle-more-quests-btn" type="button" onclick="toggleExtraQuests()" class="px-6 py-3.5 bg-[#11162a] border-2 border-[#8b7355] hover:border-[#f0c040] text-[#f0c040] hover:text-white text-xs lg:text-sm font-bold tracking-widest uppercase flex items-center gap-3 transition-colors shadow-lg cursor-pointer">
+        <span id="quest-btn-icon" class="text-sm transition-transform duration-200 inline-block">▶</span>
+        <span id="quest-btn-text">VIEW MORE QUESTS (+<?= $extraCount ?>)</span>
+      </button>
+    </div>
+  <?php endif; ?>
 </section>
+
+<script>
+function toggleExtraQuests() {
+  const extraCards = document.querySelectorAll('.extra-quest-card');
+  const btnText = document.getElementById('quest-btn-text');
+  const btnIcon = document.getElementById('quest-btn-icon');
+  
+  if (!extraCards.length) return;
+  
+  const isCurrentlyHidden = extraCards[0].classList.contains('hidden');
+  
+  extraCards.forEach(card => {
+    if (isCurrentlyHidden) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  if (isCurrentlyHidden) {
+    if (btnText) btnText.innerText = 'SHOW LESS QUESTS';
+    if (btnIcon) btnIcon.style.transform = 'rotate(90deg)';
+  } else {
+    if (btnText) btnText.innerText = 'VIEW MORE QUESTS (+' + extraCards.length + ')';
+    if (btnIcon) btnIcon.style.transform = 'rotate(0deg)';
+    
+    // Scroll back to quest log header smoothly if collapsing
+    const questHeader = document.getElementById('quest-log');
+    if (questHeader) {
+      questHeader.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+}
+</script>
