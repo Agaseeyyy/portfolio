@@ -150,10 +150,10 @@ function toggleExtraQuests() {
 
   if (isCurrentlyHidden) {
     if (btnText) btnText.innerText = 'SHOW LESS QUESTS';
-    if (btnIcon) btnIcon.style.transform = 'rotate(90deg)';
+    if (btnIcon) btnIcon.innerText = '▲';
   } else {
     if (btnText) btnText.innerText = 'VIEW MORE QUESTS (+' + extraCards.length + ')';
-    if (btnIcon) btnIcon.style.transform = 'rotate(0deg)';
+    if (btnIcon) btnIcon.innerText = '▶';
     
     // Scroll back to quest log header smoothly if collapsing
     const questHeader = document.getElementById('quest-log');
