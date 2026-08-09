@@ -16,9 +16,9 @@ $email = $contact['email'] ?? 'bustargaagassi1018@gmail.com';
 <footer id="contacts" class="footer-save-point">
   <!-- Fire Pillar Left (Base Stone + Animated Swaying Flame + Animated Swaying Grass + Rising Embers) -->
   <div class="fire-pillar-wrapper fire-left">
-    <img src="<?= base_url('images/fire-pillar-base.png') ?>" alt="" class="fire-base-img">
-    <img src="<?= base_url('images/flame-only.png') ?>" alt="" class="flame-tip-img">
-    <img src="<?= base_url('images/grass-two.png') ?>" alt="" class="grass-tuft-img">
+    <img src="<?= base_url('images/fire-pillar-base.webp') ?>" alt="" class="fire-base-img">
+    <img src="<?= base_url('images/flame-only.webp') ?>" alt="" class="flame-tip-img">
+    <img src="<?= base_url('images/grass-two.webp') ?>" alt="" class="grass-tuft-img">
     
     <!-- Fire Particle Embers Left -->
     <div class="flame-ember ember-l w-1.5 h-1.5" style="left: 18%; top: 15%; animation-delay: 0.1s;"></div>
@@ -30,9 +30,9 @@ $email = $contact['email'] ?? 'bustargaagassi1018@gmail.com';
 
   <!-- Fire Pillar Right (Base Stone + Animated Swaying Flame + Animated Swaying Grass + Rising Embers) -->
   <div class="fire-pillar-wrapper fire-right">
-    <img src="<?= base_url('images/fire-pillar-base.png') ?>" alt="" class="fire-base-img">
-    <img src="<?= base_url('images/flame-only.png') ?>" alt="" class="flame-tip-img">
-    <img src="<?= base_url('images/grass-two.png') ?>" alt="" class="grass-tuft-img">
+    <img src="<?= base_url('images/fire-pillar-base.webp') ?>" alt="" class="fire-base-img">
+    <img src="<?= base_url('images/flame-only.webp') ?>" alt="" class="flame-tip-img">
+    <img src="<?= base_url('images/grass-two.webp') ?>" alt="" class="grass-tuft-img">
 
     <!-- Fire Particle Embers Right -->
     <div class="flame-ember ember-r w-1.5 h-1.5" style="left: 18%; top: 15%; animation-delay: 0.3s;"></div>

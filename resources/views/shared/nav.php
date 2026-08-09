@@ -25,7 +25,7 @@ $roleName = strtoupper(($home['role'] ?? 'DEVELOPER'));
     <!-- Brand / Player Name & Level with RPG double border frame -->
     <a href="<?= base_url('/') ?>" class="flex items-center gap-4.5 no-underline group" hx-boost="true" hx-target="#main-content" hx-swap="innerHTML transition:true" hx-push-url="true">
       <div class="w-16 h-16 rpg-pixel-frame overflow-hidden flex-shrink-0 p-0.5 shadow-lg">
-        <img src="<?= base_url('images/me.png') ?>" alt="Avatar" class="w-full h-full object-cover">
+        <img src="<?= base_url('images/me.webp') ?>" alt="Avatar" class="w-full h-full object-cover">
       </div>
       <div class="flex flex-col">
         <span class="text-[#f0c040] text-sm lg:text-[15px] font-bold tracking-wider group-hover:text-white transition-colors">

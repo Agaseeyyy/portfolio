@@ -14,8 +14,8 @@ $rawBio = !empty($project['description']) ? $project['description'] : ($home['bi
 $metaDesc = htmlspecialchars(substr(strip_tags($rawBio), 0, 160));
 
 $currentUrl = base_url(ltrim($_SERVER['REQUEST_URI'] ?? '', '/'));
-$ogImage = !empty($project['image']) ? base_url($project['image']) : base_url('images/me.png');
-$homeSkyBg = base_url('images/home-sky.png');
+$ogImage = !empty($project['image']) ? base_url($project['image']) : base_url('images/me.webp');
+$homeSkyBg = base_url('images/home-sky.webp');
 $version = time();
 ?>
 <!DOCTYPE html>
@@ -82,7 +82,7 @@ $version = time();
     "name": "Agassi Bustarga",
     "jobTitle": "Full-stack Developer",
     "url": "<?= base_url() ?>",
-    "image": "<?= base_url('images/me.png') ?>",
+    "image": "<?= base_url('images/me.webp') ?>",
     "sameAs": [
       "https://github.com/agaseeyyy",
       "https://linkedin.com"
