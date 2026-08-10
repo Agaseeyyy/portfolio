@@ -15,7 +15,7 @@ class SitemapController
         if (ob_get_length()) ob_clean();
         header('Content-Type: application/xml; charset=utf-8');
 
-        $baseUrl = base_url();
+        $baseUrl = absolute_url();
         $projectModel = new ProjectModel();
         $projects = $projectModel->all() ?? [];
 
@@ -44,6 +44,25 @@ class SitemapController
         }
 
         echo '</urlset>';
+        exit;
+    }
+
+    /**
+     * Outputs robots.txt with dynamic absolute sitemap URL
+     */
+    public function robots()
+    {
+        if (ob_get_length()) ob_clean();
+        header('Content-Type: text/plain; charset=utf-8');
+
+        echo "# Robots.txt for Agassi Bustarga Portfolio\n";
+        echo "User-agent: *\n";
+        echo "Allow: /\n";
+        echo "Allow: /project/\n";
+        echo "Disallow: /admin/\n";
+        echo "Disallow: /app/\n";
+        echo "Disallow: /routes/\n";
+        echo 'Sitemap: ' . absolute_url('sitemap.xml') . "\n";
         exit;
     }
 }

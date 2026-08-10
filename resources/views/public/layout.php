@@ -13,8 +13,8 @@ $pageTitle = !empty($project['project_name']) ? (htmlspecialchars($project['proj
 $rawBio = !empty($project['description']) ? $project['description'] : ($home['bio'] ?? ($home['short_bio'] ?? 'Agassi Bustarga - Full-stack Web Developer specializing in PHP, React, Node.js, and modern retro web applications.'));
 $metaDesc = htmlspecialchars(substr(strip_tags($rawBio), 0, 160));
 
-$currentUrl = base_url(ltrim($_SERVER['REQUEST_URI'] ?? '', '/'));
-$ogImage = !empty($project['image']) ? base_url($project['image']) : base_url('images/me.webp');
+$currentUrl = absolute_url(ltrim($_SERVER['REQUEST_URI'] ?? '', '/'));
+$ogImage = !empty($project['image']) ? absolute_url($project['image']) : absolute_url('images/me.webp');
 $homeSkyBg = base_url('images/home-sky.webp');
 $version = time();
 ?>
@@ -81,8 +81,8 @@ $version = time();
     "@type": "Person",
     "name": "Agassi Bustarga",
     "jobTitle": "Full-stack Developer",
-    "url": "<?= base_url() ?>",
-    "image": "<?= base_url('images/me.webp') ?>",
+    "url": "<?= absolute_url() ?>",
+    "image": "<?= absolute_url('images/me.webp') ?>",
     "sameAs": [
       "https://github.com/agaseeyyy",
       "https://linkedin.com"

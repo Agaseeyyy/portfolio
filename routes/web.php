@@ -21,6 +21,7 @@ $router->get('/', [HomeController::class, 'index']);
 $router->get('/project/{id}', [HomeController::class, 'projectDetail']);
 $router->get('/sitemap.xml', [SitemapController::class, 'index']);
 $router->get('/sitemap', [SitemapController::class, 'index']);
+$router->get('/robots.txt', [SitemapController::class, 'robots']);
 
 // Admin - Authentication
 $router->get('/admin/login', [AuthController::class, 'login']);

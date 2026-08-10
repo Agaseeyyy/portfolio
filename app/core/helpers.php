@@ -28,6 +28,35 @@ if (!function_exists('base_url')) {
     }
 }
 
+if (!function_exists('absolute_url')) {
+    /**
+     * Get absolute URL (scheme + host + path) for SEO-critical output
+     * such as canonical URLs, Open Graph tags, and sitemap entries.
+     *
+     * The host is derived from the current request so the output always
+     * matches the domain the site is served from.
+     *
+     * @param string $path Optional path to append
+     * @return string
+     */
+    function absolute_url(string $path = ''): string
+    {
+        $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'] ?? '';
+
+        // Fall back to APP_URL when not running under a web request (CLI, queues)
+        if (empty($host)) {
+            $appUrl = (string) Config::get('APP_URL', '');
+            if ($appUrl !== '') {
+                return rtrim($appUrl, '/') . '/' . ltrim($path, '/');
+            }
+            return base_url($path);
+        }
+
+        return $scheme . '://' . $host . base_url($path);
+    }
+}
+
 if (!function_exists('set_flash')) {
     /**
      * Set a flash message in session

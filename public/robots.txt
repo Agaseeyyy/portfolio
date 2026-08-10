@@ -6,4 +6,4 @@ Disallow: /admin/
 Disallow: /app/
 Disallow: /routes/
 
-Sitemap: http://localhost:8000/sitemap.xml
+Sitemap: https://agassibustarga.page.gd/sitemap.xml
