@@ -2145,6 +2145,7 @@
   font-size: 16px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 14px;
   margin-bottom: 1.5rem;
   text-transform: uppercase;
@@ -2524,6 +2525,15 @@
   }
   .golden-hero-box {
     margin-top: 100px !important;
+  }
+}
+@media (max-width: 640px) {
+  .block-unit {
+    width: 15px;
+    height: 15px;
+  }
+  .block-bar {
+    gap: 3px;
   }
 }
 @property --tw-translate-x {

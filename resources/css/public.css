@@ -340,6 +340,7 @@ button {
   font-size: 16px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 14px;
   margin-bottom: 1.5rem;
   text-transform: uppercase;
@@ -792,5 +793,16 @@ button {
   }
   .golden-hero-box {
     margin-top: 100px !important;
+  }
+}
+
+/* Narrow screens: shrink pixel block units so skill/HP/EXP bars fit without horizontal scroll */
+@media (max-width: 640px) {
+  .block-unit {
+    width: 15px;
+    height: 15px;
+  }
+  .block-bar {
+    gap: 3px;
   }
 }

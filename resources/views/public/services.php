@@ -141,7 +141,7 @@ if (!function_exists('resolveSkillIconUrl')) {
           <?php foreach ($catData['items'] as $skill): 
             $iconUrl = resolveSkillIconUrl($skill, $publicDir);
           ?>
-            <div class="flex items-center justify-between gap-4 stat-row-item">
+            <div class="flex flex-wrap items-center justify-between gap-4 stat-row-item">
               <!-- 8-Bit Icon Frame Badges -->
               <div class="flex items-center gap-3.5 min-w-[160px] group cursor-pointer" title="<?= htmlspecialchars($skill['name']) ?>">
                 <div class="w-12 h-12 rpg-pixel-frame flex items-center justify-center bg-[#11162a] text-lg flex-shrink-0 p-2 group-hover:border-[#f0c040] transition-colors shadow-md">
