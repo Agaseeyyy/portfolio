@@ -50,6 +50,12 @@ class TechstackController extends Controller
     public function store(): void
     {
         require_auth();
+        if (!verify_csrf()) {
+            set_flash('error', 'Invalid or expired security token. Please try again.');
+            $this->redirect('admin/techstack');
+            return;
+        }
+
         $data = $_POST;
         $isUpdate = !empty($data['tech_id']);
 
@@ -92,6 +98,12 @@ class TechstackController extends Controller
     public function delete(int $id): void
     {
         require_auth();
+        if (!verify_csrf()) {
+            set_flash('error', 'Invalid or expired security token. Please try again.');
+            $this->redirect('admin/techstack');
+            return;
+        }
+
         $tech = $this->model->find($id);
 
         if (!$tech) {

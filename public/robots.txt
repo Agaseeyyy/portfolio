@@ -1,9 +1,0 @@
-# Robots.txt for Agassi Bustarga Portfolio
-User-agent: *
-Allow: /
-Allow: /project/
-Disallow: /admin/
-Disallow: /app/
-Disallow: /routes/
-
-Sitemap: https://agabustarga.indevs.in/sitemap.xml

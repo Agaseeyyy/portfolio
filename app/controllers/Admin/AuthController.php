@@ -19,8 +19,7 @@ class AuthController extends Controller
     {
         // If already logged in, redirect to dashboard
         if (is_authenticated()) {
-            header('Location: ' . base_url('admin'));
-            exit;
+            $this->redirect('admin');
         }
 
         $this->view('admin/login', [
@@ -33,7 +32,16 @@ class AuthController extends Controller
      */
     public function authenticate(): void
     {
-        $username = $_POST['username'] ?? '';
+        if ($this->requestMethod() !== 'POST') {
+            $this->redirect('admin/login');
+        }
+
+        if (!verify_csrf()) {
+            set_flash('error', 'Invalid or expired security token. Please try again.');
+            $this->redirect('admin/login');
+        }
+
+        $username = trim($_POST['username'] ?? '');
         $password = $_POST['password'] ?? '';
 
         // Get credentials from environment
@@ -42,19 +50,19 @@ class AuthController extends Controller
 
         // Validate credentials
         if ($username === $validUsername && $password === $validPassword) {
-            // Set session
+            // Regenerate the session ID on privilege change to prevent fixation
+            session_regenerate_id(true);
+
             $_SESSION['admin_logged_in'] = true;
             $_SESSION['admin_user'] = $username;
 
             set_flash('success', 'Welcome back, ' . htmlspecialchars($username) . '!');
-            header('Location: ' . base_url('admin'));
-            exit;
+            $this->redirect('admin');
         }
 
         // Invalid credentials
         set_flash('error', 'Invalid username or password');
-        header('Location: ' . base_url('admin/login'));
-        exit;
+        $this->redirect('admin/login');
     }
 
     /**
@@ -62,12 +70,25 @@ class AuthController extends Controller
      */
     public function logout(): void
     {
+        if ($this->requestMethod() !== 'POST') {
+            $this->redirect('admin');
+        }
+
+        if (!verify_csrf()) {
+            set_flash('error', 'Invalid or expired security token. Please try again.');
+            $this->redirect('admin');
+        }
+
         // Clear admin session
-        unset($_SESSION['admin_logged_in']);
-        unset($_SESSION['admin_user']);
+        $_SESSION = [];
+        session_destroy();
 
         set_flash('success', 'You have been logged out successfully');
-        header('Location: ' . base_url('admin/login'));
-        exit;
+        $this->redirect('admin/login');
+    }
+
+    protected function requestMethod(): string
+    {
+        return strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
     }
 }

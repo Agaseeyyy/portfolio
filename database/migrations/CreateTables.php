@@ -4,7 +4,7 @@
  * Create Tables Migration
  * 
  * Creates all portfolio database tables.
- * Core classes are loaded via autoload.php.
+ * Core classes are loaded via bootstrap.php.
  */
 
 use app\core\Migration;
@@ -22,6 +22,10 @@ class CreateTables extends Migration
             `name` VARCHAR(100) NOT NULL,
             `role` VARCHAR(100) NOT NULL,
             `short_bio` TEXT NOT NULL,
+            `hp_percentage` INT(11) DEFAULT 100,
+            `exp_percentage` INT(11) DEFAULT 85,
+            `level_text` VARCHAR(100) DEFAULT '5 Years Experience',
+            `weapon_text` VARCHAR(100) DEFAULT 'Code & Creativity',
             `profile_photo` VARCHAR(255) DEFAULT NULL,
             `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
             `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -64,6 +68,7 @@ class CreateTables extends Migration
             `tech_name` VARCHAR(100) NOT NULL,
             `icon` VARCHAR(255) DEFAULT NULL,
             `category` ENUM('frontend', 'backend', 'database', 'tools') NOT NULL DEFAULT 'tools',
+            `proficiency` INT(11) DEFAULT 8,
             `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
             `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             PRIMARY KEY (`tech_id`)

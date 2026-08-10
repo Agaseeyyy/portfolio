@@ -18,7 +18,7 @@ use app\controllers\Admin\CertificationController;
 
 // Public routes
 $router->get('/', [HomeController::class, 'index']);
-$router->get('/project/{id}', [HomeController::class, 'projectDetail']);
+$router->get('/project/{id:\d+}', [HomeController::class, 'projectDetail']);
 $router->get('/sitemap.xml', [SitemapController::class, 'index']);
 $router->get('/sitemap', [SitemapController::class, 'index']);
 $router->get('/robots.txt', [SitemapController::class, 'robots']);
@@ -26,7 +26,7 @@ $router->get('/robots.txt', [SitemapController::class, 'robots']);
 // Admin - Authentication
 $router->get('/admin/login', [AuthController::class, 'login']);
 $router->post('/admin/authenticate', [AuthController::class, 'authenticate']);
-$router->get('/admin/logout', [AuthController::class, 'logout']);
+$router->post('/admin/logout', [AuthController::class, 'logout']);
 
 // Admin - Dashboard
 $router->get('/admin', [DashboardController::class, 'index']);

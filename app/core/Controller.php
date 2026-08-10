@@ -12,26 +12,25 @@ use app\core\View;
  */
 abstract class Controller
 {
+    /**
+     * Render a view with optional data
+     * 
+     * @param string $viewName View file path (without extension)
+     * @param array $data Data to pass to the view
+     */
+    protected function view(string $viewName, array $data = []): void
+    {
+        View::render($viewName, $data);
+    }
 
-	/**
-	 * Render a view with optional data
-	 * 
-	 * @param string $viewName View file path (without extension)
-	 * @param array $data Data to pass to the view
-	 */
-	protected function view(string $viewName, array $data = []): void
-	{
-		View::render($viewName, $data);
-	}
-
-	/**
-	 * Redirect to a URL (automatically prepends base URL for paths)
-	 * 
-	 * @param string $path Path to redirect to
-	 */
-	protected function redirect(string $path): void
-	{
-		header("Location: " . base_url($path));
-		exit;
-	}
+    /**
+     * Redirect to a URL (automatically prepends base URL for paths)
+     * 
+     * @param string $path Path to redirect to
+     */
+    protected function redirect(string $path): void
+    {
+        header("Location: " . base_url($path));
+        exit;
+    }
 }

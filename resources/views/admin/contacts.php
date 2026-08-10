@@ -28,6 +28,7 @@ use app\core\View;
             <?php endif ?>
 
             <form action="<?= base_url('admin/contacts/store') ?>" method="POST">
+                <?= csrf_field() ?>
 
                 <?php if (!empty($contact['contact_id'])): ?>
                     <input type="hidden" name="contact_id" value="<?= $contact['contact_id'] ?>">

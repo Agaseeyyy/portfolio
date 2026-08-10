@@ -26,6 +26,7 @@ class View
      */
     public static function render(string $viewFile, array $data = []): void
     {
+        $viewFile = ltrim($viewFile, '/');
         self::$viewPath = __DIR__ . '/../../resources/views/';
         self::$data = $data;
         self::$sections = [];

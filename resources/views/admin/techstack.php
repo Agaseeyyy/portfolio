@@ -94,6 +94,7 @@ use app\core\View;
 <dialog id="techModal" class="modal">
     <div class="modal-box !max-w-md">
         <form id="techForm" method="POST" enctype="multipart/form-data">
+            <?= csrf_field() ?>
 
             <input type="hidden" name="_method" id="formMethod" value="POST">
             <input type="hidden" name="tech_id" id="techId">
@@ -152,6 +153,7 @@ use app\core\View;
         <p class="mt-2 text-sm text-gray-500">This will also remove it from all associated projects.</p>
 
         <form id="deleteForm" method="POST">
+            <?= csrf_field() ?>
 
             <input type="hidden" name="_method" value="POST">
 

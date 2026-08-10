@@ -45,6 +45,7 @@ View::extend('admin/layout');
             <?php endif ?>
 
             <form action="<?= base_url('admin/home/store') ?>" method="POST" enctype="multipart/form-data">
+                <?= csrf_field() ?>
                 <?php if (!empty($data['id'])): ?>
                     <input type="hidden" name="id" value="<?= htmlspecialchars($data['id'] ?? '') ?>">
                 <?php endif; ?>

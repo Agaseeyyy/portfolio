@@ -306,10 +306,8 @@ $version = time();
   </div>
 
   <!-- JavaScript with cache busters -->
-  <script src="<?= base_url('resources/js/rpg-audio.js?v=' . $version) ?>"></script>
+  <script src="<?= base_url('resources/js/rpg-audio.js?v=' . $version) ?>" defer></script>
   <script src="<?= base_url('resources/js/animations.js?v=' . $version) ?>" defer></script>
-  <script src="<?= base_url('resources/js/portfolio.js?v=' . $version) ?>" defer></script>
-  <script src="<?= base_url('resources/js/services.js?v=' . $version) ?>" defer></script>
   <script src="<?= base_url('resources/js/contacts.js?v=' . $version) ?>" defer></script>
   <script src="<?= base_url('resources/js/script.js?v=' . $version) ?>" defer></script>
   <?= View::renderSection('scripts') ?>

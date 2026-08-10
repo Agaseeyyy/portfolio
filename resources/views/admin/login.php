@@ -62,6 +62,8 @@
 
                 <!-- Login Form -->
                 <form action="<?= base_url('admin/authenticate') ?>" method="POST" class="space-y-4">
+                    <?= csrf_field() ?>
+
                     <!-- Username Field -->
                     <fieldset class="fieldset">
                         <legend class="fieldset-legend text-base-content/70">Username</legend>

@@ -18,7 +18,6 @@ $defaultCategories = [
     'items' => [
       ['name' => 'JAVASCRIPT', 'icon' => 'icons/javascript.svg', 'level' => 8],
       ['name' => 'REACT', 'icon' => 'icons/react.svg', 'level' => 8],
-      ['name' => 'TYPESCRIPT', 'icon' => 'icons/typescript.svg', 'level' => 7],
       ['name' => 'TAILWIND CSS', 'icon' => 'icons/tailwind.svg', 'level' => 8],
     ]
   ],
@@ -27,8 +26,6 @@ $defaultCategories = [
     'icon_img' => 'icons/backend.webp',
     'items' => [
       ['name' => 'PHP', 'icon' => 'icons/php.svg', 'level' => 8],
-      ['name' => 'NODE.JS', 'icon' => 'icons/nodejs.svg', 'level' => 7],
-      ['name' => 'PYTHON', 'icon' => 'icons/python.svg', 'level' => 7],
       ['name' => 'JAVA', 'icon' => 'icons/java.svg', 'level' => 6],
     ]
   ],

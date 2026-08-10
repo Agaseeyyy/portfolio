@@ -12,8 +12,8 @@
  * Or visit this file in browser when running on a web server
  */
 
-// Load autoloader (gets core classes)
-require_once dirname(__DIR__, 2) . '/app/core/autoload.php';
+// Load the application bootstrap (gets core classes and config)
+require_once dirname(__DIR__, 2) . '/app/bootstrap.php';
 
 use app\core\Migration;
 

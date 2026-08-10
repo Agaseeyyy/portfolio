@@ -33,6 +33,12 @@ class CertificationController extends Controller
     public function store(): void
     {
         require_auth();
+        if (!verify_csrf()) {
+            set_flash('error', 'Invalid or expired security token. Please try again.');
+            $this->redirect('admin/certifications');
+            return;
+        }
+
         $data = $_POST;
         $isUpdate = !empty($data['certification_id']);
 
@@ -79,6 +85,12 @@ class CertificationController extends Controller
     public function delete(int $id): void
     {
         require_auth();
+        if (!verify_csrf()) {
+            set_flash('error', 'Invalid or expired security token. Please try again.');
+            $this->redirect('admin/certifications');
+            return;
+        }
+
         $cert = $this->model->find($id);
 
         if (!$cert) {

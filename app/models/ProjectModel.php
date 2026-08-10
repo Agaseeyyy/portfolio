@@ -21,6 +21,9 @@ class ProjectModel extends Model
     /**
      * Get all projects with their associated technologies
      * 
+     * Fetches all project tech in one query and groups it by project,
+     * avoiding an N+1 query per project.
+     * 
      * @return array
      */
     public function getProjectsWithTech(): array
@@ -31,14 +34,25 @@ class ProjectModel extends Model
             return [];
         }
 
-        foreach ($projects as &$project) {
-            $sql = "SELECT t.tech_id, t.tech_name, t.icon 
-                    FROM project_technologies_tbl pt 
-                    INNER JOIN techstack_tbl t ON t.tech_id = pt.tech_id 
-                    WHERE pt.project_id = ?";
+        $ids = array_column($projects, 'project_id');
+        $placeholders = implode(',', array_fill(0, count($ids), '?'));
+        $sql = "SELECT pt.project_id, t.tech_id, t.tech_name, t.icon
+                FROM project_technologies_tbl pt
+                INNER JOIN techstack_tbl t ON t.tech_id = pt.tech_id
+                WHERE pt.project_id IN ($placeholders)
+                ORDER BY pt.project_id, t.tech_name";
 
-            $project['technologies'] = $this->query($sql, [$project['project_id']]);
+        $techByProject = [];
+        foreach ($this->query($sql, $ids) as $row) {
+            $projectId = $row['project_id'];
+            unset($row['project_id']);
+            $techByProject[$projectId][] = $row;
         }
+
+        foreach ($projects as &$project) {
+            $project['technologies'] = $techByProject[$project['project_id']] ?? [];
+        }
+        unset($project);
 
         return $projects;
     }

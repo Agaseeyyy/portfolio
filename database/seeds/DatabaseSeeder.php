@@ -4,7 +4,7 @@
  * Database Seeder
  * 
  * Seeds all portfolio tables with default data on first run.
- * Core classes are loaded via autoload.php.
+ * Core classes are loaded via bootstrap.php.
  */
 
 use app\core\Seeder;
@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->seedHome();
         $this->seedContactInfo();
-        $this->seedServices();
         $this->seedTechstack();
         $this->seedProjects();
     }
@@ -52,69 +51,6 @@ class DatabaseSeeder extends Seeder
             'linkedin_link'  => 'https://linkedin.com/in/agassi-bustarga',
             'instagram_link' => 'https://instagram.com/_agaseeyyy'
         ]);
-    }
-
-    /**
-     * Seed services offered
-     */
-    private function seedServices(): void
-    {
-        if (!$this->isTableEmpty('services_tbl')) return;
-
-        $services = [
-            [
-                'icon'  => 'icons/code-brackets.svg',
-                'title' => 'Web Development',
-                'description_json' => json_encode([
-                    'short_info' => 'Full-stack web applications with modern frameworks, responsive design, and optimized performance.',
-                    'features'   => ['Frontend & Backend Development', 'Responsive Design', 'API Integration']
-                ]),
-            ],
-            [
-                'icon'  => 'icons/mobile-phone.svg',
-                'title' => 'Mobile Development',
-                'description_json' => json_encode([
-                    'short_info' => 'Cross-platform mobile applications with native performance and intuitive user experiences.',
-                    'features'   => ['iOS & Android Apps', 'Cross-Platform Solutions', 'App Store Deployment']
-                ]),
-            ],
-            [
-                'icon'  => 'icons/ui-ux-design.svg',
-                'title' => 'UI/UX Design',
-                'description_json' => json_encode([
-                    'short_info' => 'User-centered design solutions that combine aesthetics with functionality for optimal user experience.',
-                    'features'   => ['User Interface Design', 'Prototyping & Wireframing', 'User Research']
-                ]),
-            ],
-            [
-                'icon'  => 'icons/graphics-design.svg',
-                'title' => 'Graphics Design',
-                'description_json' => json_encode([
-                    'short_info' => 'Creative visual solutions including logos, branding, marketing materials, and digital artwork.',
-                    'features'   => ['Logo & Brand Design', 'Marketing Materials', 'Digital Illustrations']
-                ]),
-            ],
-            [
-                'icon'  => 'icons/video-editing.svg',
-                'title' => 'Video Editing',
-                'description_json' => json_encode([
-                    'short_info' => 'Professional video editing services for content creation, promotional videos, and social media content.',
-                    'features'   => ['Video Production', 'Motion Graphics', 'Social Media Content']
-                ]),
-            ],
-            [
-                'icon'  => 'icons/computer-repair.svg',
-                'title' => 'Computer & Phone Repair',
-                'description_json' => json_encode([
-                    'short_info' => 'Expert hardware and software troubleshooting for computers, laptops, smartphones, and tablets.',
-                    'features'   => ['Hardware Diagnostics & Repair', 'Software Troubleshooting', 'Data Recovery & Backup']
-                ]),
-            ],
-        ];
-
-        foreach ($services as $service) {
-            $this->insert('services_tbl', $service);
-        }
     }
 
     /**

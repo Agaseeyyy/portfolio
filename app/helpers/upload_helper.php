@@ -37,9 +37,10 @@ function upload_file(string $fieldName, string $uploadPath, ?string $oldFile = n
         ];
     }
 
-    // Default options
+    // Default options (SVG excluded: it can carry inline scripts and is a
+    // stored-XSS vector)
     $maxSize = $options['maxSize'] ?? 2048 * 1024; // 2MB default in bytes
-    $allowedTypes = $options['allowedTypes'] ?? ['image/png', 'image/jpg', 'image/jpeg', 'image/webp', 'image/svg+xml'];
+    $allowedTypes = $options['allowedTypes'] ?? ['image/png', 'image/jpg', 'image/jpeg', 'image/webp'];
 
     // Validate file type
     $finfo = new finfo(FILEINFO_MIME_TYPE);

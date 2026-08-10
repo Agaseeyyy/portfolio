@@ -124,3 +124,45 @@ if (!function_exists('require_auth')) {
         }
     }
 }
+
+if (!function_exists('csrf_token')) {
+    /**
+     * Get (and lazily generate) the CSRF token for the session
+     * 
+     * @return string
+     */
+    function csrf_token(): string
+    {
+        if (empty($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+        return $_SESSION['csrf_token'];
+    }
+}
+
+if (!function_exists('csrf_field')) {
+    /**
+     * Render a hidden CSRF token input for use inside forms
+     * 
+     * @return string
+     */
+    function csrf_field(): string
+    {
+        return '<input type="hidden" name="csrf_token" value="' . htmlspecialchars(csrf_token()) . '">';
+    }
+}
+
+if (!function_exists('verify_csrf')) {
+    /**
+     * Validate the CSRF token submitted with a POST request
+     * 
+     * @return bool
+     */
+    function verify_csrf(): bool
+    {
+        $token = $_POST['csrf_token'] ?? '';
+        return is_string($token)
+            && !empty($_SESSION['csrf_token'])
+            && hash_equals($_SESSION['csrf_token'], $token);
+    }
+}

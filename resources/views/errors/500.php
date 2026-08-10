@@ -1,11 +1,11 @@
 <?php
 /**
- * 404 Not Found
+ * 500 Internal Server Error
  *
- * Rendered by the router when no route matches the requested path.
- * Self-contained so it always works even when the app styles are unavailable.
+ * Rendered by the global exception handler. The handler logs the real
+ * error details; this page shows a friendly message without leaking
+ * server internals to visitors.
  */
-$homeUrl = base_url('');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,7 @@ $homeUrl = base_url('');
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
-  <title>404 - Quest Not Found | Agassi Bustarga</title>
+  <title>500 - Dungeon Collapsed | Agassi Bustarga</title>
   <link rel="icon" type="image/x-icon" href="<?= base_url('images/favicon.ico') ?>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,15 +63,15 @@ $homeUrl = base_url('');
 </head>
 <body>
   <div class="panel">
-    <div class="code">404</div>
-    <div class="title">QUEST NOT FOUND</div>
+    <div class="code">500</div>
+    <div class="title">THE DUNGEON COLLAPSED</div>
     <div class="divider"></div>
     <p class="desc">
-      THE PATH YOU SEEK DOES NOT EXIST IN THIS DUNGEON.<br>
-      THE TREASURE MAY HAVE MOVED, OR THE MAP IS WRONG.<br>
-      RETURN TO THE ENTRANCE AND TRY AGAIN.
+      SOMETHING WENT WRONG WITH THE TOWER'S MAGIC.<br>
+      THE ERROR HAS BEEN LOGGED FOR THE SORCERER.<br>
+      PLEASE TRY AGAIN LATER.
     </p>
-    <a class="btn" href="<?= htmlspecialchars($homeUrl) ?>">&#9654; RETURN HOME</a>
+    <a class="btn" href="<?= htmlspecialchars(base_url('')) ?>">&#9654; RETURN HOME</a>
     <div style="margin-top: 24px;"><span class="cursor-blink">&#9632;</span></div>
   </div>
 </body>

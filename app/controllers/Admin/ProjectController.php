@@ -38,6 +38,12 @@ class ProjectController extends Controller
     public function store(): void
     {
         require_auth();
+        if (!verify_csrf()) {
+            set_flash('error', 'Invalid or expired security token. Please try again.');
+            $this->redirect('admin/projects');
+            return;
+        }
+
         $data = $_POST;
         $technologies = $data['technologies'] ?? [];
         unset($data['technologies']);
@@ -109,6 +115,12 @@ class ProjectController extends Controller
     public function delete(int $id): void
     {
         require_auth();
+        if (!verify_csrf()) {
+            set_flash('error', 'Invalid or expired security token. Please try again.');
+            $this->redirect('admin/projects');
+            return;
+        }
+
         $project = $this->model->find($id);
 
         if (!$project) {
