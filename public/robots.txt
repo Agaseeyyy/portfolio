@@ -6,4 +6,4 @@ Disallow: /admin/
 Disallow: /app/
 Disallow: /routes/
 
-Sitemap: https://agassibustarga.page.gd/sitemap.xml
+Sitemap: https://agabustarga.indevs.in/sitemap.xml
