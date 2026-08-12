@@ -35,3 +35,4 @@ Thumbs.db
 # Playwright MCP browser artifacts
 .playwright-mcp/
 /*.png
+deploy/CHECKLIST.md
