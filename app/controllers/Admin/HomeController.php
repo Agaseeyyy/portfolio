@@ -28,7 +28,7 @@ class HomeController extends Controller
             'pageDescription' => "Manage your portfolio's hero section content",
             'activeMenu' => 'home',
             'data' => $homeData,
-            'photoSrc' => !empty($homeData['profile_photo']) ? $homeData['profile_photo'] : Config::get('DEFAULT_AVATAR', 'images/def-avatar.png'),
+            'photoSrc' => !empty($homeData['profile_photo']) ? $homeData['profile_photo'] : Config::get('DEFAULT_AVATAR', 'images/me.webp'),
         ];
 
         $this->view('admin/home', $data);

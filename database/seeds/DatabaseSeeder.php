@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             'name'          => 'Agassi Bustarga',
             'role'          => 'Student Developer',
             'short_bio'     => 'A passionate and dedicated information technology student with a knack for problem-solving and a love for coding. Eager to learn and grow in the tech industry.',
-            'profile_photo' => 'images/def-avatar.png'
+            'profile_photo' => 'images/me.webp'
         ]);
     }
 

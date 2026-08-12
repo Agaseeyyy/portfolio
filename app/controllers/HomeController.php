@@ -43,8 +43,7 @@ class HomeController extends Controller
             // Processed values for views
             'firstName' => $nameParts[0] ?? '',
             'lastName' => $nameParts[1] ?? '',
-            'profilePhoto' => !empty($home['profile_photo']) ? $home['profile_photo'] : Config::get('DEFAULT_AVATAR', 'images/def-avatar.png'),
-            'hoverPhoto' => Config::get('HOVER_AVATAR', 'images/hover-avatar.png'),
+            'profilePhoto' => !empty($home['profile_photo']) ? $home['profile_photo'] : Config::get('DEFAULT_AVATAR', 'images/me.webp'),
         ];
 
         return $this->view('public/home', $data);

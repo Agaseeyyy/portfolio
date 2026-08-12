@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="<?= base_url('resources/css/admin-compiled.css') ?>" rel="stylesheet">
     <title>Admin Login | Portfolio</title>
-    <link rel="icon" type="image/png" href="<?= base_url('images/favicon.png') ?>">
+    <link rel="icon" type="image/x-icon" href="<?= base_url('images/favicon.ico') ?>">
 </head>
 
 <body class="bg-base-100 min-h-screen flex items-center justify-center p-4">

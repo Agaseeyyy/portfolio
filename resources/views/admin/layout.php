@@ -33,7 +33,7 @@ $homeData = $homeModel->first() ?? [];
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="<?= base_url('resources/css/admin-compiled.css') ?>" rel="stylesheet">
     <title><?= View::renderSection('title') ?: ($pageTitle ?? 'Dashboard') ?> | Admin Panel</title>
-    <link rel="icon" type="image/png" href="<?= base_url('images/favicon.png') ?>">
+    <link rel="icon" type="image/x-icon" href="<?= base_url('images/favicon.ico') ?>">
 
 </head>
 
@@ -68,7 +68,7 @@ $homeData = $homeModel->first() ?? [];
                             <div class="w-10 h-10 overflow-hidden rounded-full ring-2 ring-primary/50">
                                 <?php
                                 $photo = $homeData['profile_photo'] ?? '';
-                                $photoUrl = !empty($photo) ? base_url($photo) : base_url(Config::get('DEFAULT_AVATAR', 'images/def-avatar.png'));
+                                $photoUrl = !empty($photo) ? base_url($photo) : base_url(Config::get('DEFAULT_AVATAR', 'images/me.webp'));
                                 ?>
                                 <img src="<?= $photoUrl ?>" alt="Admin" class="object-cover w-full h-full">
                             </div>
