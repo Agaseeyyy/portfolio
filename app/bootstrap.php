@@ -43,7 +43,6 @@ set_exception_handler(function (\Throwable $e): void {
         $e->getFile(),
         $e->getLine()
     ));
-    @file_put_contents(__DIR__ . '/../../.errlog', sprintf("[%s] %s in %s:%d\n%s\n", date('c'), $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()), FILE_APPEND);
 
     if (PHP_SAPI === 'cli') {
         fwrite(STDERR, 'Fatal error: ' . $e->getMessage() . "\n");
