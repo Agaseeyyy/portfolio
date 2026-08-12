@@ -95,11 +95,12 @@ This project serves two purposes:
    ```
 
 6. **Set up your web server**
-   - Point your web server to the `public` directory
-   - For local development, use PHP's built-in server or XAMPP/MAMP
+   - Point the web server **document root at the project root** (this directory, which contains `.htaccess`).
+   - The root `.htaccess` rewrites requests to `public/index.php` and blocks direct access to PHP source, config, `vendor/`, and `node_modules/`. Keep it at the document root.
+   - For local development under a subpath (e.g. `http://localhost/portfolio`), set `APP_PATH=/portfolio` in `.env` — the `.htaccess` adapts automatically. For a domain-root deploy use `APP_PATH=` (empty).
 
 7. **Access the site**
-   - Public site: `http://localhost/portfolio`
+   - Public site: `http://localhost/portfolio` (or your domain root in production)
    - Admin panel: `http://localhost/portfolio/admin`
 
 ## Project Structure
@@ -115,11 +116,11 @@ portfolio/
 ├── database/
 │   ├── migrations/        # Database migrations
 │   └── seeds/             # Database seeders
-├── public/                # Web root
+├── public/                # Web assets (served under /public via .htaccess; not the docroot)
 │   ├── images/            # Static images
 │   └── uploads/           # User uploads
-├── resources/
-│   ├── css/               # CSS source files
+├── resources/            # CSS source + view templates (compiled css/js are referenced as /resources/...)
+│   ├── css/               # CSS source files and compiled output
 │   └── views/             # PHP view templates
 │       ├── admin/         # Admin panel views
 │       └── public/        # Public site views
@@ -157,7 +158,7 @@ The application automatically runs migrations and seeders in development mode. T
 |----------|-------------|---------|
 | `APP_ENV` | Environment (local/production) | `local` |
 | `APP_DEBUG` | Show errors | `true` |
-| `APP_PATH` | URL base path | `/portfolio` |
+| `APP_PATH` | URL base path for a subpath install (e.g. `/portfolio`). Leave **empty** for a domain-root deploy. | `/portfolio` (local) / `` (prod) |
 | `DB_HOST` | Database host | `localhost` |
 | `DB_NAME` | Database name | - |
 | `DB_USER` | Database user | `root` |
@@ -170,6 +171,7 @@ The application automatically runs migrations and seeders in development mode. T
 - Change default admin credentials in production
 - Set `APP_DEBUG=false` in production
 - Keep `.env` file secure and never commit it
+- The root `.htaccess` denies direct web access to `app/`, `core/`, `config/`, `database/`, `routes/`, `vendor/`, `node_modules/`, `.env`, and `resources/views/`. Keep it at the document root; do not serve the project from inside `public/`.
 
 ## License
 

@@ -1,14 +1,51 @@
+# =============================================================================
+# Portfolio — Apache rewrite rules (adaptive: subpath OR domain-root deploy)
+#
+# Deployment model
+# ----------------
+# The web document root is the PROJECT ROOT (this folder), not `public/`.
+# This .htaccess rewrites requests into `public/index.php`. Static assets live
+# in two places and are served directly by Apache:
+#   - <root>/resources/css|js/            (compiled CSS/JS, base_url('resources/...'))
+#   - <root>/public/images|icons|uploads/ (rewritten here from the web root)
+#
+# The install prefix (e.g. /portfolio/ for a subpath install) is NOT hard-coded.
+# Every rewrite substitution is RELATIVE, so mod_rewrite resolves it against
+# this folder's own URL prefix. The same file therefore works whether the app
+# lives at a subpath or at the domain root (https://agabustarga.indevs.in/) —
+# no manual edit on deploy.
+#
+# Security
+# --------
+# PHP source, config, migrations, vendor, view templates and dotfiles are
+# blocked. Only the front controller (public/index.php) and the asset trees
+# above are ever served.
+# =============================================================================
+
 Options -Indexes
 RewriteEngine On
-RewriteBase /portfolio/
 
-# 1. Allow resources (JS/CSS/Images) to bypass the router
-RewriteCond %{REQUEST_URI} ^/portfolio/resources/ [NC]
+# --- 1. Deny direct access to source/config/VCS (defense in depth) ----------
+RewriteCond %{REQUEST_URI} (?:^|/)(app|core|config|database|routes|deploy|tests|vendor|node_modules|resources/views)/ [NC,OR]
+RewriteCond %{REQUEST_URI} (?:^|/)\.env [NC,OR]
+RewriteCond %{REQUEST_URI} /\.git [NC,OR]
+RewriteCond %{REQUEST_URI} \.(?:sql|bak|ini|log)$ [NC,OR]
+RewriteCond %{REQUEST_URI} (?:^|/)(composer\.(?:json|lock)|package(?:-lock)?\.json|README\.md|\.github|\.gitignore)$ [NC]
+RewriteRule ^ - [R=404,L]
+
+# --- 2. Serve any existing file at the project root directly ----------------
+# Covers <root>/resources/css|js/* (compiled assets) and any other real file
+# that is not blocked above.
+RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^ - [L]
 
-# 2. This covers assets, images, icons, etc. in one line
-RewriteCond %{REQUEST_URI} ^/portfolio/(assets|images|icons|uploads)/ [NC]
-RewriteRule ^(.*)$ public/$1 [L]
+# --- 3. Rewrite public assets (images/icons/uploads/assets) into public/ -----
+# Relative substitution: resolves correctly in both subpath and domain-root
+# installs because mod_rewrite anchors it to this folder's URL prefix.
+RewriteRule ^(images|icons|uploads|assets)/(.*)$ public/$1/$2 [L]
 
-# 3. Silently rewrite to public/index.php and pass the 'url' parameter
+# --- 4. Front controller ----------------------------------------------------
+# Everything that is not a real file routes to index.php. Directories (e.g. the
+# install dir itself) also fall through here, so the home route resolves.
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
