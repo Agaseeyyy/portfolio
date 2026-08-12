@@ -1,0 +1,28 @@
+# Production .htaccess (domain-root deployment)
+#
+# Use this file when the portfolio is served directly at a domain root
+# (e.g. https://agabustarga.indevs.in/ with the project root as the
+# document root and APP_PATH empty in .env).
+#
+# The in-repo root .htaccess targets a /portfolio/ subpath (local XAMPP);
+# this variant removes that prefix. Copy it to the server as .htaccess
+# (replacing the local variant) and keep APP_PATH empty in .env.
+#
+# If your host routes the domain differently (subfolder, separate vhost
+# config), you may not need this file at all — the rules below are only
+# needed when the project root itself is the document root.
+
+Options -Indexes
+RewriteEngine On
+RewriteBase /
+
+# 1. Allow resources (JS/CSS/Images) to bypass the router
+RewriteCond %{REQUEST_URI} ^/resources/ [NC]
+RewriteRule ^ - [L]
+
+# 2. This covers assets, images, icons, etc. in one line
+RewriteCond %{REQUEST_URI} ^/(assets|images|icons|uploads)/ [NC]
+RewriteRule ^(.*)$ public/$1 [L]
+
+# 3. Silently rewrite to public/index.php and pass the 'url' parameter
+RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]

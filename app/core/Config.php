@@ -77,6 +77,6 @@ class Config
      */
     public static function isProduction(): bool
     {
-        return self::env() === 'production';
+        return strtolower(self::env()) === 'production';
     }
 }
