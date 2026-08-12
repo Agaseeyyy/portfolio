@@ -28,6 +28,7 @@ RewriteEngine On
 # --- 1. Deny direct access to source/config/VCS (defense in depth) ----------
 RewriteCond %{REQUEST_URI} (?:^|/)(app|core|config|database|routes|deploy|tests|vendor|node_modules|resources/views)/ [NC,OR]
 RewriteCond %{REQUEST_URI} (?:^|/)\.env [NC,OR]
+RewriteCond %{REQUEST_URI} (?:^|/)\.errlog [NC,OR]
 RewriteCond %{REQUEST_URI} /\.git [NC,OR]
 RewriteCond %{REQUEST_URI} \.(?:sql|bak|ini|log)$ [NC,OR]
 RewriteCond %{REQUEST_URI} (?:^|/)(composer\.(?:json|lock)|package(?:-lock)?\.json|README\.md|\.github|\.gitignore)$ [NC]
